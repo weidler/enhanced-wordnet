@@ -1,0 +1,11 @@
+!    Antonym
+@    Hypernym
+ ~    Hyponym
+*    Entailment
+>    Cause
+^    Also see
+$    Verb Group
++    Derivationally related form 
+;c    Domain of synset - TOPIC
+;r    Domain of synset - REGION
+;u    Domain of synset - USAGE
