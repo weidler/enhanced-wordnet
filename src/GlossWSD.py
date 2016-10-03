@@ -6,6 +6,7 @@ from pprint import pprint
 import xml.etree.ElementTree as ET
 import re
 import datetime
+import os
 from Glosses import Token, CollocationHead, CollocationMember
 from nltk.corpus import wordnet as wn
 from itertools import product as list_product, combinations
@@ -41,7 +42,7 @@ GLOSSTAG_POS_POSSIBLE_SS_TYPES = {
 	"UH": [],
 	"VB": [2],
 	"VBD": [2],
-	"VBG": [2],
+	"VBG": [1, 2],
 	"VBN": [2],
 	"VBP": [2],
 	"VBZ": [2],
@@ -53,7 +54,7 @@ GLOSSTAG_POS_POSSIBLE_SS_TYPES = {
 
 class GlossDisambiguator(object):
 
-	def __init__(self, glosses, glosstag_file, reference_wordnet):
+	def __init__(self, glosses, glosstag_files, reference_wordnet):
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
 
@@ -61,24 +62,31 @@ class GlossDisambiguator(object):
 		log_dir = "log/"
 		time = datetime.datetime.now()
 		timestamp = "{0}-{1}-{2}_{3}:{4}".format(time.day, time.month, time.year, time.hour, time.minute)
-		self._invalid_key_logfile = log_dir + "invalid_keys_" + timestamp + ".log"
-		with open(self._invalid_key_logfile, "w") as f:
-			f.write("LOG FILE - INVALID KEYS\n\n")
-		self._logged_keys = []
+		self._logfile = log_dir + "gloss_disambiguation_" + timestamp + ".log"
+		with open(self._logfile, "w") as f:
+			f.write("LOG FILE - GLOSS DISAMBIGUATION - {0}\n\n".format(timestamp))
+		self._logged_messages = []
 
 
 	def disambiguate_glosses(self):
 		print("=== Disambiguating Glosses... ===")
-		merged_glosses = self._merge_glosses_with_glosstag_file()
+		print("merging files...")
+		for f in self.glosstag_files:
+			print("...{0}".format(f))
+			merged_glosses = self._merge_glosses_with_glosstag_file(f)
 		disambiguated = self._disambiguate_merged_glosses(merged_glosses)
+
+		# check if keys were logged, if not delete empty logfile
+		if len(self._logged_messages) == 0:
+			os.remove(self._logfile)
 
 		return disambiguated
 
 	### MAIN PROTECTED METHODS ###
 
-	def _merge_glosses_with_glosstag_file(self):
+	def _merge_glosses_with_glosstag_file(self, glosstag_file):
 		glosses = self.glosses
-		tree = ET.parse(self.glosstag_file)
+		tree = ET.parse(glosstag_file)
 		root = tree.getroot()
 
 		def resolve_wrapper_nodes(node_list):
@@ -98,12 +106,16 @@ class GlossDisambiguator(object):
 			if synset_id in glosses:
 				gloss_def = synset.find("./gloss/[@desc='wsd']/def")
 				tokens = resolve_wrapper_nodes(gloss_def.findall("*"))
-
-				# travers through all tokens in the gloss
+				# travers through all tokens in the glosstag gloss, create Token objects for them and append them to the token list in the gloss
 				for token in tokens:
-					pos = token.attrib["pos"]
+					if "pos" in token.keys():
+						pos = token.attrib["pos"]
+					else:
+						pos = "unknown"
+						self._log_message("NO POS: {0}".format(synset_id))
+
 					token_object = None
-					token_id_in_gloss = token.attrib["id"][-1]
+					token_id_in_gloss = int(re.search("_[a-z]+([0-9]+)", token.attrib["id"]).group(1))
 					anno_tag = token.attrib["tag"]
 
 					# check if its a collocation or a normal wf
@@ -131,7 +143,7 @@ class GlossDisambiguator(object):
 							disambiguation = token.find("id")
 
 							token_original_form = disambiguation.tail
-							token_wn_synset_offset = ""  # TODO
+							token_wn_synset_offset = ""  # TODO identify offset
 							token_wn_sense_key = disambiguation.attrib["sk"]
 
 						token_object = Token(token_id_in_gloss, token_original_form, lemma, token_wn_synset_offset, token_wn_sense_key, anno_tag, pos)
@@ -145,8 +157,11 @@ class GlossDisambiguator(object):
 							# cf is the collocation head and may contain a disambiguated id
 							collocation_glob = token.find("glob")
 							token_original_form = collocation_glob.tail
-							collocation_id = token.attrib["coll"]
-							lemma = token.attrib["lemma"]
+							collocation_id = token.attrib["coll"].split(",")
+							if "lemma" in collocation_glob.keys():
+								lemma = collocation_glob.attrib["lemma"]
+							elif "pos" in collocation_glob.keys():
+								lemma = collocation_glob.attrib["pos"]
 
 							if collocation_glob.attrib["tag"] == "un":
 								# cf was not disambiguated
@@ -169,17 +184,20 @@ class GlossDisambiguator(object):
 						else:
 							# cf is not the head of a collocation
 							token_original_form = token.text
-							collocation_id = token.attrib["coll"]
-							lemma = token.attrib["lemma"]
+							collocation_id = token.attrib["coll"].split(",")
+							if "lemma" in token.keys():
+								lemma = token.attrib["lemma"]
+							elif "pos" in token.keys():
+								lemma = token.attrib["pos"]
 
 							token_object = CollocationMember(token_id_in_gloss, token_original_form, lemma, token_wn_synset_offset, token_wn_sense_key, anno_tag, pos, collocation_id)
 
 					else:
-						print("WARNING: unknown token tag!")
+						self._log_message("WARNING: unknown token tag '{0}'".format(token.tag))
+						token_object = None
 
 
 					glosses[synset_id].tokens[token_id_in_gloss] = token_object
-
 		return glosses
 
 	def _disambiguate_merged_glosses(self, merged_glosses):
@@ -188,6 +206,7 @@ class GlossDisambiguator(object):
 		total_glosses = len(merged_glosses)
 		current_gloss = 0
 		disambiguated_glosses_count = 0
+		skipped_glosses_count = 0
 
 		# go over all glosses and disambiguate them if possible
 		for gloss_key in merged_glosses:
@@ -196,6 +215,9 @@ class GlossDisambiguator(object):
 			taggable_tokens = []
 			tagged_tokens = []
 
+			if len(gloss.tokens) == 0:
+				self._log_message("WARNING: unmerged gloss {0}".format(gloss_key))
+
 			# for each token inside the gloss determine if the token is already disambiguated, needs to be disambiguated or isnt part of WordNet anyways
 			for token_index in gloss.tokens:
 				token = gloss.tokens[token_index]
@@ -203,13 +225,14 @@ class GlossDisambiguator(object):
 				# tokens that are tagged as "man" or "auto" are already disambiguated
 				if token.tag in ["man", "auto"]:
 					tagged_tokens.append(token)
-				# if a token is tagged as "un" it is not yet annotated, but possibly should be; if the lemma contains entries of the type "LEMMA%SS_TYPE" and the POS if the
-				# word matches one of the lemma-ss_types it needs to be/can be disambiguated
-				elif token.tag == "un" and re.match("([a-z]+%[0-9]\|?)+", token.lemma) and not set(GLOSSTAG_POS_POSSIBLE_SS_TYPES[token.pos]).isdisjoint(set(tokens_wn_ss_types)):
+				# if a token is tagged as "un" it is not yet annotated, but possibly should be; if the lemma contains entries of the type "LEMMA%SS_TYPE" and the POS if the word matches one of the lemma-ss_types it needs to be/can be disambiguated
+				elif token.tag == "un" and re.match("([a-z]+%[0-9]\|?)+", token.lemma) and not set(GLOSSTAG_POS_POSSIBLE_SS_TYPES[token.pos]).isdisjoint(set(tokens_wn_ss_types)) and type(token) != CollocationMember:
 					taggable_tokens.append(token)
 
 			# if there are no remaining taggable tokens, then proceed with the next gloss
 			if len(taggable_tokens) == 0:
+				processed_glosses[gloss_key] = gloss
+				skipped_glosses_count += 1
 				continue
 			disambiguated_glosses_count += 1
 
@@ -221,7 +244,8 @@ class GlossDisambiguator(object):
 			# finished, append to output
 			processed_glosses[gloss_key] = disambiguated_gloss
 
-		print("\tDISAMBIGUATED {0} GLOSSES".format(disambiguated_glosses_count))
+		print("\tdisambiguated {0} glosses, skipped {1}".format(disambiguated_glosses_count, skipped_glosses_count))
+
 		return processed_glosses
 
 	## Disambiguation Methods ##
@@ -232,14 +256,21 @@ class GlossDisambiguator(object):
 
 		for undisambiguated_token in taggable_tokens:
 			possible_senses = self._get_possible_wn_senses_for_token(undisambiguated_token)
-			most_frequent_sense = max(possible_senses, key=lambda s: self.reference_wordnet.wordnet["sense_index"][str(s)]["tag_cnt"])
+
+			if len(possible_senses) != 0:
+				most_frequent_sense = max(possible_senses, key=lambda s: self.reference_wordnet.wordnet["sense_index"][str(s)]["tag_cnt"])
+				synset_offset = self.reference_wordnet.wordnet["sense_index"][most_frequent_sense]["synset_offset"]
+			else:
+				most_frequent_sense = "no_wn_sense_existing"
+				synset_offset = "no_wn_sense_existing"
+				self._log_message("WARNING: no wn sense found for token {0}".format(undisambiguated_token))
 
 			token_index = undisambiguated_token.id
 
 			if undisambiguated_token.wn_sense_key is None and undisambiguated_token.wn_synset_offset is None:
 				disambiguated_gloss.tokens[token_index].tag = "mfs"
 				disambiguated_gloss.tokens[token_index].wn_sense_key = most_frequent_sense
-				disambiguated_gloss.tokens[token_index].wn_synset_offset = self.reference_wordnet.wordnet["sense_index"][most_frequent_sense]["synset_offset"]
+				disambiguated_gloss.tokens[token_index].wn_synset_offset = synset_offset
 			else:
 				print("WHAT")
 
@@ -324,7 +355,7 @@ class GlossDisambiguator(object):
 				# as these keys then cant be found in WN they are tried to be resolved here
 				if re.search("%([0-9]):", key).group(1) == "3":
 					return lemma_from_key(re.sub("(%)[0-9](:)", "\g<1>5\g<2>", key))
-				self._log_key(sense_key_a)
+				self._log_message(sense_key_a)
 				return None
 
 		lemma_a = lemma_from_key(sense_key_a)
@@ -337,11 +368,11 @@ class GlossDisambiguator(object):
 
 	### OTHER METHODS ###
 
-	def _log_key(self, key):
-		if key not in self._logged_keys:
-			with open(self._invalid_key_logfile, "a") as f:
-				f.write(key + "\n")
-		self._logged_keys.append(key)
+	def _log_message(self, message):
+		if message not in self._logged_messages:
+			with open(self._logfile, "a") as f:
+				f.write(message + "\n")
+		self._logged_messages.append(message)
 
 if __name__ == "__main__":
 	gd = GlossDisambiguator("", "", "")
