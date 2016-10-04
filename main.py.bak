@@ -18,7 +18,7 @@ wn = WordNet("data/wordnet_database/", "src/noun_pointers.txt", "src/adj_pointer
 glosses = wn.collect_glosses()
 
 if use_test_gloss_portion:
-	glosses = {key: glosses[key] for key in list(glosses.keys())[:100]}
+	glosses = {key: glosses[key] for key in glosses.keys()[:100]}
 
 # for some reason there are a few glosses that crash EasySRL, they are excluded here
 excluded_synsets = ["n13515353", "n00658946", "n06505517", "n07061677"]

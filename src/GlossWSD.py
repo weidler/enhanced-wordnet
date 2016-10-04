@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # AUTHOR: Tonio Weidler
 
@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 import re
 import datetime
 import os
-from Glosses import Token, CollocationHead, CollocationMember
+from src.Glosses import Token, CollocationHead, CollocationMember
 from nltk.corpus import wordnet as wn
 from itertools import product as list_product, combinations
 

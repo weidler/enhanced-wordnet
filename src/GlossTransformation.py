@@ -1,16 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # AUTHOR: Tonio Weidler
 
 import subprocess as sp
 from pprint import pprint
-from Glosses import CollocationMember, CollocationHead
+from src.Glosses import CollocationMember, CollocationHead
 import re
 import regex
 import os
 import json
 import datetime
-from functions import parse_logic_transformation, find_predicates
+from src.functions import parse_logic_transformation, find_predicates
 
 class GlossTransformer(object):
 

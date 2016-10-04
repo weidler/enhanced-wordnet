@@ -1,10 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # AUTHOR: Tonio Weidler
 
-from Glosses import LogicallyTransformedGloss
-from functions import get_ss_type_from_sense_key, add_key, get_sk_main_variable
+from src.Glosses import LogicallyTransformedGloss
+from src.functions import get_ss_type_from_sense_key, add_key, get_sk_main_variable, find_predicates
 import re
+from pprint import pprint
 
 class RelationExtractor(object):
 	"""
@@ -54,7 +55,7 @@ class RelationExtractor(object):
 			if ss_type == "noun":
 				main_entity_symbol = self._find_main_entity(gloss_transformation)
 				if not main_entity_symbol:
-					print("no main entity identified for {0}".format(gloss_key))
+					# print("no main entity identified for {0}".format(gloss_key))
 					continue
 
 				# relation "specification" / "attributes"
@@ -80,7 +81,16 @@ class RelationExtractor(object):
 
 			# verb relations
 			elif ss_type == "verb":
-				pass
+				main_event_symbol = self._find_main_event(gloss_transformation)
+				if not main_event_symbol:
+					# print("no main event identified for {0}".format(gloss_key))
+					continue
+
+				specifications = self._extract_verb_specifications(main_event_symbol, gloss_transformation)
+				for spec_type in specifications:
+					if spec_type[0]:
+						gloss_relations["{0}_spec".format(spec_type[1])] = set([sense[1] for sense in spec_type[0]])
+
 			elif ss_type == "adj":
 				pass  # not implemented yet
 			elif ss_type == "adv":
@@ -217,12 +227,44 @@ class RelationExtractor(object):
 
 		return (attributes, hyperonym)
 
-	def _extract_verb_specification(self):
-		pass
+	def _extract_verb_specifications(self, main_event_symbol, parsed_gloss_transformation):
+		locational = []
+		manner = []
+		temporal = []
+
+		types = [locational, manner, temporal]
+		pred_regs = ["LOC", "MNR", "TMP"]
+		names = ["locational", "manner", "temporal"]
+
+		parsed_logic_transformation = parsed_gloss_transformation[main_event_symbol]["parsed_transformation"]
+
+		for spec_type_list, reg in zip(types, pred_regs):
+			for loc in find_predicates(parsed_logic_transformation, reg):
+				if loc[1][-1] == main_event_symbol:
+					possibilities = []
+					if loc[1][0][0] == "OR":
+						for coord in loc[1][0][1]:
+							if coord[0] == "sk":
+								possibilities.append(coord)
+					elif loc[1][0][0] == "sk":
+						possibilities.append(loc[1][0])
+
+					for sk in possibilities:
+						spec_type_list.extend([sense for sense in parsed_gloss_transformation[get_sk_main_variable(sk)]["predicates"] if get_ss_type_from_sense_key(sense[1]) in ["a", "s", "r"]])
+
+		return zip(types, names)
+
 
 	def _find_main_entity(self, transformed_gloss_entities):
 		#TODO is there a smarter way?
 		if "x" in transformed_gloss_entities:
 			return "x"
+		else:
+			return None
+
+	def _find_main_event(self, transformed_gloss_entities):
+		#TODO is there a smarter way?
+		if "e" in transformed_gloss_entities:
+			return "e"
 		else:
 			return None

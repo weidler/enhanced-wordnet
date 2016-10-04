@@ -1,6 +1,7 @@
 REQUIREMENTS:
 
-pylog
+nltk, nltk.corpus.wordnet
+cort
 
 possible problems and their solving:
 

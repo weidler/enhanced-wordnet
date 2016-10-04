@@ -1,11 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os
 import re
 from pprint import pprint
 
-from Glosses import Gloss, LogicallyTransformedGloss
+from src.Glosses import Gloss, LogicallyTransformedGloss
 
 class WordNet(object):
 
