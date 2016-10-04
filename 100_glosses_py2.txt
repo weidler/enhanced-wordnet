@@ -1,0 +1,315 @@
+[Command: /usr/bin/env -u /home/weidler/workspaces/enhancedwordnet/main.py]
+=== Loading WordNet... ===
+parsing noun files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+parsing adj files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+parsing verb files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+parsing adv files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+loaded wordnet database...
+collecting glosses...
+	... finished
+=== Disambiguating Glosses... ===
+merging files...
+...data/wordnet_glosstags/adv.xml
+...data/wordnet_glosstags/verb.xml
+...data/wordnet_glosstags/noun.xml
+...data/wordnet_glosstags/adj.xml
+	at gloss 2 of 100
+		...disambiguating 1 words in gloss n06863751
+	at gloss 4 of 100
+		...disambiguating 2 words in gloss n09562319
+	at gloss 5 of 100
+		...disambiguating 2 words in gloss n05543425
+	at gloss 7 of 100
+		...disambiguating 2 words in gloss n08590719
+	at gloss 9 of 100
+		...disambiguating 7 words in gloss n00901476
+	at gloss 12 of 100
+		...disambiguating 2 words in gloss a00685638
+	at gloss 14 of 100
+		...disambiguating 3 words in gloss n14613643
+	at gloss 16 of 100
+		...disambiguating 3 words in gloss n06745628
+	at gloss 17 of 100
+		...disambiguating 4 words in gloss n03059806
+	at gloss 18 of 100
+		...disambiguating 1 words in gloss n01852400
+	at gloss 19 of 100
+		...disambiguating 5 words in gloss n04527475
+	at gloss 20 of 100
+		...disambiguating 2 words in gloss n12631637
+	at gloss 21 of 100
+		...disambiguating 2 words in gloss n01424420
+	at gloss 22 of 100
+		...disambiguating 3 words in gloss n14884336
+	at gloss 23 of 100
+		...disambiguating 2 words in gloss n03539754
+	at gloss 24 of 100
+		...disambiguating 2 words in gloss a00199811
+	at gloss 25 of 100
+		...disambiguating 1 words in gloss n09741233
+	at gloss 26 of 100
+		...disambiguating 5 words in gloss n06007642
+	at gloss 27 of 100
+		...disambiguating 1 words in gloss n10476467
+	at gloss 28 of 100
+		...disambiguating 3 words in gloss a02778122
+	at gloss 29 of 100
+		...disambiguating 5 words in gloss n10823894
+	at gloss 30 of 100
+		...disambiguating 3 words in gloss n14723425
+	at gloss 31 of 100
+		...disambiguating 1 words in gloss n09760476
+	at gloss 32 of 100
+		...disambiguating 1 words in gloss n10607824
+	at gloss 34 of 100
+		...disambiguating 1 words in gloss n04834817
+	at gloss 35 of 100
+		...disambiguating 2 words in gloss n05687338
+	at gloss 36 of 100
+		...disambiguating 2 words in gloss n14340287
+	at gloss 38 of 100
+		...disambiguating 4 words in gloss n10534849
+	at gloss 40 of 100
+		...disambiguating 2 words in gloss n13765749
+	at gloss 41 of 100
+		...disambiguating 1 words in gloss v00569556
+	at gloss 42 of 100
+		...disambiguating 6 words in gloss n08345366
+	at gloss 43 of 100
+		...disambiguating 4 words in gloss n13654093
+	at gloss 44 of 100
+		...disambiguating 1 words in gloss n02415130
+	at gloss 46 of 100
+		...disambiguating 2 words in gloss n07155081
+	at gloss 47 of 100
+		...disambiguating 2 words in gloss n00639556
+	at gloss 49 of 100
+		...disambiguating 3 words in gloss n08794366
+	at gloss 50 of 100
+		...disambiguating 2 words in gloss r00125108
+	at gloss 51 of 100
+		...disambiguating 2 words in gloss v02573031
+	at gloss 52 of 100
+		...disambiguating 3 words in gloss n12083113
+	at gloss 53 of 100
+		...disambiguating 1 words in gloss n09331654
+	at gloss 54 of 100
+		...disambiguating 2 words in gloss n13718178
+	at gloss 55 of 100
+		...disambiguating 1 words in gloss n10072546
+	at gloss 56 of 100
+		...disambiguating 2 words in gloss v00626428
+	at gloss 58 of 100
+		...disambiguating 2 words in gloss a00877816
+	at gloss 60 of 100
+		...disambiguating 2 words in gloss n05433400
+	at gloss 61 of 100
+		...disambiguating 4 words in gloss v00660851
+	at gloss 62 of 100
+		...disambiguating 5 words in gloss n12530818
+	at gloss 63 of 100
+		...disambiguating 1 words in gloss n00099588
+	at gloss 64 of 100
+		...disambiguating 4 words in gloss n03073977
+	at gloss 65 of 100
+		...disambiguating 1 words in gloss a01628946
+	at gloss 66 of 100
+		...disambiguating 2 words in gloss n01325658
+	at gloss 68 of 100
+		...disambiguating 1 words in gloss n08795492
+	at gloss 69 of 100
+		...disambiguating 2 words in gloss n15176319
+	at gloss 70 of 100
+		...disambiguating 1 words in gloss n07460104
+	at gloss 71 of 100
+		...disambiguating 3 words in gloss n07025900
+	at gloss 72 of 100
+		...disambiguating 1 words in gloss v01376082
+	at gloss 74 of 100
+		...disambiguating 1 words in gloss n12842887
+	at gloss 75 of 100
+		...disambiguating 3 words in gloss n14005549
+	at gloss 77 of 100
+		...disambiguating 1 words in gloss n11472820
+	at gloss 78 of 100
+		...disambiguating 2 words in gloss n12591017
+	at gloss 79 of 100
+		...disambiguating 1 words in gloss n05559727
+	at gloss 80 of 100
+		...disambiguating 2 words in gloss v02372605
+	at gloss 81 of 100
+		...disambiguating 1 words in gloss n12153033
+	at gloss 82 of 100
+		...disambiguating 3 words in gloss n00089657
+	at gloss 85 of 100
+		...disambiguating 7 words in gloss n15066125
+	at gloss 87 of 100
+		...disambiguating 2 words in gloss n08111157
+	at gloss 89 of 100
+		...disambiguating 3 words in gloss n06119608
+	at gloss 90 of 100
+		...disambiguating 1 words in gloss a03124290
+	at gloss 91 of 100
+		...disambiguating 2 words in gloss a02453492
+	at gloss 92 of 100
+		...disambiguating 1 words in gloss a02872654
+	at gloss 93 of 100
+		...disambiguating 2 words in gloss n01461315
+	at gloss 94 of 100
+		...disambiguating 1 words in gloss v02083694
+	at gloss 95 of 100
+		...disambiguating 6 words in gloss n06688059
+	at gloss 96 of 100
+		...disambiguating 2 words in gloss n10360578
+	at gloss 97 of 100
+		...disambiguating 1 words in gloss a02198302
+	at gloss 99 of 100
+		...disambiguating 1 words in gloss n03233423
+	at gloss 100 of 100
+		...disambiguating 2 words in gloss a00387392
+	disambiguated 77 glosses, skipped 23
+...writing glosses
+=== Transforming Glosses ===
+building corpus...
+parsing...
+<type 'str'>
+=== Extract Relations ===
+...finished
+{u'n00901476': {'application': [u'examine%2:32:01::']},
+ u'n01325658': {'attributes': ['deciduous%3:00:01:caducous:00'],
+                'specifications': [(u'horn%1:06:06::',
+                                    'deciduous%3:00:01:caducous:00')]},
+ u'n01424420': {'attributes': [u'parasitic%5:00:00:dependent:00'],
+                'specifications': [('protozoan%1:05:00::',
+                                    u'parasitic%5:00:00:dependent:00')]},
+ u'n01841441': {'attributes': ['western%3:00:00:west:00'],
+                'specifications': [('sapsucker%1:05:00::',
+                                    'western%3:00:00:west:00')]},
+ u'n01852400': {'attributes': ['asiatic%3:01:00::',
+                               'showy%3:00:00:colorful:03'],
+                'specifications': [('duck%1:05:00::', 'asiatic%3:01:00::'),
+                                   ('duck%1:05:00::',
+                                    'showy%3:00:00:colorful:03')]},
+ u'n02415130': {'attributes': ['reddish%3:00:00:chromatic:00'],
+                'specifications': [(u'sheep%1:05:00::',
+                                    'reddish%3:00:00:chromatic:00')]},
+ u'n03073977': {'application': ['support%2:35:00::'],
+                'attributes': ['tall%3:00:00::',
+                               'cylindrical%3:00:00:rounded:00',
+                               u'vertical%3:00:00::'],
+                'specifications': [(u'structure%1:09:00::',
+                                    'tall%3:00:00::'),
+                                   (u'structure%1:09:00::',
+                                    'cylindrical%3:00:00:rounded:00'),
+                                   (u'structure%1:09:00::',
+                                    u'vertical%3:00:00::')]},
+ u'n03539754': {'application': [u'control%2:35:00::']},
+ u'n04527475': {'application': [u'measure%2:31:00::'],
+                'attributes': ['short%3:00:01::'],
+                'specifications': [('tube%1:06:00::', 'short%3:00:01::')]},
+ u'n04834817': {'attributes': ['excessive%3:00:00:unrestrained:00'],
+                'specifications': [('desire%1:07:00::',
+                                    'excessive%3:00:00:unrestrained:00')]},
+ u'n05433400': {'attributes': ['cytoplasmic%3:01:00::',
+                               u'intact%5:00:00:whole:00'],
+                'specifications': [(u'content%1:10:00::',
+                                    'cytoplasmic%3:01:00::'),
+                                   (u'content%1:10:00::',
+                                    u'intact%5:00:00:whole:00')]},
+ u'n05442789': {'attributes': ['normal%3:00:01::'],
+                'specifications': [('complement%1:23:00::',
+                                    'normal%3:00:01::')]},
+ u'n05559727': {'attributes': ['large%3:00:00::', 'fleshy%3:01:00::'],
+                'specifications': [(u'mass%1:17:00::', 'large%3:00:00::'),
+                                   (u'mass%1:17:00::', 'fleshy%3:01:00::')]},
+ u'n06863751': {'attributes': ['major%3:00:04::'],
+                'specifications': [('minor_diatonic_scale%1:10:00::',
+                                    'major%3:00:04::')]},
+ u'n07025900': {'attributes': [u'traditional%5:00:00:orthodox:00'],
+                'specifications': [('genre%1:10:01::',
+                                    u'traditional%5:00:00:orthodox:00')]},
+ u'n08345366': {'attributes': ['military%3:00:02::',
+                               'clandestine%3:00:00:covert:00'],
+                'specifications': [(u'wing%1:05:00::', 'military%3:00:02::'),
+                                   (u'wing%1:05:00::',
+                                    'clandestine%3:00:00:covert:00')]},
+ u'n08794366': {'attributes': ['coastal%3:00:00::'],
+                'specifications': [('region%1:15:01::', 'coastal%3:00:00::')]},
+ u'n08795492': {'attributes': ['ancient%3:00:00:past:00'],
+                'specifications': [('seaport%1:15:00::',
+                                    'ancient%3:00:00:past:00')]},
+ u'n10072546': {'attributes': ['unethically%4:02:00::'],
+                'specifications': [('person%1:03:00::',
+                                    'unethically%4:02:00::')]},
+ u'n11029454': {'attributes': ['illegitimate%3:00:00::'],
+                'specifications': [('son%1:18:00::',
+                                    'illegitimate%3:00:00::')]},
+ u'n11227400': {'attributes': ['russian%3:01:00::'],
+                'specifications': [('ballerina%1:18:00::',
+                                    'russian%3:01:00::')]},
+ u'n12083113': {'attributes': [u'various%5:00:02:different:00',
+                               'showy%3:00:00:colorful:03'],
+                'specifications': [('orchid%1:20:00::',
+                                    u'various%5:00:02:different:00'),
+                                   ('orchid%1:20:00::',
+                                    'showy%3:00:00:colorful:03')]},
+ u'n12153033': {'attributes': ['north_american%3:01:00::',
+                               'north_american%3:01:00::'],
+                'specifications': [('sedge%1:20:00::',
+                                    'north_american%3:01:00::'),
+                                   ('sedge%1:20:00::',
+                                    'north_american%3:01:00::')]},
+ u'n12530818': {'attributes': ['small%3:00:00::'],
+                'specifications': [('shrub%1:20:00::', 'small%3:00:00::')]},
+ u'n12591017': {'attributes': ['brazilian%3:01:00::'],
+                'specifications': [('leaf_bud%1:20:00::',
+                                    'brazilian%3:01:00::')]},
+ u'n12631637': {'attributes': [u'erect%3:00:00::'],
+                'specifications': [('subshrub%1:20:00::',
+                                    u'erect%3:00:00::')]},
+ u'n12842887': {'attributes': ['perennial%3:00:00::',
+                               'aromatic%3:00:00:fragrant:00'],
+                'specifications': [('herb%1:20:00::', 'perennial%3:00:00::'),
+                                   ('herb%1:20:00::',
+                                    'aromatic%3:00:00:fragrant:00')]},
+ u'n14723425': {'application': ['increase%2:30:02::']},
+ u'n15066125': {'attributes': [u'first%5:00:00:ordinal:00'],
+                'specifications': [('nerve_agent%1:27:00::',
+                                    u'first%5:00:00:ordinal:00')]},
+ u'n15176319': {'attributes': [u'third%5:00:00:ordinal:00'],
+                'specifications': [('month%1:28:01::',
+                                    u'third%5:00:00:ordinal:00')]}}
+From a total of 100 glosses of which are
+	73 nouns and
+	13 verbs
+relations from 30 glosses where extracted,
+which where found as follows for their ss type:
+
+attributes: 27 (36.99%)
+specifications: 27 (36.99%)
+application: 5 (6.85%)
+functionality: 0 (0.0%)
+locational_spec: 0 (0.0%)
+manner_spec: 0 (0.0%)
+temporal_spec: 0 (0.0%)
+be: 0 (0.0%)
+
+
+Done.
+[Finished in 105.193s]

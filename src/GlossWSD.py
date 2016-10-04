@@ -108,7 +108,7 @@ class GlossDisambiguator(object):
 				tokens = resolve_wrapper_nodes(gloss_def.findall("*"))
 				# travers through all tokens in the glosstag gloss, create Token objects for them and append them to the token list in the gloss
 				for token in tokens:
-					if "pos" in token.keys():
+					if "pos" in list(token.keys()):
 						pos = token.attrib["pos"]
 					else:
 						pos = "unknown"
@@ -120,9 +120,9 @@ class GlossDisambiguator(object):
 
 					# check if its a collocation or a normal wf
 					if token.tag == "wf":
-						if "lemma" in token.keys():
+						if "lemma" in list(token.keys()):
 							lemma = token.attrib["lemma"]
-						elif "pos" in token.keys():
+						elif "pos" in list(token.keys()):
 							lemma = token.attrib["pos"]
 
 						# handle different annotation scenarios
@@ -158,9 +158,9 @@ class GlossDisambiguator(object):
 							collocation_glob = token.find("glob")
 							token_original_form = collocation_glob.tail
 							collocation_id = token.attrib["coll"].split(",")
-							if "lemma" in collocation_glob.keys():
+							if "lemma" in list(collocation_glob.keys()):
 								lemma = collocation_glob.attrib["lemma"]
-							elif "pos" in collocation_glob.keys():
+							elif "pos" in list(collocation_glob.keys()):
 								lemma = collocation_glob.attrib["pos"]
 
 							if collocation_glob.attrib["tag"] == "un":
@@ -185,9 +185,9 @@ class GlossDisambiguator(object):
 							# cf is not the head of a collocation
 							token_original_form = token.text
 							collocation_id = token.attrib["coll"].split(",")
-							if "lemma" in token.keys():
+							if "lemma" in list(token.keys()):
 								lemma = token.attrib["lemma"]
-							elif "pos" in token.keys():
+							elif "pos" in list(token.keys()):
 								lemma = token.attrib["pos"]
 
 							token_object = CollocationMember(token_id_in_gloss, token_original_form, lemma, token_wn_synset_offset, token_wn_sense_key, anno_tag, pos, collocation_id)
@@ -221,7 +221,7 @@ class GlossDisambiguator(object):
 			# for each token inside the gloss determine if the token is already disambiguated, needs to be disambiguated or isnt part of WordNet anyways
 			for token_index in gloss.tokens:
 				token = gloss.tokens[token_index]
-				tokens_wn_ss_types = map(int, re.findall("[0-9]+", token.lemma))
+				tokens_wn_ss_types = list(map(int, re.findall("[0-9]+", token.lemma)))
 				# tokens that are tagged as "man" or "auto" are already disambiguated
 				if token.tag in ["man", "auto"]:
 					tagged_tokens.append(token)
@@ -278,7 +278,7 @@ class GlossDisambiguator(object):
 
 	def _disambiguate_gloss_by_path_similarity(self, gloss, taggable_tokens, tagged_tokens):
 
-			possible_combinations = map(list, list(self._get_possible_sense_combinations(taggable_tokens, tagged_tokens)))
+			possible_combinations = list(map(list, list(self._get_possible_sense_combinations(taggable_tokens, tagged_tokens))))
 			total_combs = len(list(possible_combinations))
 			scores = []
 			pprint(possible_combinations[0])

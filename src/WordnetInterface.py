@@ -22,7 +22,7 @@ class WordNet(object):
 			"adv": self._load_pointers(adv_pointers)
 		}
 
-		self.possible_pointers = list(set([item for sublist in self.pointers.values() for item in sublist]))
+		self.possible_pointers = list(set([item for sublist in list(self.pointers.values()) for item in sublist]))
 
 		self.wordnet = self._load_wordnet(self.wordnet_dir)
 

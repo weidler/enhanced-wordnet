@@ -32,7 +32,7 @@ class RelationExtractor(object):
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
 
-		untransformed_glosses = filter(lambda g: type(self.glosses[g]) != LogicallyTransformedGloss, self.glosses)
+		untransformed_glosses = [g for g in self.glosses if type(self.glosses[g]) != LogicallyTransformedGloss]
 		if untransformed_glosses:
 			raise Exception("Please transform the Glosses first! There are {0} glosses in this list that are not transformed!".format(len(untransformed_glosses)))
 		self.extracted_relations = {}
@@ -104,7 +104,7 @@ class RelationExtractor(object):
 	def get_extracted_relations_stats(self, relations):
 		total_glosses_count = len(self.glosses)
 		glosses_with_relations_count = len(relations)
-		gloss_ss_types = [g[0] for g in self.glosses.keys()]
+		gloss_ss_types = [g[0] for g in list(self.glosses.keys())]
 		total_nouns = gloss_ss_types.count("n")
 		total_verbs = gloss_ss_types.count("v")
 		noun_relations = ["attributes", "specifications", "application", "functionality"]
@@ -117,14 +117,14 @@ class RelationExtractor(object):
 					glosses_with_relations_count
 				))
 
-		for ss_type_relations in [noun_relations, verb_relations]:
+		for ss_type_relations, count in zip([noun_relations, verb_relations], [total_nouns, total_verbs]):
 			for r in ss_type_relations:
 				r_count = 0
 				for g_key in relations:
 					g = relations[g_key]
-					if r in g.keys():
+					if r in list(g.keys()):
 						r_count += 1
-				print("{0}: {1} ({2}%)".format(r, r_count, round(r_count/float(total_nouns)*100, 2)))
+				print("{0}: {1} ({2}%)".format(r, r_count, round(r_count/float(count)*100, 2)))
 
 
 	def _extract_noun_functionality(self, main_entity_symbol, parsed_gloss_transformation):
@@ -252,7 +252,7 @@ class RelationExtractor(object):
 					for sk in possibilities:
 						spec_type_list.extend([sense for sense in parsed_gloss_transformation[get_sk_main_variable(sk)]["predicates"] if get_ss_type_from_sense_key(sense[1]) in ["a", "s", "r"]])
 
-		return zip(types, names)
+		return list(zip(types, names))
 
 
 	def _find_main_entity(self, transformed_gloss_entities):

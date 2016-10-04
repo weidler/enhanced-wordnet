@@ -25,7 +25,7 @@ class GlossTransformer(object):
 		with open(self._logfile, "w") as f:
 			f.write("LOG FILE - GLOSS TRANSFORMATION\n\n")
 
-		self._gloss_order = self.glosses.keys()
+		self._gloss_order = list(self.glosses.keys())
 		self._transformation_type = "logic"
 
 	def transform_glosses(self, target_file=None):
@@ -38,7 +38,7 @@ class GlossTransformer(object):
 
 		if target_file:
 			with open(target_file, "w") as f:
-				f.write(gloss_order_reference + parsed_gloss_corpus)
+				f.write(str(gloss_order_reference + parsed_gloss_corpus))
 			return True
 
 		else:
@@ -51,7 +51,7 @@ class GlossTransformer(object):
 		order = re.search("%ORDER (.*?)\n", content).group(1)
 		self._gloss_order = json.loads(re.sub("'", '"', order))
 
-		transformed_glosses = re.sub("(^%.*\n|\n\Z)", "", content)
+		transformed_glosses = re.sub("(^%.*?\n|\n\Z)", "", content)
 		transformed_glosses_list = [g if g != "" else "EMPTY" for g in transformed_glosses.split("\n")]
 
 		return self._extend_glosses_with_transformations(transformed_glosses_list)
@@ -184,9 +184,11 @@ class GlossTransformer(object):
 			f.write(gloss_corpus)
 
 		try:
-			parser_output = sp.check_output("java -Xmx2g -jar src/tools/easysrl/easysrl_fixed.jar --model src/tools/easysrl/model/ --maxLength 150 --outputFormat {0} --inputFile gloss_corpus.tmp 2>{1}".format(self._transformation_type, self._logfile+".parser_log"), shell=True)
+			parser_output = sp.check_output("java -Xmx2g -jar src/tools/easysrl/easysrl_fixed.jar --model src/tools/easysrl/model/ --maxLength 150 --outputFormat {0} --inputFile gloss_corpus.tmp 2>{1}".format(self._transformation_type, self._logfile+".parser_log"), shell=True, universal_newlines=True)
 		except sp.CalledProcessError as e:
 			return e.output
+
+		print(type(parser_output))
 
 		os.remove("gloss_corpus.tmp")
 

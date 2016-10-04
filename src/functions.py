@@ -38,7 +38,7 @@ def parse_logic_transformation(transformation):
 		# handle predicates
 		if match.group(1):
 			if state == 1: raise RuntimeError("Regex failed; Expected argument structure for last element at {0}\n{1}!".format(match.start(), transformation))
-			if state == 2: print("Missing control symbol for argument listing at {0}\n{1}!".format(match.start(), transformation))
+			if state == 2: print(("Missing control symbol for argument listing at {0}\n{1}!".format(match.start(), transformation)))
 
 			current_element = match.group(1)
 			state = 1
@@ -64,7 +64,7 @@ def parse_logic_transformation(transformation):
 				coordination = False
 
 			# if there is nothing in the stack, then there was no opening bracket for this closing bracket
-			if not stack: print("unmatched closing bracket at {0}\n{1}".format(match.start(), transformation))
+			if not stack: print(("unmatched closing bracket at {0}\n{1}".format(match.start(), transformation)))
 			# if the last element was either an single element or a predicate+argument than add this to the args of the current level
 			if state != 0: args.append(current_element)
 

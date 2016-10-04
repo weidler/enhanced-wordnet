@@ -11,14 +11,20 @@ import pickle
 # Settings
 new_disambiguation = False
 use_test_gloss_portion = True
-new_logic_parsing = False
-file_extension = "_100"
+new_logic_transformation = False
+file_extension = "_50000"
 
+# you cant create new disambiguations and use old logic parsings, as the portion of the glosses may differ in its glosses it contains
+if new_disambiguation and not new_logic_transformation:
+	print("Setting new_logic_transformation to 'True' - you can't initiate a use a new disambiguation with an old logical traosformation")
+	new_logic_transformation = True
+
+# initialize
 wn = WordNet("data/wordnet_database/", "src/noun_pointers.txt", "src/adj_pointers.txt", "src/verb_pointers.txt", "src/adv_pointers.txt")
 glosses = wn.collect_glosses()
 
 if use_test_gloss_portion:
-	glosses = {key: glosses[key] for key in list(glosses.keys())[:100]}
+	glosses = {key: glosses[key] for key in list(glosses.keys())[:50000]}
 
 # for some reason there are a few glosses that crash EasySRL, they are excluded here
 excluded_synsets = ["n13515353", "n00658946", "n06505517", "n07061677"]
@@ -32,12 +38,12 @@ if new_disambiguation:
 	disambiguated_glosses = gd.disambiguate_glosses()
 
 	print("...writing glosses")
-	with open("glosses_disambiguated{0}.txt".format(file_extension), "w") as f:
+	with open("glosses_disambiguated{0}.txt".format(file_extension), "wb") as f:
 		pickle.dump(disambiguated_glosses, f)
 else:
 	try:
 		print("...pickling Glosses")
-		with open("glosses_disambiguated{0}.txt".format(file_extension), "r") as f:
+		with open("glosses_disambiguated{0}.txt".format(file_extension), "rb") as f:
 			disambiguated_glosses = pickle.load(f)
 		print("...finished pickling")
 	except IOError as io:
@@ -45,9 +51,8 @@ else:
 
 # TRANSFORMATION (alle Glossen dauern etwa 46 min)
 gt = GlossTransformer(disambiguated_glosses)
-if new_logic_parsing:
+if new_logic_transformation:
 	gt.transform_glosses(target_file="transformations{0}.txt".format(file_extension))
-
 transformed_glosses = gt.read_transformed_glosses("transformations{0}.txt".format(file_extension))
 
 # test_gloss = 0
@@ -59,7 +64,7 @@ transformed_glosses = gt.read_transformed_glosses("transformations{0}.txt".forma
 
 re = RelationExtractor(transformed_glosses)
 relations = re.extract_relations()
-pprint(relations)
+# pprint(relations)
 re.get_extracted_relations_stats(relations)
 
 print("\n\nDone.")
