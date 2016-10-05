@@ -1,3 +1,4 @@
 *.pyc
 data/*
 log/*
+py2_backups/

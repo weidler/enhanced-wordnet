@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import sys
 import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "../"))
+
 import re
 from pprint import pprint
 
-from src.Glosses import Gloss, LogicallyTransformedGloss
+from src.glosses.Glosses import Gloss, LogicallyTransformedGloss
 
 class WordNet(object):
 

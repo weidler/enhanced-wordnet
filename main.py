@@ -1,18 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# author: Tonio Weidler
+
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "."))
 
 from pprint import pprint
 from src.WordnetInterface import WordNet
-from src.GlossWSD import GlossDisambiguator
-from src.GlossTransformation import GlossTransformer
+from src.glosses.GlossWSD import GlossDisambiguator
+from src.glosses.GlossTransformation import GlossTransformer
 from src.RelationExtractor import RelationExtractor
 import pickle
 
 # Settings
 new_disambiguation = False
-use_test_gloss_portion = True
 new_logic_transformation = False
-file_extension = "_50000"
+
+use_test_gloss_portion = True
+test_gloss_portion = 50000
+file_extension = "_" + str(test_gloss_portion)
+
+show_detailed_output = False
 
 # you cant create new disambiguations and use old logic parsings, as the portion of the glosses may differ in its glosses it contains
 if new_disambiguation and not new_logic_transformation:
@@ -24,7 +33,7 @@ wn = WordNet("data/wordnet_database/", "src/noun_pointers.txt", "src/adj_pointer
 glosses = wn.collect_glosses()
 
 if use_test_gloss_portion:
-	glosses = {key: glosses[key] for key in list(glosses.keys())[:50000]}
+	glosses = {key: glosses[key] for key in list(glosses.keys())[:test_gloss_portion]}
 
 # for some reason there are a few glosses that crash EasySRL, they are excluded here
 excluded_synsets = ["n13515353", "n00658946", "n06505517", "n07061677"]
@@ -38,12 +47,12 @@ if new_disambiguation:
 	disambiguated_glosses = gd.disambiguate_glosses()
 
 	print("...writing glosses")
-	with open("glosses_disambiguated{0}.txt".format(file_extension), "wb") as f:
+	with open("extracted_data/glosses_disambiguated{0}.txt".format(file_extension), "wb") as f:
 		pickle.dump(disambiguated_glosses, f)
 else:
 	try:
 		print("...pickling Glosses")
-		with open("glosses_disambiguated{0}.txt".format(file_extension), "rb") as f:
+		with open("extracted_data/glosses_disambiguated{0}.txt".format(file_extension), "rb") as f:
 			disambiguated_glosses = pickle.load(f)
 		print("...finished pickling")
 	except IOError as io:
@@ -52,19 +61,26 @@ else:
 # TRANSFORMATION (alle Glossen dauern etwa 46 min)
 gt = GlossTransformer(disambiguated_glosses)
 if new_logic_transformation:
-	gt.transform_glosses(target_file="transformations{0}.txt".format(file_extension))
-transformed_glosses = gt.read_transformed_glosses("transformations{0}.txt".format(file_extension))
+	gt.transform_glosses(target_file="extracted_data/transformations{0}.txt".format(file_extension))
+transformed_glosses = gt.read_transformed_glosses("extracted_data/transformations{0}.txt".format(file_extension))
 
-# test_gloss = 0
-# for test_gloss in transformed_glosses:
-# 	print("\n\n")
-# 	print(transformed_glosses[test_gloss])
-# 	print(transformed_glosses[test_gloss].tokens)
-# 	pprint(transformed_glosses[test_gloss].transformed_gloss_entities)
+if show_detailed_output:
+	print("\n\nDETAILED OUTPUT GLOSS TRANSFORMATIONS & PARSINGS")
+	for test_gloss in transformed_glosses:
+		print("\n-----------------------------------------------------------------------\n")
+		print(transformed_glosses[test_gloss])
+		print("")
+		print(transformed_glosses[test_gloss].tokens)
+		print("\n")
+		pprint(transformed_glosses[test_gloss].transformed_gloss_parsed)
+		print("")
+		pprint(transformed_glosses[test_gloss].transformed_gloss_entities)
+
+	print("\n\n-----------------------------------------------------------------------\n\n")
 
 re = RelationExtractor(transformed_glosses)
 relations = re.extract_relations()
-# pprint(relations)
+if show_detailed_output: pprint(relations)
 re.get_extracted_relations_stats(relations)
 
 print("\n\nDone.")
