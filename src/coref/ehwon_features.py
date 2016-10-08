@@ -19,7 +19,7 @@ from src.functions import is_noun, is_verb
 # there is the need to create an global wordnet interface here, that can be used in the functions
 # else, with every function call it would have to be reinitialized
 
-GLOBAL_WORDNET_INTERFACE = WordNet("data/wordnet_database/", "src/pointers/noun_pointers.txt", "src/pointers/adj_pointers.txt", "src/pointers/verb_pointers.txt", "src/pointers/adv_pointers.txt", relations_filename="extracted_data/relations_dev_117659.rel")
+GLOBAL_WORDNET_INTERFACE = WordNet("data/wordnet_database/", "src/pointers/noun_pointers.txt", "src/pointers/adj_pointers.txt", "src/pointers/verb_pointers.txt", "src/pointers/adv_pointers.txt", relations_filename="extracted_data/relations_dev_117659_2.rel")
 wnl = WordNetLemmatizer()
 
 def random_feature(mention):
@@ -57,7 +57,7 @@ def anaphor_performs_antecedent_application(anaphor, antecedent):
 
 def antecedent_performs_anaphor_application(anaphor, antecedent):
     """Compute whether the antecedent is object of a verb that is the anaphors application."""
-    performs = _calc_typical_action_congruency(anaphor, antecedent)
+    performs = _calc_typical_action_congruency(antecedent, anaphor)
     return ("antecedent_performs_anaphor_application", performs)
 
 ### HELPER FUNCTIONS ###
@@ -82,7 +82,7 @@ def _calc_typical_action_congruency(phrase, paraphrase):
         paraphrase_head_application_synset_ids = set(itertools.chain(*[syn.relations["application"] for syn in paraphrase_head_synsets if "application" in syn.relations]))
         if not phrase_head_governor_synset_ids.isdisjoint(paraphrase_head_application_synset_ids):
             phrase_performs_paraphrase_action = True
-            print("\n'{0}' performing '{1}' which is typical for a '{2}'".format(phrase_head_dependency_token.form ,phrase_head_governor_token.form, paraphrase_head_lemma))
+            # print("'{0}' performing '{1}' which is typical for a '{2}'\n".format(phrase_head_dependency_token.form, phrase_head_governor_token.form, paraphrase_head_lemma))
 
     return phrase_performs_paraphrase_action
 

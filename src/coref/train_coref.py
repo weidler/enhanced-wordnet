@@ -10,6 +10,11 @@ import logging
 import pickle
 from pprint import pprint
 
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(''message)s')
+
+logging.info("Initializing")
+
 from cort.core import corpora
 from cort.core import mention_extractor
 from cort.coreference import experiments
@@ -18,9 +23,6 @@ from cort.coreference import instance_extractors
 from cort.util import import_helper
 
 from src.coref import ehwon_features
-
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(''message)s')
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train coreference resolution '
@@ -112,11 +114,11 @@ else:
         features.token_distance,
         # ehwon_features.anaphor_specifier_congruency,
         # ehwon_features.anaphor_attribute_congruency,
-        ehwon_features.anaphor_performs_antecedent_application
+        ehwon_features.anaphor_performs_antecedent_application,
         # ehwon_features.anaphor_performs_antecedent_functionality,
         # ehwon_features.antecedent_specifier_congruency,
         # ehwon_features.antecedent_attribute_congruency
-        # ehwon_features.antecedent_performs_anaphor_application,
+        ehwon_features.antecedent_performs_anaphor_application
         # ehwon_features.antecedent_performs_anaphor_functionality,
         # ehwon_features.head_path_similarity,
     ]

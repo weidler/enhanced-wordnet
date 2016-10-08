@@ -103,6 +103,11 @@ class WordNet(object):
 
 		return synsets
 
+	def get_hypernym_synsets(self, snyset):
+		"""For a given Synset return a list of Synsets that are its hypernyms."""
+		if "hypernyms":
+			hypernym_ids = synset.relations.hyper
+
 	### PROTECTED ###
 
 	def _load_wordnet(self, wordnet_dir):
@@ -315,6 +320,9 @@ class Synset(object):
 
 	def __eq__(self, other):
 		return self.synset_id == other.synset_id
+
+	def __repr__(self):
+		return "Synset({0}, {1})".format(self.synset_id, self.words)
 
 	def __init__(self, synset_id, sense_keys, words, relations, gloss):
 		self.__dict__.update(locals())
