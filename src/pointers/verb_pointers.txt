@@ -1,0 +1,11 @@
+!    antonym
+@    hypernym
+ ~    hyponym
+*    entailment
+>    cause
+^    also_see
+$    verb_group
++    derivationally_related
+;c    domain_topic
+;r    domain_region
+;u    domain_usage

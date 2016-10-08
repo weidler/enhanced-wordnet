@@ -21,6 +21,39 @@ def add_key(key, dictionary, value={}):
 	if key not in dictionary:
 		dictionary[key] = value
 
+def get_wordnet_pos(treebank_tag):
+
+    if treebank_tag.startswith('J'):
+        return "a"
+    elif treebank_tag.startswith('V'):
+        return "v"
+    elif treebank_tag.startswith('N'):
+        return "n"
+    elif treebank_tag.startswith('R'):
+        return "r"
+    else:
+        return ''
+
+def is_noun(pos):
+	if get_wordnet_pos(pos) == "n":
+		return True
+	return False
+
+def is_verb(pos):
+	if get_wordnet_pos(pos) == "n":
+		return True
+	return False
+
+def is_adjective(pos):
+	if get_wordnet_pos(pos) == "a" or get_wordnet_pos(pos) == "s":
+		return True
+	return False
+
+def is_adverb(pos):
+	if get_wordnet_pos(pos) == "r":
+		return True
+	return False
+
 def find_predicates(parsed_transformation, arg_regex):
 	"""Find all Predicate-Argument Structures in the prased transformation where the predicate matches the regex."""
 	predicates = []

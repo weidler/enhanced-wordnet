@@ -1,0 +1,6 @@
+!    antonym
+\    derived_from_adj
+;c    domain_topic
+;r    domain_region
+;u    domain_usage
++    derivationally_related

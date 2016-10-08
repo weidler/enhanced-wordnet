@@ -1,0 +1,10 @@
+!    antonym
+&    similar_to
+<    participle
+\    pertainym
+=    attribute
+^    also_see
+;c    domain_topic
+;r    domain_region
+;u    domain_usage
++    derivationally_related

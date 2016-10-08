@@ -285,13 +285,10 @@ class GlossTransformer(object):
 	def _build_gloss_corpus(self, glosses, ignore_parenthesis_content=True):
 		gloss_corpus = ""
 
-		#TODO there are still some glosses that produce strange transformations with unmatching parethesis
-		#TODO honestly i think i sould trash all content in parenthesis
-		#TODO maybe its smarter to construct from tokens? allows combination of collocations...
 		#TODO it could be better to use more than one sentences per gloss if they are seperated by ";" as otherwise its near to impossible to determine the main entity of the sentences following any ;
 		for gloss_key in self._gloss_order:
 			gloss = self.glosses[gloss_key]
-			gloss_text = re.sub(r"[.,;:?!]", " \g<0> ", gloss.gloss_desc)
+			gloss_text = re.sub(r"[.,;:?!]", " \g<0> ", gloss.gloss_definitions[0])
 			gloss_text = re.sub(r"'(s)", "\g<1>", gloss_text)
 			if ignore_parenthesis_content:
 				gloss_text = re.sub(r"\(.*?\)", "", gloss_text)  # TODO das isn kack regex, brauche recursive

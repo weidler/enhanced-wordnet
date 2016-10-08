@@ -10,6 +10,7 @@ from src.glosses.Glosses import LogicallyTransformedGloss
 from src.functions import get_ss_type_from_sense_key, add_key, get_sk_main_variable, find_predicates
 import re
 from pprint import pprint
+from six import string_types
 
 class RelationExtractor(object):
 	"""
@@ -39,6 +40,7 @@ class RelationExtractor(object):
 		untransformed_glosses = [g for g in self.glosses if type(self.glosses[g]) != LogicallyTransformedGloss]
 		if untransformed_glosses:
 			raise Exception("Please transform the Glosses first! There are {0} glosses in this list that are not transformed!".format(len(untransformed_glosses)))
+
 		self.extracted_relations = {}
 
 	def extract_relations(self):
@@ -57,7 +59,7 @@ class RelationExtractor(object):
 
 			# extract according to the ss type of the glosses synset
 			# noun relations
-			if ss_type == "noun":
+			if ss_type == "n":
 				main_entity_symbol = self._find_main_entity(gloss_entity_dict)
 				if not main_entity_symbol:
 					continue
@@ -88,7 +90,7 @@ class RelationExtractor(object):
 					gloss_relations["functionality"].extend([f[1] for f in functionalities])
 
 			# verb relations
-			elif ss_type == "verb":
+			elif ss_type == "v":
 				main_event_symbol = self._find_main_event(gloss_entity_dict)
 
 				if not main_event_symbol:
@@ -101,9 +103,9 @@ class RelationExtractor(object):
 					if spec_type[0]:
 						gloss_relations["{0}_spec".format(spec_type[1])] = set([sense[1] for sense in spec_type[0]])
 
-			elif ss_type == "adj":
+			elif ss_type == "a" or ss_type == "s":
 				pass  # not implemented yet
-			elif ss_type == "adv":
+			elif ss_type == "r":
 				pass  # not implemented yet
 
 			if gloss_relations:
@@ -189,7 +191,7 @@ class RelationExtractor(object):
 								arg_2_dict = gloss_entity_dict[arg_2]
 								if arg_1 == main_entity_symbol and arg_2_dict["type"] == "event":  #TODO maybe not check by event but by contained predicates
 									for predicate in arg_2_dict["predicates"]:
-										if get_ss_type_from_sense_key(predicate[1]) == "v":
+										if get_ss_type_from_sense_key(predicate[1]) == "v" and self._check_if_valid_sensekey(predicate[1]):
 											applications.append(predicate)
 
 		# HEURISTIK II
@@ -218,7 +220,7 @@ class RelationExtractor(object):
 						sk_existential_event = re.search(r"∃(e'*)", sk[0][0])
 						if sk_existential_event:
 							sk_application_event = sk_existential_event.group(1)
-							applications.extend([sense for sense in gloss_entity_dict[sk_application_event]["predicates"] if sense[1] != "UNKNOWN"])
+							applications.extend([sense for sense in gloss_entity_dict[sk_application_event]["predicates"] if self._check_if_valid_sensekey(sense[1]) and get_ss_type_from_sense_key(sense[1]) == "v"])
 
 		# HEURISTIK III
 		#
@@ -232,7 +234,7 @@ class RelationExtractor(object):
 		hyperonym = None
 		attributes = []
 		for predicate in main_entity_predicates:  # TODO maybe i can even use UNKNOWNs
-			if predicate[1] != "UNKNOWN" and predicate[1]:  # second condition checks if not None
+			if self._check_if_valid_sensekey(predicate[1]):
 				predicate_ss_type = get_ss_type_from_sense_key(predicate[1])
 				if not predicate_ss_type:
 					continue
@@ -264,7 +266,7 @@ class RelationExtractor(object):
 						possibilities.append(loc[1][0])
 
 					for sk in possibilities:
-						spec_type_list.extend([sense for sense in gloss_entity_dict[get_sk_main_variable(sk)]["predicates"] if get_ss_type_from_sense_key(sense[1]) in ["a", "s", "r"]])
+						spec_type_list.extend([sense for sense in gloss_entity_dict[get_sk_main_variable(sk)]["predicates"] if get_ss_type_from_sense_key(sense[1]) in ["a", "s", "r"] and self._check_if_valid_sensekey(sense[1])])
 
 		return list(zip(types, names))
 
@@ -282,3 +284,8 @@ class RelationExtractor(object):
 			return "e"
 		else:
 			return None
+
+	def _check_if_valid_sensekey(self, key):
+		if isinstance(key, string_types) and key != "purposefully_ignored%0:00:00::" and re.match(r"[a-z_0-9\-']+%[1-5]:[0-9]+:[0-9]+:[a-z_0-9\-']*:[0-9]*", key):
+			return True
+		return False

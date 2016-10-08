@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author: Tonio Weidler
 
@@ -18,8 +18,8 @@ new_disambiguation = False
 new_logic_transformation = False
 
 use_test_gloss_portion = True
-test_gloss_portion = 50000
-file_extension = "_" + str(test_gloss_portion)
+test_gloss_portion = 117659
+file_extension = "_dev_" + str(test_gloss_portion)
 
 show_detailed_output = False
 
@@ -29,7 +29,7 @@ if new_disambiguation and not new_logic_transformation:
 	new_logic_transformation = True
 
 # initialize
-wn = WordNet("data/wordnet_database/", "src/noun_pointers.txt", "src/adj_pointers.txt", "src/verb_pointers.txt", "src/adv_pointers.txt")
+wn = WordNet("data/wordnet_database/", "src/pointers/noun_pointers.txt", "src/pointers/adj_pointers.txt", "src/pointers/verb_pointers.txt", "src/pointers/adv_pointers.txt")
 glosses = wn.collect_glosses()
 
 if use_test_gloss_portion:
@@ -48,7 +48,7 @@ if new_disambiguation:
 
 	print("...writing glosses")
 	with open("extracted_data/glosses_disambiguated{0}.txt".format(file_extension), "wb") as f:
-		pickle.dump(disambiguated_glosses, f)
+		pickle.dump(disambiguated_glosses, f, protocol=2)  # protocol ensures python 2 compatibility
 else:
 	try:
 		print("...pickling Glosses")
@@ -82,5 +82,8 @@ re = RelationExtractor(transformed_glosses)
 relations = re.extract_relations()
 if show_detailed_output: pprint(relations)
 re.get_extracted_relations_stats(relations)
+
+with open("extracted_data/relations{0}_2.rel".format(file_extension), "wb") as f:
+	pickle.dump(relations, f, protocol=2)
 
 print("\n\nDone.")

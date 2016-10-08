@@ -1,9 +1,0 @@
-!    Antonym
-&    Similar to
-<    Participle of verb
-\    Pertainym (pertains to noun)
-=    Attribute
-^    Also see
-;c    Domain of synset - TOPIC
-;r    Domain of synset - REGION
-;u    Domain of synset - USAGE 

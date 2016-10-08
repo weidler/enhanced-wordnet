@@ -261,8 +261,8 @@ class GlossDisambiguator(object):
 			possible_senses = self._get_possible_wn_senses_for_token(undisambiguated_token)
 
 			if len(possible_senses) != 0:
-				most_frequent_sense = max(possible_senses, key=lambda s: self.reference_wordnet.wordnet["sense_index"][str(s)]["tag_cnt"])
-				synset_offset = self.reference_wordnet.wordnet["sense_index"][most_frequent_sense]["synset_offset"]
+				most_frequent_sense = max(possible_senses, key=lambda sense_key: self.reference_wordnet.sense_keys[sense_key]["tag_cnt"])
+				synset_offset = self.reference_wordnet.sense_keys[most_frequent_sense]["synset_offset"]
 			else:
 				most_frequent_sense = "no_wn_sense_existing"
 				synset_offset = "no_wn_sense_existing"
@@ -280,6 +280,8 @@ class GlossDisambiguator(object):
 		return disambiguated_gloss
 
 	def _disambiguate_gloss_by_path_similarity(self, gloss, taggable_tokens, tagged_tokens):
+
+			""" DEPRECATED """
 
 			possible_combinations = list(map(list, list(self._get_possible_sense_combinations(taggable_tokens, tagged_tokens))))
 			total_combs = len(list(possible_combinations))
@@ -333,6 +335,7 @@ class GlossDisambiguator(object):
 		return list_product(*complete_list_of_tokens)
 
 	def _get_possible_wn_senses_for_token(self, token):
+		"""Retrieve all possible senses for a token considering its POS."""
 		lemmas = token.lemma.split("|")
 		possible_wn_senses = []
 
@@ -340,11 +343,12 @@ class GlossDisambiguator(object):
 			lemma_raw, lemma_ss_type = lemma.split("%")
 			if int(lemma_ss_type) in GLOSSTAG_POS_POSSIBLE_SS_TYPES[token.pos]:
 				lemma_pos = {1: "n", 2: "v", 3: "a", 4: "r", 5: "s"}[int(lemma_ss_type)]
+				# TODO avoid nltk?
 				synsets = wn.synsets(lemma_raw, lemma_pos)
 
 				for synset in synsets:
 					for l in synset.lemmas():
-						if l.name() == lemma_raw and str(l.key()) in self.reference_wordnet.wordnet["sense_index"]:
+						if l.name() == lemma_raw and str(l.key()) in self.reference_wordnet.sense_keys:
 							possible_wn_senses.append(l.key())
 
 		return set(possible_wn_senses)

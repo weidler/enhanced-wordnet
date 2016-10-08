@@ -10,28 +10,26 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "..
 class Gloss(object):
 	"""
 	Attributes:
-		pos				(string)	word class of the glosses synset (noun/adj/adv/verb)
-		synset_offset	(string)	synset offset of the glosses synset
-		synset_id		(string)	synset id of the glosses synset build from a single letter indicator of the ss_type (n/a/v/s/r) followed by
+		pos						(string)	word class of the glosses synset (noun/adj/adv/verb)
+		synset_offset			(string)	synset offset of the glosses synset
+		synset_id				(string)	synset id of the glosses synset build from a single letter indicator of the ss_type (n/a/v/s/r) followed by
 									the synset_offset
-		gloss_text		(string)	the text of the gloss
-		gloss_desc		(string)	description part of the gloss
-		synset_data		(dict)		data entry in wordnet database for the glosses synset
+		gloss_text				(string)	the text of the gloss
+		gloss_definitions		(string)	definition part of the gloss
+		synset					(dict)		the glosses synset object
 	"""
 
-	def __init__(self, pos, synset_offset, synset_id, gloss_text, synset_data):
+	def __init__(self, pos, synset_offset, synset_id, gloss_text, gloss_definitions, gloss_examples, synset):
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
 
 		self.tokens = {}
-		gloss_parts = gloss_text.split("; ")
-		self.gloss_desc = "; ".join([p for p in gloss_parts if p[0] != '"'])
 
 	def __repr__(self):
-		return "GLOSS(pos={0}, words={3} desc={1}, id={2}".format(self.pos, self.gloss_desc, self.synset_id, self.synset_data["words"])
+		return "GLOSS(pos={0}, words={3} desc={1}, id={2}".format(self.pos, self.gloss_definitions, self.synset_id, self.synset.words)
 
 	def gloss_to_transformed_gloss(self, transformed_gloss_string, transformed_gloss_entities, transformed_gloss_parsed):
-		return LogicallyTransformedGloss(self.pos, self.synset_offset, self.synset_id, self.gloss_text, self.synset_data, transformed_gloss_string, transformed_gloss_entities, transformed_gloss_parsed, self.tokens)
+		return LogicallyTransformedGloss(self.pos, self.synset_offset, self.synset_id, self.gloss_text, self.gloss_definitions, self.gloss_examples, self.synset, transformed_gloss_string, transformed_gloss_entities, transformed_gloss_parsed, self.tokens)
 
 class LogicallyTransformedGloss(Gloss):
 	"""
@@ -48,14 +46,14 @@ class LogicallyTransformedGloss(Gloss):
 		transformed_gloss_entities	(dict)		entities of the gloss and their respective predicates
 	"""
 
-	def __init__(self, pos, synset_offset, synset_id, gloss_text, synset_data, transformed_gloss_string, transformed_gloss_entities, transformed_gloss_parsed, tokens):
-		super(LogicallyTransformedGloss, self).__init__(pos, synset_offset, synset_id, gloss_text, synset_data)
+	def __init__(self, pos, synset_offset, synset_id, gloss_text, gloss_definitions, gloss_examples, synset, transformed_gloss_string, transformed_gloss_entities, transformed_gloss_parsed, tokens):
+		super(LogicallyTransformedGloss, self).__init__(pos, synset_offset, synset_id, gloss_text, gloss_definitions, gloss_examples, synset)
 
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
 
 	def __repr__(self):
-		return "TRANSFORMED_GLOSS(pos={0}, words={4} desc={1}, id={2}, transformation={3}".format(self.pos, self.gloss_desc, self.synset_id, self.transformed_gloss_string, self.synset_data["words"])
+		return "TRANSFORMED_GLOSS(pos={0}, words={4} desc={1}, id={2}, transformation={3}".format(self.pos, self.gloss_definitions, self.synset_id, self.transformed_gloss_string, self.synset.words)
 
 
 ### TOKENS ###

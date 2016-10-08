@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../"))
+
 import argparse
 import codecs
 import logging
 import pickle
-import sys
 from pprint import pprint
 
 from cort.core import corpora
@@ -14,26 +17,25 @@ from cort.coreference import features
 from cort.coreference import instance_extractors
 from cort.util import import_helper
 
-import coref.ehwon_features
+from src.coref import ehwon_features
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(''message)s')
 
-
 def parse_args():
     parser = argparse.ArgumentParser(description='Train coreference resolution '
-                                                 'models.')
+                                                'models.')
     parser.add_argument('-in',
                         required=True,
                         dest='input_filename',
                         help='The input file. Must follow the format of the '
-                             'CoNLL shared tasks on coreference resolution '
-                             '(see http://conll.cemantix.org/2012/data.html).)')
+                            'CoNLL shared tasks on coreference resolution '
+                            '(see http://conll.cemantix.org/2012/data.html).)')
     parser.add_argument('-out',
                         dest='output_filename',
                         required=True,
                         help='The output file the learned model will be saved '
-                             'to.')
+                            'to.')
     parser.add_argument('-extractor',
                         dest='extractor',
                         required=True,
@@ -54,17 +56,17 @@ def parse_args():
                         dest='cost_scaling',
                         default=1,
                         help='Scaling factor of the cost function. Defaults '
-                             'to 1')
+                            'to 1')
     parser.add_argument('-random_seed',
                         dest='seed',
                         default=23,
                         help='Random seed for training data shuffling. '
-                             'Defaults to 23.')
+                            'Defaults to 23.')
     parser.add_argument('-features',
                         dest='features',
                         help='The file containing the list of features. If not'
-                             'provided, defaults to a standard set of'
-                             'features.')
+                            'provided, defaults to a standard set of'
+                            'features.')
 
     return parser.parse_args()
 
@@ -74,8 +76,6 @@ if sys.version_info[0] == 2:
                     "efficient under Python 3.3+.")
 
 args = parse_args()
-pprint(args)
-pprint(type(args))
 
 if args.features:
     mention_features, pairwise_features = import_helper.get_features(
@@ -94,9 +94,9 @@ else:
         features.last,
         features.preceding_token,
         features.next_token,
+        ehwon_features.random_feature,
         features.governor,
-        features.ancestry,
-        coref.ehwon_features.random_feature
+        features.ancestry
     ]
 
     pairwise_features = [
@@ -109,7 +109,16 @@ else:
         features.modifier,
         features.tokens_contained,
         features.head_contained,
-        features.token_distance
+        features.token_distance,
+        # ehwon_features.anaphor_specifier_congruency,
+        # ehwon_features.anaphor_attribute_congruency,
+        ehwon_features.anaphor_performs_antecedent_application
+        # ehwon_features.anaphor_performs_antecedent_functionality,
+        # ehwon_features.antecedent_specifier_congruency,
+        # ehwon_features.antecedent_attribute_congruency
+        # ehwon_features.antecedent_performs_anaphor_application,
+        # ehwon_features.antecedent_performs_anaphor_functionality,
+        # ehwon_features.head_path_similarity,
     ]
 
 
@@ -129,8 +138,8 @@ extractor = instance_extractors.InstanceExtractor(
 
 logging.info("Reading in data.")
 training_corpus = corpora.Corpus.from_file("training",
-                                           codecs.open(args.input_filename,
-                                                       "r", "utf-8"))
+                                        codecs.open(args.input_filename,
+                                                    "r", "utf-8"))
 
 logging.info("Extracting system mentions.")
 for doc in training_corpus:
