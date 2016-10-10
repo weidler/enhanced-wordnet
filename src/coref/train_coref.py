@@ -13,8 +13,6 @@ from pprint import pprint
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(''message)s')
 
-logging.info("Initializing")
-
 from cort.core import corpora
 from cort.core import mention_extractor
 from cort.coreference import experiments
@@ -22,11 +20,9 @@ from cort.coreference import features
 from cort.coreference import instance_extractors
 from cort.util import import_helper
 
-from src.coref import ehwon_features
-
 def parse_args():
-    parser = argparse.ArgumentParser(description='Train coreference resolution '
-                                                'models.')
+    parser = argparse.ArgumentParser(description='Train coreference resolution models.')
+
     parser.add_argument('-in',
                         required=True,
                         dest='input_filename',
@@ -80,6 +76,7 @@ if sys.version_info[0] == 2:
 args = parse_args()
 
 if args.features:
+    print("reading features...")
     mention_features, pairwise_features = import_helper.get_features(
         args.features)
 else:
@@ -96,7 +93,6 @@ else:
         features.last,
         features.preceding_token,
         features.next_token,
-        ehwon_features.random_feature,
         features.governor,
         features.ancestry
     ]
@@ -111,16 +107,7 @@ else:
         features.modifier,
         features.tokens_contained,
         features.head_contained,
-        features.token_distance,
-        # ehwon_features.anaphor_specifier_congruency,
-        # ehwon_features.anaphor_attribute_congruency,
-        ehwon_features.anaphor_performs_antecedent_application,
-        # ehwon_features.anaphor_performs_antecedent_functionality,
-        # ehwon_features.antecedent_specifier_congruency,
-        # ehwon_features.antecedent_attribute_congruency
-        ehwon_features.antecedent_performs_anaphor_application
-        # ehwon_features.antecedent_performs_anaphor_functionality,
-        # ehwon_features.head_path_similarity,
+        features.token_distance
     ]
 
 
@@ -129,6 +116,9 @@ perceptron = import_helper.import_from_path(args.perceptron)(
     n_iter=int(args.n_iter),
     seed=int(args.seed)
 )
+
+pprint(mention_features)
+pprint(pairwise_features)
 
 extractor = instance_extractors.InstanceExtractor(
     import_helper.import_from_path(args.extractor),
@@ -152,6 +142,8 @@ model = experiments.learn(
     extractor,
     perceptron
 )
+
+print(model[0].keys())
 
 logging.info("Writing model to file.")
 pickle.dump(model, open(args.output_filename, "wb"), protocol=2)

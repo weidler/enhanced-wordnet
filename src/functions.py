@@ -54,6 +54,18 @@ def is_adverb(pos):
 		return True
 	return False
 
+def is_subj(grammatical_function):
+	"""Check if a dependency relation is a subject relation."""
+	if "subj" in grammatical_function:
+		return True
+	return False
+
+def is_obj(grammatical_function):
+	"""Check if a dependency relation is an object relation."""
+	if "obj" in grammatical_function:
+		return True
+	return False
+
 def find_predicates(parsed_transformation, arg_regex):
 	"""Find all Predicate-Argument Structures in the prased transformation where the predicate matches the regex."""
 	predicates = []
@@ -78,5 +90,4 @@ def get_sk_main_variable(parsed_transformation_sk):
 	return re.search(r"[#∃]([a-z])\'*\.", parsed_transformation_sk[1][0][0]).group(1)
 
 if __name__ == "__main__":
-	parsed = ('sk', [('#x.', [('fungus', ['x']), ('ARG', [('sk', [('#y.', [('family', ['y']), ('helvellacea', ['y'])])]), 'x'])])])
-	print(get_sk_main_variable(parsed))
+	print(is_subj("nsubj"))

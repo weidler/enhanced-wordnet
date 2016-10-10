@@ -6,6 +6,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "../"))
 
 import re
+import itertools
 
 from src.functions import get_ss_type_from_sense_key, add_key
 from src.glosses.Glosses import Gloss
@@ -17,7 +18,7 @@ class WordNet(object):
 	between different Synsets.
 
 	Attributes:
-		...
+		pointers		(list)
 
 	Public Methods:
 		...
@@ -103,10 +104,16 @@ class WordNet(object):
 
 		return synsets
 
-	def get_hypernym_synsets(self, snyset):
-		"""For a given Synset return a list of Synsets that are its hypernyms."""
-		if "hypernyms":
-			hypernym_ids = synset.relations.hyper
+	def get_hypernym_synsets(self, synset, traversal_depth=1):
+		"""For a given Synset return a list of Synsets that are its hypernyms, traversing an optionally expanded depth through the inheritance tree."""
+		if traversal_depth == 0:
+			return []
+
+		if "hypernym" in synset.relations:
+			hypernym_ids = synset.relations["hypernym"]
+			return [self.synset_from_id(syn_id) for syn_id in hypernym_ids] + list(itertools.chain(*[self.get_hypernym_synsets(self.synset_from_id(syn_id_2), traversal_depth=traversal_depth-1) for syn_id_2 in hypernym_ids]))
+
+		return []
 
 	### PROTECTED ###
 
@@ -292,7 +299,6 @@ class WordNet(object):
 	def _integrate_relations_from_file(self, filename):
 		print("...integrating new relations")
 		import pickle
-		# TODO implement inverse relations
 
 		with open(filename, "rb") as f:
 			relations = pickle.load(f)
@@ -321,6 +327,9 @@ class Synset(object):
 	def __eq__(self, other):
 		return self.synset_id == other.synset_id
 
+	def __hash__(self):
+		return hash(self.synset_id)
+
 	def __repr__(self):
 		return "Synset({0}, {1})".format(self.synset_id, self.words)
 
@@ -345,28 +354,7 @@ class Synset(object):
 					self.relations[relation_type].append(wordnet.synset_id_from_key(rel_member))
 
 if __name__ == "__main__":
-	wn = WordNet("data/wordnet_database/", "src/pointers/noun_pointers.txt", "src/pointers/adj_pointers.txt", "src/pointers/verb_pointers.txt", "src/pointers/adv_pointers.txt", relations_filename="extracted_data/relations_dev_117659.rel")
-	whips = wn.synsets_for_lemma("whip", "noun")
-	for w in whips:
-		if "attributes" in w.relations:
-			print(w.gloss)
-			print(w.relations["attributes"])
-	# sys.exit()
-	syn = wn.synsets["n02084071"]
-	syn2 = wn.synsets["n00001930"]
-	syn3 = wn.synsets["n02084071"]
-	syn3.relations = {}
+	from pprint import pprint
+	wn = WordNet("data/wordnet_database/", "src/pointers/noun_pointers.txt", "src/pointers/adj_pointers.txt", "src/pointers/verb_pointers.txt", "src/pointers/adv_pointers.txt", relations_filename="extracted_data/relations_dev_full.rel")
 
-	print(syn == syn2)
-	print(syn == syn3)
-	sys.exit()
-
-	print(syn.ss_type)
-	print(syn.offset)
-	print(syn.sense_keys)
-	print(syn.relations)
-	print(syn.definitions)
-	print(syn.examples)
-
-	for k in syn.sense_keys:
-		print(wn.synset_from_key(k))
+	pprint(wn.synset_from_id("n07593972").relations)

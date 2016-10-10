@@ -311,9 +311,7 @@ class GlossDisambiguator(object):
 	## Helper Methods ##
 
 	def _get_possible_sense_combinations(self, taggable, tagged):
-		"""
-		Create a list of possible combinations  of the tokens possible senses.
-		"""
+		"""Create a list of possible combinations  of the tokens possible senses."""
 		print("\tget possible combinations...")
 		# first create a list of the already tagged senses and store for each of those one list inside that contains the one single correct sense
 		tagged_sense_keys = [[(token, token.wn_sense_key)] for token in tagged]

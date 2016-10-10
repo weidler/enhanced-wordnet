@@ -17,9 +17,7 @@ class RelationExtractor(object):
 	Relation Dict Reference:
 		{
 			noun_key: {
-				functionality: [verb_keys, ...],
-				application: [verb_keys, ...],
-
+				function: [verb_keys, ...],
 				specification: [(hypernym_noun_key, adj_key), ...],
 				attributes: [adj_key, ...]
 			}
@@ -51,62 +49,58 @@ class RelationExtractor(object):
 		# travers through all those glosses and let the extraction begin!
 		for gloss_key in glosses:
 			gloss = glosses[gloss_key]
-			gloss_entity_dict = gloss.transformed_gloss_entities
-			parsed_gloss_transformation = gloss.transformed_gloss_parsed
+			gloss_entity_dicts = gloss.transformed_gloss_entities
+			parsed_gloss_transformations = gloss.transformed_gloss_parsed
 			ss_type = gloss.pos
 
 			gloss_relations = {}
 
-			# extract according to the ss type of the glosses synset
-			# noun relations
-			if ss_type == "n":
-				main_entity_symbol = self._find_main_entity(gloss_entity_dict)
-				if not main_entity_symbol:
-					continue
+			for gloss_entity_dict, parsed_gloss_transformation in zip(gloss_entity_dicts, parsed_gloss_transformations):
+				# extract according to the ss type of the glosses synset
+				# noun relations
+				if ss_type == "n":
+					main_entity_symbol = self._find_main_entity(gloss_entity_dict)
+					if not main_entity_symbol:
+						continue
 
-				# relation "specification" / "attributes"
-				attributes, hyperonym = self._extract_noun_specification_and_attributes(main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation)
+					# relation "specification" / "attributes"
+					attributes, hyperonym = self._extract_noun_specification_and_attributes(main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation)
 
-				if attributes:
-					add_key("attributes", gloss_relations, value=[])
-					gloss_relations["attributes"].extend([a[1] for a in attributes])
+					if attributes:
+						add_key("attributes", gloss_relations, value=[])
+						gloss_relations["attributes"].extend([a[1] for a in attributes])
 
-				if hyperonym and attributes:
-					add_key("specifications", gloss_relations, value=[])
-					gloss_relations["specifications"].extend([(hyperonym[1], a[1]) for a in attributes])
+					if hyperonym and attributes:
+						add_key("specifications", gloss_relations, value=[])
+						gloss_relations["specifications"].extend([(hyperonym[1], a[1]) for a in attributes])
 
-				# relation application
-				applications = self._extract_noun_application(main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation)
+					# relation function
+					functions = self._extract_noun_function(main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation)
 
-				if applications:
-					add_key("application", gloss_relations, value=[])
-					gloss_relations["application"].extend([f[1] for f in applications])
+					if functions:
+						add_key("function", gloss_relations, value=[])
+						gloss_relations["function"].extend([f[1] for f in functions])
 
-				# relation functionality
-				functionalities = self._extract_noun_functionality(main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation)
+				# verb relations
+				elif ss_type == "v":
+					main_event_symbol = self._find_main_event(gloss_entity_dict)
 
-				if functionalities:
-					add_key("functionality", gloss_relations, value=[])
-					gloss_relations["functionality"].extend([f[1] for f in functionalities])
+					if not main_event_symbol:
+						continue
 
-			# verb relations
-			elif ss_type == "v":
-				main_event_symbol = self._find_main_event(gloss_entity_dict)
+					# verb specifications
+					specifications = self._extract_verb_specifications(main_event_symbol, gloss_entity_dict, parsed_gloss_transformation)
 
-				if not main_event_symbol:
-					continue
+					for spec_type in specifications:
+						if spec_type[0]:
+							spec_name = "{0}_spec".format(spec_type[1])
+							add_key(spec_name, gloss_relations, value=[])
+							gloss_relations[spec_name].extend(set([sense[1] for sense in spec_type[0]]))
 
-				# verb specifications
-				specifications = self._extract_verb_specifications(main_event_symbol, gloss_entity_dict, parsed_gloss_transformation)
-
-				for spec_type in specifications:
-					if spec_type[0]:
-						gloss_relations["{0}_spec".format(spec_type[1])] = set([sense[1] for sense in spec_type[0]])
-
-			elif ss_type == "a" or ss_type == "s":
-				pass  # not implemented yet
-			elif ss_type == "r":
-				pass  # not implemented yet
+				elif ss_type == "a" or ss_type == "s":
+					pass  # not implemented yet
+				elif ss_type == "r":
+					pass  # not implemented yet
 
 			if gloss_relations:
 				extracted_relations[gloss_key] = gloss_relations
@@ -122,7 +116,7 @@ class RelationExtractor(object):
 		total_nouns = gloss_ss_types.count("n")
 		total_verbs = gloss_ss_types.count("v")
 
-		noun_relations = ["attributes", "specifications", "application", "functionality"]
+		noun_relations = ["attributes", "specifications", "function"]
 		verb_relations = ["locational_spec", "manner_spec", "temporal_spec", "be"]
 
 		print("From a total of {0} glosses of which are\n\t{1} nouns and\n\t{2} verbs\nrelations from {3} glosses where extracted,\nwhich where found as follows for their ss type:\n".format(
@@ -135,27 +129,28 @@ class RelationExtractor(object):
 		for ss_type_relations, count in zip([noun_relations, verb_relations], [total_nouns, total_verbs]):
 			for r in ss_type_relations:
 				r_count = 0
+				entries_count = 0
 				for g_key in relations:
 					g = relations[g_key]
 					if r in list(g.keys()):
 						r_count += 1
-				print("{0}: {1} ({2}%)".format(r, r_count, round(r_count/float(count)*100, 2)))
+						entries_count += len(g[r])
+				print("{0}:\n  in synsets:\t{1} \t({2}%)\n  total:\t\t{3}\n  pro synset:\t{4}".format(r, r_count, round(r_count/float(count)*100, 2), entries_count, round(entries_count/float(count), 2)))
 
-
-	def _extract_noun_functionality(self, main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation):
-		pass
-
-	def _extract_noun_application(self, main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation):
-		applications = []
+	def _extract_noun_function(self, main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation):
+		function = []
 
 		heuristik_1 = True
 		heuristik_2 = True
+		heuristik_3 = True
+		heuristik_4 = True
 
 		# HEURISTIK I
 		# NOUN ... used ... (to) VERB
 		# e.g. a spoon used to eat soup
 		# go through all variables of the gloss
 		if heuristik_1:
+			# Necessary
 			for variable in gloss_entity_dict:
 				variable_dict = gloss_entity_dict[variable]
 				variable_predicates_lemmas = [l[0] for l in variable_dict["predicates"]]
@@ -192,7 +187,7 @@ class RelationExtractor(object):
 								if arg_1 == main_entity_symbol and arg_2_dict["type"] == "event":  #TODO maybe not check by event but by contained predicates
 									for predicate in arg_2_dict["predicates"]:
 										if get_ss_type_from_sense_key(predicate[1]) == "v" and self._check_if_valid_sensekey(predicate[1]):
-											applications.append(predicate)
+											function.append(predicate)
 
 		# HEURISTIK II
 		# NOUN ... for VERB_GERUND
@@ -219,13 +214,39 @@ class RelationExtractor(object):
 					for sk in possibilities:
 						sk_existential_event = re.search(r"∃(e'*)", sk[0][0])
 						if sk_existential_event:
-							sk_application_event = sk_existential_event.group(1)
-							applications.extend([sense for sense in gloss_entity_dict[sk_application_event]["predicates"] if self._check_if_valid_sensekey(sense[1]) and get_ss_type_from_sense_key(sense[1]) == "v"])
+							sk_function_event = sk_existential_event.group(1)
+							function.extend([sense for sense in gloss_entity_dict[sk_function_event]["predicates"] if self._check_if_valid_sensekey(sense[1]) and get_ss_type_from_sense_key(sense[1]) == "v"])
 
 		# HEURISTIK III
-		#
+		# any EVENT that the main entity is ARG1 or ARG0 of
+		if heuristik_3:
+			for event_symbol in [symbol for symbol in gloss_entity_dict.keys() if symbol[0] == "e"]:
+				event = gloss_entity_dict[event_symbol]
+				event_arguments = event["arguments"]
+				relevant_arguments = [event_arguments[arg] for arg in event_arguments.keys() if arg in ["ARG1", "ARG0"]]
+				event_is_function = False
+				for relevant_arg in relevant_arguments:
+					if [main_entity_symbol] in relevant_arg:
+						event_is_function = True
+						break
 
-		return applications
+					for possible_arg in relevant_arg:
+						if possible_arg[0] == "sk" and get_sk_main_variable(possible_arg) == main_entity_symbol:
+							event_is_function = True
+
+				if event_is_function:
+					function.extend([sense for sense in event["predicates"] if self._check_if_valid_sensekey(sense[1]) and get_ss_type_from_sense_key(sense[1]) == "v"])
+
+		# HEURISTIK IV
+		# any adjectival present or past participle
+		# eg a singing bird
+		if heuristik_4:
+			for predicate in gloss_entity_dict[main_entity_symbol]["predicates"]:
+				if get_ss_type_from_sense_key(predicate[1]) == "v" and self._check_if_valid_sensekey(predicate[1]):
+					function.append(predicate)
+
+
+		return function
 
 
 	def _extract_noun_specification_and_attributes(self, main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation):
@@ -244,6 +265,10 @@ class RelationExtractor(object):
 					attributes.append(predicate)
 
 		return (attributes, hyperonym)
+
+	def _extract_verb_location(self, main_event_symbol, gloss_entity_dict, parsed_gloss_transformation):
+		# TODO
+		pass
 
 	def _extract_verb_specifications(self, main_event_symbol, gloss_entity_dict, parsed_gloss_transformation):
 		locational = []

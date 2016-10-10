@@ -14,18 +14,24 @@ from src.RelationExtractor import RelationExtractor
 import pickle
 
 # Settings
-new_disambiguation = False
-new_logic_transformation = False
+file_extension = "_dev"
+
+new_disambiguation = True
+new_logic_transformation = True
 
 use_test_gloss_portion = True
-test_gloss_portion = 117659
-file_extension = "_dev_" + str(test_gloss_portion)
+test_gloss_portion = 1000
 
 show_detailed_output = False
 
+if use_test_gloss_portion:
+	file_extension += "_" + str(test_gloss_portion)
+else:
+	file_extension += "_full"
+
 # you cant create new disambiguations and use old logic parsings, as the portion of the glosses may differ in its glosses it contains
 if new_disambiguation and not new_logic_transformation:
-	print("Setting new_logic_transformation to 'True' - you can't initiate a use a new disambiguation with an old logical traosformation")
+	print("Setting new_logic_transformation to 'True' - you can't initiate a new disambiguation with an old logical transformation")
 	new_logic_transformation = True
 
 # initialize
@@ -64,26 +70,31 @@ if new_logic_transformation:
 	gt.transform_glosses(target_file="extracted_data/transformations{0}.txt".format(file_extension))
 transformed_glosses = gt.read_transformed_glosses("extracted_data/transformations{0}.txt".format(file_extension))
 
-if show_detailed_output:
-	print("\n\nDETAILED OUTPUT GLOSS TRANSFORMATIONS & PARSINGS")
-	for test_gloss in transformed_glosses:
-		print("\n-----------------------------------------------------------------------\n")
-		print(transformed_glosses[test_gloss])
-		print("")
-		print(transformed_glosses[test_gloss].tokens)
-		print("\n")
-		pprint(transformed_glosses[test_gloss].transformed_gloss_parsed)
-		print("")
-		pprint(transformed_glosses[test_gloss].transformed_gloss_entities)
-
-	print("\n\n-----------------------------------------------------------------------\n\n")
-
 re = RelationExtractor(transformed_glosses)
 relations = re.extract_relations()
-if show_detailed_output: pprint(relations)
+
+if show_detailed_output:
+	for synset_id in transformed_glosses:
+		print("\n-----------------------------------------------------------------------\n")
+		if synset_id in relations:
+			pprint(relations[synset_id])
+		else:
+			print("no relations extracted...")
+
+		print("\n\n")
+		print(transformed_glosses[synset_id])
+		print("\nTokens:")
+		print(transformed_glosses[synset_id].tokens)
+		print("\nParsed Transformation")
+		pprint(transformed_glosses[synset_id].transformed_gloss_parsed)
+		print("\nEntities")
+		pprint(transformed_glosses[synset_id].transformed_gloss_entities)
+
+		print("\n\n-----------------------------------------------------------------------\n\n")
+
 re.get_extracted_relations_stats(relations)
 
-with open("extracted_data/relations{0}_2.rel".format(file_extension), "wb") as f:
+with open("extracted_data/relations{0}.rel".format(file_extension), "wb") as f:
 	pickle.dump(relations, f, protocol=2)
 
 print("\n\nDone.")

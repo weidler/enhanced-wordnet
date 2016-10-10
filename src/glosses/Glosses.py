@@ -15,7 +15,8 @@ class Gloss(object):
 		synset_id				(string)	synset id of the glosses synset build from a single letter indicator of the ss_type (n/a/v/s/r) followed by
 									the synset_offset
 		gloss_text				(string)	the text of the gloss
-		gloss_definitions		(string)	definition part of the gloss
+		gloss_definitions		(list)		definitions of the gloss as list of strings
+		gloss_examples			(list)		examples of the gloss as list of strings
 		synset					(dict)		the glosses synset object
 	"""
 
@@ -28,8 +29,8 @@ class Gloss(object):
 	def __repr__(self):
 		return "GLOSS(pos={0}, words={3} desc={1}, id={2}".format(self.pos, self.gloss_definitions, self.synset_id, self.synset.words)
 
-	def gloss_to_transformed_gloss(self, transformed_gloss_string, transformed_gloss_entities, transformed_gloss_parsed):
-		return LogicallyTransformedGloss(self.pos, self.synset_offset, self.synset_id, self.gloss_text, self.gloss_definitions, self.gloss_examples, self.synset, transformed_gloss_string, transformed_gloss_entities, transformed_gloss_parsed, self.tokens)
+	def gloss_to_transformed_gloss(self, transformed_gloss_strings, transformed_gloss_entities, transformed_gloss_parsed):
+		return LogicallyTransformedGloss(self.pos, self.synset_offset, self.synset_id, self.gloss_text, self.gloss_definitions, self.gloss_examples, self.synset, transformed_gloss_strings, transformed_gloss_entities, transformed_gloss_parsed, self.tokens)
 
 class LogicallyTransformedGloss(Gloss):
 	"""
@@ -41,19 +42,19 @@ class LogicallyTransformedGloss(Gloss):
 		gloss_text					(string)	the text of the gloss
 		synset_data					(dict)		data entry in wordnet database for the glosses synset
 
-		transformed_gloss_string	(string)	string representation of the transformed gloss
-		transformed_gloss_parsed	(list)		parsed transformation
-		transformed_gloss_entities	(dict)		entities of the gloss and their respective predicates
+		transformed_gloss_strings	(list)		string representations of the transformed gloss parts
+		transformed_gloss_parsed	(list)		list of parsed transformations of the gloss descriptions
+		transformed_gloss_entities	(list)		list of dicts with entities of the gloss description and their respective predicates
 	"""
 
-	def __init__(self, pos, synset_offset, synset_id, gloss_text, gloss_definitions, gloss_examples, synset, transformed_gloss_string, transformed_gloss_entities, transformed_gloss_parsed, tokens):
+	def __init__(self, pos, synset_offset, synset_id, gloss_text, gloss_definitions, gloss_examples, synset, transformed_gloss_strings, transformed_gloss_entities, transformed_gloss_parsed, tokens):
 		super(LogicallyTransformedGloss, self).__init__(pos, synset_offset, synset_id, gloss_text, gloss_definitions, gloss_examples, synset)
 
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
 
 	def __repr__(self):
-		return "TRANSFORMED_GLOSS(pos={0}, words={4} desc={1}, id={2}, transformation={3}".format(self.pos, self.gloss_definitions, self.synset_id, self.transformed_gloss_string, self.synset.words)
+		return "TRANSFORMED_GLOSS(pos={0}, words={4} desc={1}, id={2}, transformation={3}".format(self.pos, self.gloss_definitions, self.synset_id, self.transformed_gloss_strings, self.synset.words)
 
 
 ### TOKENS ###
@@ -76,7 +77,7 @@ class Token(object):
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
 
-		self.lemma_string = self.lemma.split("|")[0].split("%")[0].lower()
+		self.lemma_strings = set([lemma_string.split("%")[0].lower() for lemma_string in self.lemma.split("|")])
 
 	def __repr__(self):
 		return "TOKEN(id={1}, token={0}, sense_key={2}, lemma={3}, pos={4})".format(self.token, self.id, self.wn_sense_key, self.lemma, self.pos)

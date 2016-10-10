@@ -22,5 +22,7 @@ cort.coreference.features.modifier
 cort.coreference.features.tokens_contained
 cort.coreference.features.head_contained
 cort.coreference.features.token_distance
-src.coref.ehwon_features.anaphor_performs_antecedent_application
-src.coref.ehwon_features.antecedent_performs_anaphor_application
+src.coref.ehwon_features.anaphor_attribute_specification
+src.coref.ehwon_features.antecedent_attribute_specification
+src.coref.ehwon_features.anaphor_performs_antecedent_function
+src.coref.ehwon_features.antecedent_performs_anaphor_function

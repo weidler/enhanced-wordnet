@@ -76,7 +76,13 @@ class GlossTransformer(object):
 
 			if gloss_transformation_string != "EMPTY":
 				parsed_transformation = GlossTransformer.parse_logic_transformation(gloss_transformation_string)
-				transformed_glosses[gloss_key] = gloss.gloss_to_transformed_gloss(gloss_transformation_string, self._extract_entities_from_transformation(gloss_key, gloss_transformation_string, parsed_transformation), parsed_transformation)
+
+				if gloss_key not in transformed_glosses:
+					transformed_glosses[gloss_key] = gloss.gloss_to_transformed_gloss([gloss_transformation_string], [self._extract_entities_from_transformation(gloss_key, gloss_transformation_string, parsed_transformation)], [parsed_transformation])
+				else:
+					transformed_glosses[gloss_key].transformed_gloss_strings.append(gloss_transformation_string)
+					transformed_glosses[gloss_key].transformed_gloss_entities.append(self._extract_entities_from_transformation(gloss_key, gloss_transformation_string, parsed_transformation))
+					transformed_glosses[gloss_key].transformed_gloss_parsed.append(parsed_transformation)
 
 		print("...of {0} predicates in the transformation {1} ({2}) could be mapped to a key.".format(self._mappable_predicates, self._mapped_predicates, round(self._mapped_predicates/float(self._mappable_predicates)*100, 2)))
 
@@ -235,16 +241,16 @@ class GlossTransformer(object):
 		return output
 
 	def _map_senses_to_predicates(self, variable_predicates, gloss):
+		# TODO better mapping for multiple gloss descriptions
 		disambiguated_variable_predicates = []
 		gloss_token_stack = gloss.tokens.copy()
 
-		# TODO far from perfect, too much UNKNOWN
 		for i, pred in enumerate(variable_predicates):
 			self._mappable_predicates += 1
 			predicate_sense = "UNKNOWN"
 			for token_id in sorted(gloss_token_stack.keys()):
 				token = gloss.tokens[token_id]
-				if pred.lower() == token.lemma_string.lower() or (type(token) == CollocationHead and pred.lower() == token.lemma_string.lower().split("_")[0]):
+				if pred.lower() in token.lemma_strings or (type(token) == CollocationHead and pred.lower() in [coll.split("_")[0] for coll in token.lemma_strings]):
 					if type(token) == CollocationMember:
 						for i in gloss.tokens:
 							t = gloss.tokens[i]
@@ -284,30 +290,36 @@ class GlossTransformer(object):
 
 	def _build_gloss_corpus(self, glosses, ignore_parenthesis_content=True):
 		gloss_corpus = ""
+		corpus_gloss_order = []  # gloss order for the corpus, including duplicate entries for glosses with multiple definitions
 
-		#TODO it could be better to use more than one sentences per gloss if they are seperated by ";" as otherwise its near to impossible to determine the main entity of the sentences following any ;
 		for gloss_key in self._gloss_order:
 			gloss = self.glosses[gloss_key]
-			gloss_text = re.sub(r"[.,;:?!]", " \g<0> ", gloss.gloss_definitions[0])
-			gloss_text = re.sub(r"'(s)", "\g<1>", gloss_text)
-			if ignore_parenthesis_content:
-				gloss_text = re.sub(r"\(.*?\)", "", gloss_text)  # TODO das isn kack regex, brauche recursive
-				gloss_text = re.sub(r"[()]", "", gloss_text)
-			else:
-				gloss_text = re.sub(r"\(", " -LRB- ", gloss_text)
-				gloss_text = re.sub(r"\)", " -RRB- ", gloss_text)
+			gloss_definitions = gloss.gloss_definitions
+			for definition in gloss_definitions:
+				gloss_text = re.sub(r"[.,;:?!]", " \g<0> ", definition)
+				gloss_text = re.sub(r"'(s)", "\g<1>", gloss_text)
+				if ignore_parenthesis_content:
+					gloss_text = re.sub(r"\(.*?\)", "", gloss_text)  # TODO das isn kack regex, brauche recursive
+					gloss_text = re.sub(r"[()]", "", gloss_text)
+				else:
+					gloss_text = re.sub(r"\(", " -LRB- ", gloss_text)
+					gloss_text = re.sub(r"\)", " -RRB- ", gloss_text)
 
-			gloss_text = re.sub(r"(\s)+", "\\1", gloss_text)
+				gloss_text = re.sub(r"(\s)+", "\\1", gloss_text)
 
-			if gloss_text != "":
-				gloss_corpus += gloss_text + "\n"
-			else:
-				gloss_corpus += "PLACEHOLDER" + "\n"
-				self._log_error("WARNING: Empty Gloss", gloss)
+				if gloss_text != "":
+					gloss_corpus += gloss_text + "\n"
+				else:
+					gloss_corpus += "PLACEHOLDER" + "\n"
+					self._log_error("WARNING: Empty Gloss", gloss)
 
+				corpus_gloss_order.append(gloss_key)
+
+		# save gloss corpus to file for debugging purposes
 		with open("gloss_corpus.txt", "w") as f:
 			f.write(gloss_corpus)
 
+		self._gloss_order = corpus_gloss_order
 		return gloss_corpus
 
 	def _log_error(self, message, gloss):
