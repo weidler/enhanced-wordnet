@@ -6,3 +6,5 @@ log/*.parser_log
 gloss_corpus.txt
 *.conll
 models/*.obj
+__pycache__
+*.pyc
