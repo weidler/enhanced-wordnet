@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# AUTHOR: Tonio Weidler
+
+"""Simple script to combine conll files to a corpus."""
+
 from os import listdir
 from os.path import isfile, join
 import re

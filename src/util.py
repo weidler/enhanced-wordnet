@@ -71,7 +71,11 @@ def is_obj(grammatical_function):
 	return False
 
 def find_predicates(parsed_transformation, arg_regex):
-	"""Find all Predicate-Argument Structures in the prased transformation where the predicate matches the regex."""
+	"""Recursively find all Predicate-Argument Structures in the prased transformation where the predicate matches the regex.
+
+	Returns:
+		(list):		a list of the predicates-argument structures matching the regex
+	"""
 	predicates = []
 	for element in parsed_transformation:
 		if isinstance(element, tuple):

@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# AUTHOR: Tonio Weidler
+
 """Additional Cort Features based on Enhanced WordNet."""
 
 import sys
@@ -22,39 +26,45 @@ from src.util import is_noun, is_verb, is_subj, is_obj
 GLOBAL_WORDNET_INTERFACE = WordNet("data/wordnet_database/", "src/pointers/noun_pointers.txt", "src/pointers/adj_pointers.txt", "src/pointers/verb_pointers.txt", "src/pointers/adv_pointers.txt", relations_filename="extracted_data/relations_dev_full.rel")
 wnl = WordNetLemmatizer()
 
-def random_feature(mention):
-    """Random test."""
-    return "cheat", ran.randint(0, 10)
-
-def random_feature2(mention, mention2):
-    """Random test."""
-    return "cheat", ran.choice([True, False])
-
 def antecedent_attribute_specification(anaphor, antecedent):
-    # TODO rewrite to only apply to hypernym/specified word
-    """Compute whether the anaphor is a hypernym of the antecedent, specified by adjectives that are attributes of the antecedent."""
+    """Compute whether the anaphor is a hypernym of the antecedent, specified by adjectives that are attributes of the antecedent.
+    Returns:
+        (tuple):    feature name, boolean
+    """
     matches = _calc_attribute_specification(phrase=anaphor, paraphrase=antecedent)
     return "antecedent_attribute_specification", matches
 
 def anaphor_attribute_specification(anaphor, antecedent):
-    """Compute whether the antecedent is a hypernym of the anaphor, specified by adjectives that are attributes of the anaphor."""
+    """Compute whether the antecedent is a hypernym of the anaphor, specified by adjectives that are attributes of the anaphor.
+    Returns:
+        (tuple):    feature name, boolean
+    """
     matches = _calc_attribute_specification(phrase=antecedent, paraphrase=anaphor)
     return "anaphor_attribute_specification", matches
 
 def anaphor_performs_antecedent_function(anaphor, antecedent):
-    """Compute whether the anaphor is object of a verb that is the antecedents function."""
+    """Compute whether the anaphor is object of a verb that is the antecedents function.
+    Returns:
+        (tuple):    feature name, boolean
+    """
     performs = _calc_typical_action_congruency(anaphor, antecedent)
     return "anaphor_performs_antecedent_function", performs
 
 def antecedent_performs_anaphor_function(anaphor, antecedent):
-    """Compute whether the antecedent is object of a verb that is the anaphors function."""
+    """Compute whether the antecedent is object of a verb that is the anaphors function.
+    Returns:
+        (tuple):    feature name, boolean
+    """
     performs = _calc_typical_action_congruency(antecedent, anaphor)
     return "antecedent_performs_anaphor_function", performs
 
 ### HELPER FUNCTIONS ###
 
 def _calc_typical_action_congruency(phrase, paraphrase):
-    """Calculate if the phrase performs an action which is typical for the paraphrase."""
+    """Calculate if the phrase performs an action which is typical for the paraphrase.
+    Returns:
+        (bool): true if the head of the paraphrase performs an action that is the function of the phrase head
+    """
     phrase_performs_paraphrase_action = False
 
     phrase_dependency_structure = list(itertools.chain(*phrase.document.dep))[phrase.span.begin:phrase.span.end+1]
@@ -86,7 +96,10 @@ def _calc_typical_action_congruency(phrase, paraphrase):
     return phrase_performs_paraphrase_action
 
 def _calc_attribute_specification(phrase, paraphrase):
-    """Calculate if a mention (paraphrase) is a hypernym of another mention (phrase) and is modified by adjectives that are the phrases attributes."""
+    """Calculate if a mention (paraphrase) is a hypernym of another mention (phrase) and is modified by adjectives that are the phrases attributes.
+    Returns:
+        (bool):     True if there is a match in hypernymy and attribute/adjectives
+    """
     # add CONTRADICTION -> an emerald CANT BE RED
     # get necessary informations about the paraphrase
     specifies_with_attributes = False

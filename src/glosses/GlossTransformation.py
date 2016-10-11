@@ -2,20 +2,32 @@
 # -*- coding: utf-8 -*-
 # AUTHOR: Tonio Weidler
 
+"""Module provides a class for transforming glosses into logical transformations."""
+
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../"))
 
 import subprocess as sp
-from pprint import pprint
 from src.glosses.Glosses import CollocationMember, CollocationHead
 import re
-import regex
 import json
 import datetime
 from src.util import find_predicates
 
 class GlossTransformer(object):
+	"""Gloss Transformation Class that allows to transform a collection of disambiguated glosses into
+	logically transformed glosses.
+
+	Attributes:
+		glosses		(dict)		dictionary containing the synset ids and their untransformed glosses
+
+	Methods:
+		transform_glosses			(dict/bool)		transform the glosses from scratch into an corpus containing
+													the used gloss order and one line per transformed gloss(-part)
+													optionally write this corpus to a file to avoid repeting the process
+		read_transformed_glosses	(dict)			read the transformed glosses corpus from a file and create LogicallyTransformedGlosses
+	"""
 
 	def __init__(self, glosses):
 		self.__dict__.update(locals())
@@ -35,6 +47,17 @@ class GlossTransformer(object):
 		self._mapped_predicates = 0
 
 	def transform_glosses(self, target_file=None):
+		"""Transform the glosses from scratch into an corpus containing
+		the used gloss order and one line per transformed gloss(-part)
+		optionally write this corpus to a file to avoid repeting the process.
+
+		Arguments:
+			target_file		(string)	optionally provide a path that the corpus will
+										be written to
+		Returns:
+			(bool/string)	if no path provided return the gloss corpus as strings,
+							else if writing succeeds return True
+		"""
 		print("=== Transforming Glosses ===")
 		print("building corpus...")
 		gloss_corpus = self._build_gloss_corpus(self.glosses)
@@ -51,6 +74,7 @@ class GlossTransformer(object):
 			return parsed_gloss_corpus
 
 	def read_transformed_glosses(self, filename):
+		"""Read the transformed glosses corpus from a file and create LogicallyTransformedGlosses."""
 		print("=== Transforming Glosses ===")
 		with open(filename, "r") as f:
 			content = f.read()
@@ -64,6 +88,7 @@ class GlossTransformer(object):
 		return self._extend_glosses_with_transformations(transformed_glosses_list)
 
 	def _extend_glosses_with_transformations(self, transformed_gloss_strings):
+		"""Extend the glosses with the transformations to LogicallyTransformed Glosses."""
 		print("...parsing transformations")
 		transformed_glosses = {}
 
@@ -165,6 +190,7 @@ class GlossTransformer(object):
 
 
 	def _extract_entities_from_transformation(self, gloss_key, transformed_gloss, parsed_logic_transformation):
+		"""Extract entities from the transformation and preextract some information about them."""
 		output = {}
 		gloss = self.glosses[gloss_key]
 
@@ -241,6 +267,7 @@ class GlossTransformer(object):
 		return output
 
 	def _map_senses_to_predicates(self, variable_predicates, gloss):
+		"""Map the sense keys from the Gloss Tokens to the according predicates in the transformation. ~90% successrate..."""
 		# TODO better mapping for multiple gloss descriptions
 		disambiguated_variable_predicates = []
 		gloss_token_stack = gloss.tokens.copy()
@@ -276,6 +303,7 @@ class GlossTransformer(object):
 		return disambiguated_variable_predicates
 
 	def _apply_transformation_tool(self, gloss_corpus):
+		"""Apply EasySRL via subprocess to transform the glosses."""
 		with open("gloss_corpus.tmp", "w") as f:
 			f.write(gloss_corpus)
 
@@ -289,6 +317,7 @@ class GlossTransformer(object):
 		return parser_output
 
 	def _build_gloss_corpus(self, glosses, ignore_parenthesis_content=True):
+		"""Create a corpus of glosses in a file, meant to be read and transformed by EasySRL."""
 		gloss_corpus = ""
 		corpus_gloss_order = []  # gloss order for the corpus, including duplicate entries for glosses with multiple definitions
 
@@ -323,13 +352,14 @@ class GlossTransformer(object):
 		return gloss_corpus
 
 	def _log_error(self, message, gloss):
+		"""Log potential Errors/Warnings to the logfile."""
 		with open(self._logfile, "a") as f:
 			f.write("{0}\n\t\t{1}\n".format(message, gloss))
 
 if __name__ == "__main__":
-	from pprint import pprint
 	import timeit
 	import regex
+	from pprint import pprint
 
 	with open("extracted_data/transformations_100.txt", "r") as f:
 		corpus = f.read().split("\n")[1:]

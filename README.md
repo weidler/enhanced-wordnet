@@ -1,7 +1,15 @@
 EhWoN: Enhanced WordNet - Extracting interclass relations from WordNets Glosses
 ===============================================================================
 
-This README explains the basic structure of the system and how to use it. More detailled explanations are found in the report. The Code is documented with docstrings.
+This README explains the basic structure of the system and how to use it. More detailled explanations are found in the report. The Code is documented with docstrings. This copy of the project is most likely INCOMPLETE as important parts are missing due to size/licenses. YOu may either download/create them
+yourself or received an archive that you can simply extract into this project.
+
+**A word about path insertion**  
+I really prefer to sort my source files in different folders, but python for some reason makes it very inconveniant to import files
+from directories that are in directories above the current file. Therefore I added a short code snippet into each file that adds the project
+folders path to the PYTHONPATH variable. That then allows me to very convenintly import any file in the project. Though this works for me it is
+somewhat experimental and there seem to be issues with updating .pyc files. If something doesnt work a good starting point may be deleting the snippet
+everywhere and permanently adding the project path to the PYTHONPATH variable.
 
 ## Requirements
 
@@ -34,3 +42,25 @@ The project is structured into the following tree of directories:
 	* **glosses/** contains source files for representing and processing the glosses
 	* **pointers/** contains lookup files for the WordNetInterface with pointers and their relation names
 	* **tools/** contains any third-party systems
+
+## Usage
+
+I provide two main scripts to easily use the project
+
+***main.py***  
+This wrapper/main file combines the whole disambiguation/transformation/extraction process based on some options.
+
+***evaluate.sh***  
+A command line script to manage the cort based evaluation process. Usage as follows:
+
+	bash evaluate.sh ACTION [OPTIONS]
+
+		ACTION		one of the following actions are possible and required:
+						train	only train a model
+						test	only test a model (create a prediction)
+						score	only score a prediction
+						all		do all of the above consecutively
+		OPTIONS		options concerning the files used
+			-t		training corpus name, one of train, dev or test
+			-p		test corpus name, one of train, dev or test
+			-f 		feature list name, one of baseline, ehwon 

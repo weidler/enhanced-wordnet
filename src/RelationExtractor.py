@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # AUTHOR: Tonio Weidler
 
+"""Module contains the class that provides functionality for extracting the new relations."""
+
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "../"))
@@ -13,8 +15,9 @@ from pprint import pprint
 from six import string_types
 
 class RelationExtractor(object):
-	"""
-	Relation Dict Reference:
+	"""Extractor for different relation types from transformed glosses.
+
+	Relation Dict Format:
 		{
 			noun_key: {
 				function: [verb_keys, ...],
@@ -22,16 +25,34 @@ class RelationExtractor(object):
 				attributes: [adj_key, ...]
 			}
 
+			...
+
 			verb_key: {
 				locational_spec: [noun_key, ...],
 				manner_spec: [adj_key, ...],
 				temporal_spec: [???],
 				be: [adjective]
 			}
+
+			...
 		}
+
+	Attributes:
+		glosses		(dict)		a dict of transformed glosses as provided at instantiation
+
+	Methods:
+		extract_relations				(dict):		extracts relations from all transformed glosses in 'glosses'
+													and returns a relation dict formatted as described above
+		get_extracted_relations_stats	(None):		print statistics about the extracted relations in relation to
+													'glosses'
 	"""
 
 	def __init__(self, glosses):
+		"""Instantiate a relation extractor.
+
+		Arguments:
+			glosses	(dict)	a dict with synset ids as keys and TransformedGlosses as values
+		"""
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
 
@@ -39,9 +60,13 @@ class RelationExtractor(object):
 		if untransformed_glosses:
 			raise Exception("Please transform the Glosses first! There are {0} glosses in this list that are not transformed!".format(len(untransformed_glosses)))
 
-		self.extracted_relations = {}
-
 	def extract_relations(self):
+		"""Extract the new relations from the transformed glosses. Output only contains an entry for a gloss/synset
+		if there were new relations extracted for it. Same applies to entries for new relations.
+
+		Returns:
+			(dict):		dictionary with synset ids as keys, for more information refer to class description
+		"""
 		print("=== Extract Relations ===")
 		glosses = self.glosses.copy()
 		extracted_relations = {}
@@ -109,6 +134,7 @@ class RelationExtractor(object):
 		return extracted_relations
 
 	def get_extracted_relations_stats(self, relations):
+		"""Print statistics about the extracted relations in relation to the Extractors 'glosses'."""
 		total_glosses_count = len(self.glosses)
 		glosses_with_relations_count = len(relations)
 
@@ -138,6 +164,19 @@ class RelationExtractor(object):
 				print("{0}:\n  in synsets:\t{1} \t({2}%)\n  total:\t\t{3}\n  pro synset:\t{4}".format(r, r_count, round(r_count/float(count)*100, 2), entries_count, round(entries_count/float(count), 2)))
 
 	def _extract_noun_function(self, main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation):
+		"""Extract the 'function' relation by applying several heuristics to the transformed glosses.
+
+		Arguments:
+			main_entity_symbol 				(string)	the symbol of the main entity in that gloss, that represents the
+														concept the synset describes
+			gloss_entity_dict				(dict)		a dictionary containing all entity/event symbols as keys and some
+														preextracted informations as created in the transformation process
+			parsed_gloss_transformation		(list)		the parsed structure of lists/tuples that is the logical transformation
+
+		Returns:
+			(list)		all extracted predicates that were found to be a function of the given synset
+						predicates are tuples -> (lemma, synse_key)
+		"""
 		function = []
 
 		heuristik_1 = True
@@ -250,6 +289,19 @@ class RelationExtractor(object):
 
 
 	def _extract_noun_specification_and_attributes(self, main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation):
+		"""Extract the 'attribute' and 'specification' relation from the transformed glosses.
+
+		Arguments:
+			main_entity_symbol 				(string)	the symbol of the main entity in that gloss, that represents the
+														concept the synset describes
+			gloss_entity_dict				(dict)		a dictionary containing all entity/event symbols as keys and some
+														preextracted informations as created in the transformation process
+			parsed_gloss_transformation		(list)		the parsed structure of lists/tuples that is the logical transformation
+
+		Returns:
+			(list)		all extracted predicates that were found to be a function of the given synset
+						predicates are tuples -> (lemma, synse_key)
+		"""
 		main_entity = gloss_entity_dict[main_entity_symbol]
 		main_entity_predicates = main_entity["predicates"]
 		hyperonym = None
@@ -271,6 +323,19 @@ class RelationExtractor(object):
 		pass
 
 	def _extract_verb_specifications(self, main_event_symbol, gloss_entity_dict, parsed_gloss_transformation):
+		"""Extract the 'function' relation by applying several heuristics to the transformed glosses.
+
+		Arguments:
+			main_event_symbol 				(string)	the symbol of the main entity in that gloss, that represents the
+														concept the synset describes
+			gloss_entity_dict				(dict)		a dictionary containing all entity/event symbols as keys and some
+														preextracted informations as created in the transformation process
+			parsed_gloss_transformation		(list)		the parsed structure of lists/tuples that is the logical transformation
+
+		Returns:
+			(list)		all extracted predicates that were found to be a function of the given synset
+						predicates are tuples -> (lemma, synse_key)
+		"""
 		locational = []
 		manner = []
 		temporal = []

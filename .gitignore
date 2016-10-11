@@ -1,5 +1,5 @@
 *.pyc
 data/*
-log/*
+log/*.log
+log/*.parser_log
 py2_backups/
-extracted_data/*

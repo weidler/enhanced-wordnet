@@ -1,5 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# AUTHOR: Tonio Weidler
+
+"""Module contains WordNet Interface that provides easy access to the WordNet Database."""
 
 import sys
 import os
@@ -75,7 +78,11 @@ class WordNet(object):
 
 	def collect_glosses(self):
 		"""Collect the glosses of all Synsets and create new gloss objects from them,
-		stored in a dictionary using the glosses synset ids as keys."""
+		stored in a dictionary using the glosses synset ids as keys.
+
+		Returns:
+			(dict):	synset ids as keys, gloss objects as values
+		"""
 
 		print("collecting glosses...")
 		glosses = {}

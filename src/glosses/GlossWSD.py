@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 # AUTHOR: Tonio Weidler
 
+"""Module provides Class for disambiguating glosses."""
+
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../"))
@@ -56,7 +58,19 @@ GLOSSTAG_POS_POSSIBLE_SS_TYPES = {
 }
 
 class GlossDisambiguator(object):
+	"""Class that allows to disambiguate glosses using glosstag files and simple heuristics.
 
+	Attributes:
+		glosses				(dict)		dictionary of the glosses to disambiguate with their synset
+										ids as keys
+		glosstag_files		(list)		list of paths to glosstag_files that will be used before applying
+										the heuristic
+		reference_wordnet	(WordNet)	a WordNet object thats used as reference when disambiguating
+
+	Methods:
+		disambiguate_glosses	(dict)	disambiguate the glosses so far as it is possible and return
+										the modified dict of glosses
+	"""
 	def __init__(self, glosses, glosstag_files, reference_wordnet):
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
@@ -88,6 +102,7 @@ class GlossDisambiguator(object):
 	### MAIN PROTECTED METHODS ###
 
 	def _merge_glosses_with_glosstag_file(self, glosstag_file):
+		"""Merge the glosstag file information into the gloss objects."""
 		glosses = self.glosses
 		tree = ET.parse(glosstag_file)
 		root = tree.getroot()
@@ -204,7 +219,8 @@ class GlossDisambiguator(object):
 		return glosses
 
 	def _disambiguate_merged_glosses(self, merged_glosses):
-
+		"""Disambiguate all Glosses where it is still needed after disambiguation. This NEEDS the
+		information about poss/lemmas/collocations from the glosstagsfile, merging first is NOT OPTIONAL!"""
 		processed_glosses = {}
 		total_glosses = len(merged_glosses)
 		current_gloss = 0
@@ -254,7 +270,7 @@ class GlossDisambiguator(object):
 	## Disambiguation Methods ##
 
 	def _disambiguate_gloss_by_most_frequent_sense(self, gloss, taggable_tokens, tagged_tokens):
-
+		"""Simple disambiguation heuristic assigning the most frequent sense to each token without a sense."""
 		disambiguated_gloss = gloss
 
 		for undisambiguated_token in taggable_tokens:
@@ -280,7 +296,6 @@ class GlossDisambiguator(object):
 		return disambiguated_gloss
 
 	def _disambiguate_gloss_by_path_similarity(self, gloss, taggable_tokens, tagged_tokens):
-
 			""" DEPRECATED """
 
 			possible_combinations = list(map(list, list(self._get_possible_sense_combinations(taggable_tokens, tagged_tokens))))
@@ -311,7 +326,7 @@ class GlossDisambiguator(object):
 	## Helper Methods ##
 
 	def _get_possible_sense_combinations(self, taggable, tagged):
-		"""Create a list of possible combinations  of the tokens possible senses."""
+		"""Create a list of possible combinations of the tokens possible senses."""
 		print("\tget possible combinations...")
 		# first create a list of the already tagged senses and store for each of those one list inside that contains the one single correct sense
 		tagged_sense_keys = [[(token, token.wn_sense_key)] for token in tagged]
@@ -352,6 +367,7 @@ class GlossDisambiguator(object):
 		return set(possible_wn_senses)
 
 	def _calc_path_similarity(self, sense_key_a, sense_key_b):
+		"""Calculate path similarity between two sense_keys using nltk.wordnet."""
 		def lemma_from_key(key):
 			try:
 				return wn.lemma_from_key(key)
@@ -374,6 +390,7 @@ class GlossDisambiguator(object):
 	### OTHER METHODS ###
 
 	def _log_message(self, message):
+		"""Log Errors/Warnings to the logfile."""
 		if message not in self._logged_messages:
 			with open(self._logfile, "a") as f:
 				f.write(message + "\n")

@@ -1,4 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
+"""Shameless copy of the cort script simply to add the path inserter... Could have been
+solved a bit more elegant."""
 
 from __future__ import print_function
 import argparse

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+"""Shameless copy of the cort script simply to add the path inserter... Could have been
+solved a bit more elegant."""
+
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../"))
