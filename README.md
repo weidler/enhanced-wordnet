@@ -23,7 +23,32 @@ For the evaluation of the relations, the coreference resolution framework **cort
 
 	pip install cort
 
-pip will install any missing dependencies for those packages.
+`pip` will install any missing dependencies for those packages.  
+Don't forget that you may have to use `pip3` in case you are using python3+ and have multiple python versions installed!
+
+### Missing in the GitHub version
+
+The following tools and data is missing due to Licesne/filesize. Path structure is requiered!
+
+**src/tools/easysrl/**  
+Download here: https://github.com/mikelewis0/EasySRL
+**src/tools/reference-coreference-scorers-master/**  
+Download here: https://github.com/conll/reference-coreference-scorers
+
+**data/wordnet_database/**  
+	1. goto https://wordnet.princeton.edu/wordnet/download/current-version/
+	2. choose the download under *WordNet 3.0 for UNIX-like systems (including: Linux, Mac OS X, Solaris)* **Download just database files**
+	3. extract the content into the directory named as above, a *sense.[WORDCLASS]* and *data.[WORDCLASS]* for each of the four word classes and an *index.sense* file is REQUIRED!
+**data/wordnet_glosstags/**  
+Download from http://wordnet.princeton.edu/glosstag.shtml and extract all 4 .xml files to the folder mentioned above
+**data/conll-2012/**  
+You need the following combined corpus files:  
+
+	dev.auto, dev.gold
+	train.auto, train.gold
+	test.auto, test.gold
+
+Combine them from OntoNotes/Conll or any other conll format files. You may modify and use the script *src/coref/conll_corpus_combiner.py*  to do so.
 
 ## Structure
 
@@ -63,4 +88,4 @@ A command line script to manage the cort based evaluation process. Usage as foll
 		OPTIONS		options concerning the files used
 			-t		training corpus name, one of train, dev or test
 			-p		test corpus name, one of train, dev or test
-			-f 		feature list name, one of baseline, ehwon 
+			-f 		feature list name, one of baseline, ehwon

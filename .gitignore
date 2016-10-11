@@ -2,4 +2,4 @@
 data/*
 log/*.log
 log/*.parser_log
-py2_backups/
+src/tools/
