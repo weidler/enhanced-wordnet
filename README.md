@@ -11,6 +11,7 @@ folders path to the PYTHONPATH variable. That then allows me to very convenintly
 somewhat experimental and there seem to be issues with updating .pyc files. If something doesnt work a good starting point may be deleting the snippet
 everywhere and permanently adding the project path to the PYTHONPATH variable.
 
+***
 ## Requirements
 
 EhWoN runs on `python3` but should be executable on `python2.7+` too.
@@ -32,15 +33,18 @@ The following tools and data is missing due to Licesne/filesize. Path structure 
 
 **src/tools/easysrl/**  
 Download here: https://github.com/mikelewis0/EasySRL  
+
 **src/tools/reference-coreference-scorers-master/**  
 Download here: https://github.com/conll/reference-coreference-scorers  
 
 **data/wordnet_database/**  
 1. goto https://wordnet.princeton.edu/wordnet/download/current-version/  
-2. choose the download under *WordNet 3.0 for UNIX-like systems (including: Linux, Mac OS X, Solaris)* **Download just database files** 
+2. choose the download under *WordNet 3.0 for UNIX-like systems (including: Linux, Mac OS X, Solaris)* **Download just database files**  
 3. extract the content into the directory named as above, a *sense.[WORDCLASS]* and *data.[WORDCLASS]* for each of the four word classes and an *index.sense* file is REQUIRED!  
+
 **data/wordnet_glosstags/**  
 Download from http://wordnet.princeton.edu/glosstag.shtml and extract all 4 .xml files to the folder mentioned above  
+
 **data/conll-2012/**  
 You need the following combined corpus files:  
 
@@ -49,7 +53,7 @@ You need the following combined corpus files:
 	test.auto, test.gold
 
 Combine them from OntoNotes/Conll or any other conll format files. You may modify and use the script *src/coref/conll_corpus_combiner.py*  to do so.
-
+***
 ## Structure
 
 The project is structured into the following tree of directories:
@@ -68,6 +72,7 @@ The project is structured into the following tree of directories:
 	* **pointers/** contains lookup files for the WordNetInterface with pointers and their relation names
 	* **tools/** contains any third-party systems
 
+***
 ## Usage
 
 I provide two main scripts to easily use the project
