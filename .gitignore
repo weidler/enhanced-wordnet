@@ -1,5 +1,0 @@
-*.pyc
-data/*
-log/*.log
-log/*.parser_log
-src/tools/
