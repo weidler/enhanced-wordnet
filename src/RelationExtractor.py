@@ -7,7 +7,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "../"))
 
 from src.glosses.Glosses import LogicallyTransformedGloss
-from src.functions import get_ss_type_from_sense_key, add_key, get_sk_main_variable, find_predicates
+from src.util import get_ss_type_from_sense_key, add_key, get_sk_main_variable, find_predicates
 import re
 from pprint import pprint
 from six import string_types
@@ -297,20 +297,21 @@ class RelationExtractor(object):
 
 
 	def _find_main_entity(self, gloss_entity_dict):
-		#TODO is there a smarter way?
+		"""Find the main entity of a gloss entity dictionary."""
 		if "x" in gloss_entity_dict:
 			return "x"
 		else:
 			return None
 
 	def _find_main_event(self, gloss_entity_dict):
-		#TODO is there a smarter way?
+		"""Find the main event of a gloss entity dictionary."""
 		if "e" in gloss_entity_dict:
 			return "e"
 		else:
 			return None
 
 	def _check_if_valid_sensekey(self, key):
+		"""Check if a key is valid and possibly exists in wordnet without checking in wordnet."""
 		if isinstance(key, string_types) and key != "purposefully_ignored%0:00:00::" and re.match(r"[a-z_0-9\-']+%[1-5]:[0-9]+:[0-9]+:[a-z_0-9\-']*:[0-9]*", key):
 			return True
 		return False

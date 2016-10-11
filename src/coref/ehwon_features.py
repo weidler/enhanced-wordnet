@@ -14,7 +14,7 @@ import itertools
 
 from src.WordnetInterface import WordNet
 import src.constants as CONSTANTS
-from src.functions import is_noun, is_verb, is_subj, is_obj
+from src.util import is_noun, is_verb, is_subj, is_obj
 
 # there is the need to create an global wordnet interface here, that can be used in the functions
 # else, with every function call it would have to be reinitialized
@@ -55,7 +55,7 @@ def antecedent_performs_anaphor_function(anaphor, antecedent):
 
 def _calc_typical_action_congruency(phrase, paraphrase):
     """Calculate if the phrase performs an action which is typical for the paraphrase."""
-    phrase_performs_paraphrase_action = True
+    phrase_performs_paraphrase_action = False
 
     phrase_dependency_structure = list(itertools.chain(*phrase.document.dep))[phrase.span.begin:phrase.span.end+1]
     sentence_dependency_structure = phrase.document.dep[phrase.attributes["sentence_id"]]
@@ -69,7 +69,7 @@ def _calc_typical_action_congruency(phrase, paraphrase):
 
     if not phrase_head_governor_synsets: return phrase_performs_paraphrase_action
 
-    potential_typical_actions = set(list(itertools.chain(*[GLOBAL_WORDNET_INTERFACE.get_hypernym_synsets(syn, traversal_depth=1) for syn in phrase_head_governor_synsets])) + list(phrase_head_governor_synsets))
+    potential_typical_actions = set(list(itertools.chain(*[GLOBAL_WORDNET_INTERFACE.get_hypernym_synsets(syn, traversal_depth=0) for syn in phrase_head_governor_synsets])) + list(phrase_head_governor_synsets))
     potential_typical_actions_synset_ids = set([syn.synset_id for syn in potential_typical_actions])
 
     paraphrase_dependency_structure = list(itertools.chain(*paraphrase.document.dep))[paraphrase.span.begin:paraphrase.span.end+1]
@@ -80,7 +80,7 @@ def _calc_typical_action_congruency(phrase, paraphrase):
     if paraphrase_head_synsets and is_verb(phrase_head_governor_token.pos) and potential_typical_actions_synset_ids:
         paraphrase_head_function_synset_ids = set(itertools.chain(*[syn.relations["function"] for syn in paraphrase_head_synsets if "function" in syn.relations]))
         if not potential_typical_actions_synset_ids.isdisjoint(paraphrase_head_function_synset_ids):
-            phrase_performs_paraphrase_action = False
+            phrase_performs_paraphrase_action = True
             print("'{0}' performing '{1}' which is typical for a '{2}'".format(phrase_head_dependency_token.form, phrase_head_governor_token.form, paraphrase_head_lemma))
 
     return phrase_performs_paraphrase_action
@@ -89,6 +89,7 @@ def _calc_attribute_specification(phrase, paraphrase):
     """Calculate if a mention (paraphrase) is a hypernym of another mention (phrase) and is modified by adjectives that are the phrases attributes."""
     # add CONTRADICTION -> an emerald CANT BE RED
     # get necessary informations about the paraphrase
+    specifies_with_attributes = False
     paraphrase_dependency_structure = list(itertools.chain(*paraphrase.document.dep))[paraphrase.span.begin:paraphrase.span.end+1]
     paraphrase_head_dependency_token = paraphrase_dependency_structure[paraphrase.attributes["head_index"]]
     paraphrase_head_lemma = wnl.lemmatize(paraphrase_head_dependency_token.form, "n").lower()
@@ -97,7 +98,7 @@ def _calc_attribute_specification(phrase, paraphrase):
     paraphrase_head_adjectives = [t for t in paraphrase.document.dep[paraphrase.attributes["sentence_id"]] if t.head == paraphrase_head_dependency_token.index and t.pos in CONSTANTS.ADJECTIVE_POS]
 
     # if the paraphrase has no adjectives at all simply return False as there cant be any congruency then
-    if not paraphrase_head_adjectives: return True
+    if not paraphrase_head_adjectives: return specifies_with_attributes
 
     paraphrase_head_adjective_lemmas = [wnl.lemmatize(t.form, "a").lower() for t in paraphrase_head_adjectives]
     paraphrase_head_adjectives_synset_ids = list(itertools.chain(*[[syn.synset_id for syn in GLOBAL_WORDNET_INTERFACE.synsets_for_lemma(adjective, "adj")] for adjective in paraphrase_head_adjective_lemmas]))
@@ -106,7 +107,7 @@ def _calc_attribute_specification(phrase, paraphrase):
     phrase_dependency_structure = list(itertools.chain(*phrase.document.dep))[phrase.span.begin:phrase.span.end+1]
     phrase_head_dependency_token = phrase_dependency_structure[phrase.attributes["head_index"]]
 
-    if phrase_head_dependency_token.pos not in CONSTANTS.NOUN_POS: return True
+    if phrase_head_dependency_token.pos not in CONSTANTS.NOUN_POS: return specifies_with_attributes
 
     phrase_head_lemma = wnl.lemmatize(phrase_head_dependency_token.form, "n").lower()
     phrase_head_synsets = GLOBAL_WORDNET_INTERFACE.synsets_for_lemma(phrase_head_lemma, "noun")
@@ -118,7 +119,7 @@ def _calc_attribute_specification(phrase, paraphrase):
         pass
         # print("The phrase '{0}' has a potential paraphrase '{1}', that is its hypernym!".format(phrase_head_lemma, paraphrase_head_lemma))
     else:
-        return True
+        return specifies_with_attributes
 
     # for each phrase head synset with a paraphrase head synset as an hypernym check if that phrase synsets attributes have an intersection with the adjectives that modify the paraphrase head
     poss_matches = [0 for i in phrase_head_synsets_with_paraphrase_head_as_hypernym]
@@ -131,9 +132,8 @@ def _calc_attribute_specification(phrase, paraphrase):
     attribute_matches = max(poss_matches)
     matching_phrase_synset = phrase_head_synsets_with_paraphrase_head_as_hypernym[poss_matches.index(attribute_matches)]
 
-    specifies_with_attributes = True
     if attribute_matches > 0:
-        specifies_with_attributes = False
+        specifies_with_attributes = True
         print("The hypernymal paraphrase '{0}' is specified by {1} adjectives of {3} that are attributes of the phrases '{4}' synset {2}!".format(paraphrase_head_lemma, attribute_matches, matching_phrase_synset, paraphrase_head_adjective_lemmas, phrase_head_lemma))
 
     return specifies_with_attributes

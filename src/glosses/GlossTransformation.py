@@ -13,7 +13,7 @@ import re
 import regex
 import json
 import datetime
-from src.functions import find_predicates
+from src.util import find_predicates
 
 class GlossTransformer(object):
 

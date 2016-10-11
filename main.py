@@ -20,7 +20,7 @@ new_disambiguation = True
 new_logic_transformation = True
 
 use_test_gloss_portion = True
-test_gloss_portion = 1000
+test_gloss_portion = 100
 
 show_detailed_output = False
 

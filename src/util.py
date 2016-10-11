@@ -22,34 +22,38 @@ def add_key(key, dictionary, value={}):
 		dictionary[key] = value
 
 def get_wordnet_pos(treebank_tag):
-
-    if treebank_tag.startswith('J'):
-        return "a"
-    elif treebank_tag.startswith('V'):
-        return "v"
-    elif treebank_tag.startswith('N'):
-        return "n"
-    elif treebank_tag.startswith('R'):
-        return "r"
-    else:
-        return ''
+	"""Get the wordnet pos symbol (a/v/n/r) to a penntreebank POS Tag."""
+	if treebank_tag.startswith('J'):
+		return "a"
+	elif treebank_tag.startswith('V'):
+		return "v"
+	elif treebank_tag.startswith('N'):
+		return "n"
+	elif treebank_tag.startswith('R'):
+		return "r"
+	else:
+		return ''
 
 def is_noun(pos):
+	"""Check whether a penntreebank POS tag belongs to a noun."""
 	if get_wordnet_pos(pos) == "n":
 		return True
 	return False
 
 def is_verb(pos):
+	"""Check whether a penntreebank POS tag belongs to a verb."""
 	if get_wordnet_pos(pos) == "n":
 		return True
 	return False
 
 def is_adjective(pos):
+	"""Check whether a penntreebank POS tag belongs to a adjective."""
 	if get_wordnet_pos(pos) == "a" or get_wordnet_pos(pos) == "s":
 		return True
 	return False
 
 def is_adverb(pos):
+	"""Check whether a penntreebank POS tag belongs to a adverb."""
 	if get_wordnet_pos(pos) == "r":
 		return True
 	return False
@@ -82,6 +86,7 @@ def find_predicates(parsed_transformation, arg_regex):
 	return predicates
 
 def get_sk_main_variable(parsed_transformation_sk):
+	"""Get the main variable that is part of the skolem form."""
 	if not isinstance(parsed_transformation_sk, tuple):
 		raise TypeError("get_sk_main_variable() can only be applied on skolem forms of a parsed transformation (tuple)")
 	if parsed_transformation_sk[0] != "sk":

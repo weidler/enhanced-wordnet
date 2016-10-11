@@ -1,3 +1,5 @@
+"""Module containing different constants that may be reused over the whole source code."""
+
 SS_TYPE_LIST = ["n", "v", "r", "a", "s"]
 WORDCLASS_SS_TYPE_MAPPING = {
 	"noun": "n",

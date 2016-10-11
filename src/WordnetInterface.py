@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "..
 import re
 import itertools
 
-from src.functions import get_ss_type_from_sense_key, add_key
+from src.util import get_ss_type_from_sense_key, add_key
 from src.glosses.Glosses import Gloss
 import src.constants as CONSTANTS
 
@@ -18,14 +18,40 @@ class WordNet(object):
 	between different Synsets.
 
 	Attributes:
-		pointers		(list)
+		lemmas		(dict)		lemmas of all words in WordNet as keys with a dictionary as value containing
+								a field for each wordclass (noun, verb, adverb, adjective), each of which
+								themselves contain a dictionary with the following values:
+									"pos": the part of speech this lemma is interpreted as (n/v/a/r)
+									"synset_cnt": the amount of synsets the lemma is in for this word class
+									"p_cnt": the amount of different pointers the lemma has in all synsets its in
+									"ptr_symbol": the different pointers that the lemma has in all synsets its in
+									"sense_cnt": the amount of different senses that exist for this lemma in the word class
+									"synset_offsets": list of the offsets for the synsets in the data file that contain this lemma
+		sense_keys	(dict)		sense keys as keys and a dict with the following fields as value:
+									"synset_offset": the offset of the synset that this sense belongs to in the data file
+									"sense_number": the number of that the sense in relation to the lemma, starting at 1
+									"tag_cnt": frequency of the sense in a corpus
+		synsets		(dict)		synset ids (pos+offset) as keys and a Synset Object for that id as value
 
 	Public Methods:
-		...
+		collect_glosses			(dict):		get all glosses from all synsets and create Gloss Objects for them
+		synset_from_id			(Synset):	get the synset object for that id
+		synset_from_key			(Synset):	get the synset object for that sense key
+		synsets_from_lemma		(list):		get a list of Synsets that contain the given lemma
+		synset_id_from_key		(string):	get the synset id of the synset that sense key belongs to
+		get_hypernym_synsets 	(list):		get a list of synsets for the hypernyms of the given synset
 	"""
 
 
 	def __init__(self, wordnet_dir, noun_pointers, adj_pointers, verb_pointers, adv_pointers, relations_filename=None):
+		"""
+		Initialize and load the WordNet Interface.
+
+		Arguments:
+			wordnet_dir				(string)	the path to the directory where the wordnet database files can be found
+			[wordclass]_pointers	(string)	paths to the pointer files
+			relations_filename		(string)	the path to an optional byte file containing additional relations that will be loaded into the WordNet
+		"""
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
 
@@ -118,6 +144,7 @@ class WordNet(object):
 	### PROTECTED ###
 
 	def _load_wordnet(self, wordnet_dir):
+		"""Load the WordNet from the database directory provided."""
 		print("=== Loading WordNet... ===")
 		# get files in dir
 		files = [os.path.join(wordnet_dir, f) for f in os.listdir(wordnet_dir)]
@@ -246,6 +273,7 @@ class WordNet(object):
 		return data
 
 	def _parse_sense_index_file(self, file_content):
+		"""Parse a sense index files content."""
 		lines = [line.strip().split(" ") for line in file_content.split("\n") if line[:2] != "  " and len(line.strip().split(" ")) > 1]
 		index = {}
 
@@ -262,6 +290,7 @@ class WordNet(object):
 		return index
 
 	def _join_data_with_sense_keys(self, data, sense_index, pos):
+		"""Join a data file with the sense indexes to add the possible sense keys to each synset."""
 		print("\t...sense keys")
 		joined = data
 		pos = {"noun": ["1"], "verb": ["2"], "adj": ["3", "5"], "adv": ["4"]}[pos]
@@ -281,12 +310,12 @@ class WordNet(object):
 		return joined
 
 	def _load_pointers(self, pointer_file):
+		"""Load a pointer file."""
 		with open(pointer_file) as f:
 			return {pointer.strip(): description for (pointer, description) in [re.split(" {4,}|\t", line) for line in f.read().split("\n") if len(line.split("    ")) == 2]}
 
 	def _relations_from_pointers(self, pointers, wordclass):
-		"""From a Data File List of Pointers of a synset retrieve the relations and return them as a dictionary."""
-
+		"""From a list of pointers in a data file entry retrieve the relations and return them as a dictionary."""
 		relations = {}
 		for pointer in pointers:
 			relation_name = self.pointers[wordclass][pointer[0]]
@@ -297,6 +326,7 @@ class WordNet(object):
 		return relations
 
 	def _integrate_relations_from_file(self, filename):
+		"""Integrate the relations in an additional relation file into the WordNet Interface."""
 		print("...integrating new relations")
 		import pickle
 
@@ -307,8 +337,9 @@ class WordNet(object):
 
 
 class Synset(object):
-	"""
-		Attributes:
+	"""A Synset Class to easily access and manage Synsets.
+
+	Attributes:
 		synset_id		(string)		combination of the ss_type and the offset of the synset to uniquely
 										identify the synset e.g. 'n03428529'
 		ss_type			(string)		single character indicating the pos of the synset -> n/v/a/s/r
@@ -322,18 +353,32 @@ class Synset(object):
 		gloss			(string)		the full gloss
 		definitions		(list)			a list of definitions as found in the gloss
 		examples		(list)			a list of examples as found in the gloss
+
+	Methods:
+		update_relations	()
 	"""
 
 	def __eq__(self, other):
+		"""Compare by synset id."""
 		return self.synset_id == other.synset_id
 
 	def __hash__(self):
+		"""Hash the synset id."""
 		return hash(self.synset_id)
 
 	def __repr__(self):
 		return "Synset({0}, {1})".format(self.synset_id, self.words)
 
 	def __init__(self, synset_id, sense_keys, words, relations, gloss):
+		"""Initialize a Synset Object from an id, possible keys, words and relations as well as the gloss.
+
+		Arguments:
+			synset_id		(string)		id that uniquely identifies a synset
+			sense_keys		(list)			a list of possible sense keys for that synset
+			words			(list)			the lemmas that synset can have
+			relations		(dict)			relations of the synset to other synsets
+			gloss			(string)		the gloss text
+		"""
 		self.__dict__.update(locals())
 		del self.__dict__["self"]
 
@@ -345,6 +390,7 @@ class Synset(object):
 		self.examples = [part for part in gloss_parts if part.startswith('"') and part.endswith('"')]
 
 	def update_relations(self, relations, wordnet):
+		"""Add a list of relations to this synset."""
 		for relation_type in relations:
 			add_key(relation_type, self.relations, value=[])
 			for rel_member in relations[relation_type]:
