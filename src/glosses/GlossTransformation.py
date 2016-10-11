@@ -308,7 +308,7 @@ class GlossTransformer(object):
 			f.write(gloss_corpus)
 
 		try:
-			parser_output = sp.check_output("java -Xmx2g -jar src/tools/easysrl/easysrl_fixed.jar --model src/tools/easysrl/model/ --maxLength 150 --outputFormat {0} --inputFile gloss_corpus.tmp 2>{1}".format(self._transformation_type, self._logfile+".parser_log"), shell=True, universal_newlines=True)
+			parser_output = sp.check_output("java -Xmx2g -jar src/tools/easysrl/easysrl.jar --model src/tools/easysrl/model/ --maxLength 150 --outputFormat {0} --inputFile gloss_corpus.tmp 2>{1}".format(self._transformation_type, self._logfile+".parser_log"), shell=True, universal_newlines=True)
 		except sp.CalledProcessError as e:
 			return e.output
 

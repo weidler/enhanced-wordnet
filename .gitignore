@@ -1,0 +1,8 @@
+src/tools/
+data/
+extracted_data/*.txt
+log/*.log
+log/*.parser_log
+gloss_corpus.txt
+*.conll
+models/*.obj

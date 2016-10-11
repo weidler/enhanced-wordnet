@@ -1,0 +1,522 @@
+nohup: ignoring input
+[0;34m
+Inititializing procedure...[0m
+
+training model [0;31mmodels/train_ehwon_no_functions_model.obj[0m
+based on features in [0;31mfeatures_ehwon_no_functions.txt[0m
+calculated for data set [0;31mdata/conll-2012/train.auto[0m
+
+2016-10-11 14:36:08,038 INFO Reading in data.
+2016-10-11 14:45:04,526 INFO Extracting system mentions.
+2016-10-11 14:47:54,789 INFO Learning.
+2016-10-11 14:47:54,789 INFO 	Extracting instances and features.
+reading features...
+=== Loading WordNet... ===
+parsing noun files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+...creating synsets
+parsing adj files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+...creating synsets
+parsing verb files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+...creating synsets
+parsing adv files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+...creating synsets
+...finished
+...integrating new relations
+[<function fine_type at 0x7f7b87bd7048>,
+ <function gender at 0x7f7b87bd70d0>,
+ <function number at 0x7f7b87bd7158>,
+ <function sem_class at 0x7f7b87bd71e0>,
+ <function deprel at 0x7f7b87bd7378>,
+ <function head_ner at 0x7f7b87bd7488>,
+ <function length at 0x7f7b87bd7510>,
+ <function head at 0x7f7b87bd7400>,
+ <function first at 0x7f7b87bd7598>,
+ <function last at 0x7f7b87bd7620>,
+ <function preceding_token at 0x7f7b87bd76a8>,
+ <function next_token at 0x7f7b87bd7730>,
+ <function governor at 0x7f7b87bd72f0>,
+ <function ancestry at 0x7f7b87bd77b8>]
+[<function exact_match at 0x7f7b87bd7840>,
+ <function head_match at 0x7f7b87bd78c8>,
+ <function same_speaker at 0x7f7b87bd7bf8>,
+ <function alias at 0x7f7b87bd7b70>,
+ <function sentence_distance at 0x7f7b87bd7a60>,
+ <function embedding at 0x7f7b87bd7c80>,
+ <function modifier at 0x7f7b87bd7d08>,
+ <function tokens_contained at 0x7f7b87bd7950>,
+ <function head_contained at 0x7f7b87bd79d8>,
+ <function token_distance at 0x7f7b87bd7ae8>,
+ <function anaphor_attribute_specification at 0x7f7b79484c80>,
+ <function antecedent_attribute_specification at 0x7f7b79484bf8>]
+The hypernymal paraphrase 'condition' is specified by 1 adjectives of ['critical'] that are attributes of the phrases 'crunch' synset Synset(n13934070, [('crunch', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first', 'able'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'weather' is specified by 1 adjectives of ['warm'] that are attributes of the phrases 'warming' synset Synset(n11482140, [('thaw', '0'), ('thawing', '0'), ('warming', '0')])!
+The hypernymal paraphrase 'weather' is specified by 1 adjectives of ['warm'] that are attributes of the phrases 'warming' synset Synset(n11482140, [('thaw', '0'), ('thawing', '0'), ('warming', '0')])!
+The hypernymal paraphrase 'disease' is specified by 1 adjectives of ['chronic', 'joint'] that are attributes of the phrases 'osteoarthritis' synset Synset(n14188238, [('osteoarthritis', '0'), ('degenerative_arthritis', '0'), ('degenerative_joint_disease', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'dawn' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'measure' is specified by 1 adjectives of ['special'] that are attributes of the phrases 'moment' synset Synset(n15244650, [('moment', '0'), ('minute', '2'), ('second', '2'), ('instant', '0')])!
+The hypernymal paraphrase 'situation' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'thing' synset Synset(n13943968, [('thing', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['short'] that are attributes of the phrases 'minute' synset Synset(n15246853, [('moment', '1'), ('mo', '0'), ('minute', '1'), ('second', '1'), ('bit', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['short'] that are attributes of the phrases 'moment' synset Synset(n15246853, [('moment', '1'), ('mo', '0'), ('minute', '1'), ('second', '1'), ('bit', '0')])!
+The hypernymal paraphrase 'quantity' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'mountain' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'quantity' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'mountain' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'quantity' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'mountain' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'quantity' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'lot' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'quantity' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'hair' synset Synset(n13761603, [("hair's-breadth", '0'), ('hairsbreadth', '0'), ('hair', '0'), ('whisker', '0')])!
+The hypernymal paraphrase 'resource' is specified by 1 adjectives of ['excellent', 'financial'] that are attributes of the phrases 'living' synset Synset(n13365286, [('support', '0'), ('keep', '0'), ('livelihood', '0'), ('living', '0'), ('bread_and_butter', '0'), ('sustenance', '0')])!
+The hypernymal paraphrase 'period' is specified by 1 adjectives of ['early'] that are attributes of the phrases 'youth' synset Synset(n15266034, [('youth', '1'), ('early_days', '0')])!
+The hypernymal paraphrase 'status' is specified by 1 adjectives of ['special'] that are attributes of the phrases 'place' synset Synset(n13926786, [('place', '1'), ('shoes', '0')])!
+The hypernymal paraphrase 'way' is specified by 1 adjectives of ['long'] that are attributes of the phrases 'canal' synset Synset(n02947212, [('canal', '0')])!
+The hypernymal paraphrase 'meal' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'breakfast' synset Synset(n07574602, [('breakfast', '0')])!
+The hypernymal paraphrase 'meal' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'breakfast' synset Synset(n07574602, [('breakfast', '0')])!
+The hypernymal paraphrase 'measure' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'lot' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'measure' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'lot' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'figure' is specified by 1 adjectives of ['little'] that are attributes of the phrases 'statuette' synset Synset(n03336459, [('figurine', '0'), ('statuette', '0')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'treaty' is specified by 1 adjectives of ['international'] that are attributes of the phrases 'convention' synset Synset(n06774316, [('convention', '0')])!
+The hypernymal paraphrase 'official' is specified by 1 adjectives of ['high'] that are attributes of the phrases 'mandarin' synset Synset(n10289766, [('mandarin', '1')])!
+The hypernymal paraphrase 'official' is specified by 1 adjectives of ['high'] that are attributes of the phrases 'mandarin' synset Synset(n10289766, [('mandarin', '1')])!
+The hypernymal paraphrase 'official' is specified by 1 adjectives of ['high'] that are attributes of the phrases 'mandarin' synset Synset(n10289766, [('mandarin', '1')])!
+The hypernymal paraphrase 'quality' is specified by 1 adjectives of ['high'] that are attributes of the phrases 'price' synset Synset(n05141683, [('price', '1')])!
+The hypernymal paraphrase 'space' is specified by 1 adjectives of ['single', 'open'] that are attributes of the phrases 'expanse' synset Synset(n09277538, [('expanse', '0')])!
+The hypernymal paraphrase 'phone' is specified by 1 adjectives of ['mobile'] that are attributes of the phrases 'cell' synset Synset(n02992529, [('cellular_telephone', '0'), ('cellular_phone', '0'), ('cellphone', '0'), ('cell', '4'), ('mobile_phone', '0')])!
+The hypernymal paraphrase 'labor' is specified by 1 adjectives of ['hard'] that are attributes of the phrases 'effort' synset Synset(n00621627, [('effort', '1'), ('elbow_grease', '0'), ('exertion', '0'), ('travail', '0'), ('sweat', '0')])!
+The hypernymal paraphrase 'sound' is specified by 1 adjectives of ['loud'] that are attributes of the phrases 'blast' synset Synset(n07376257, [('bang', '0'), ('clap', '0'), ('eruption', '1'), ('blast', '1'), ('bam', '0')])!
+The hypernymal paraphrase 'sound' is specified by 1 adjectives of ['loud'] that are attributes of the phrases 'blast' synset Synset(n07376257, [('bang', '0'), ('clap', '0'), ('eruption', '1'), ('blast', '1'), ('bam', '0')])!
+The hypernymal paraphrase 'sound' is specified by 1 adjectives of ['loud'] that are attributes of the phrases 'blast' synset Synset(n07376257, [('bang', '0'), ('clap', '0'), ('eruption', '1'), ('blast', '1'), ('bam', '0')])!
+The hypernymal paraphrase 'sound' is specified by 1 adjectives of ['loud'] that are attributes of the phrases 'blast' synset Synset(n07376257, [('bang', '0'), ('clap', '0'), ('eruption', '1'), ('blast', '1'), ('bam', '0')])!
+The hypernymal paraphrase 'activity' is specified by 1 adjectives of ['various'] that are attributes of the phrases 'bridge' synset Synset(n00490569, [('bridge', '0')])!
+The hypernymal paraphrase 'child' is specified by 1 adjectives of ['first', 'male'] that are attributes of the phrases 'son' synset Synset(n10624074, [('son', '0'), ('boy', '3')])!
+The hypernymal paraphrase 'part' is specified by 1 adjectives of ['low'] that are attributes of the phrases 'bottom' synset Synset(n08511970, [('bottom', '1')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'world' is specified by 1 adjectives of ['natural'] that are attributes of the phrases 'nature' synset Synset(n09366762, [('nature', '0')])!
+The hypernymal paraphrase 'people' is specified by 1 adjectives of ['young'] that are attributes of the phrases 'youth' synset Synset(n07944050, [('young', '0'), ('youth', '0')])!
+The hypernymal paraphrase 'people' is specified by 1 adjectives of ['young'] that are attributes of the phrases 'youth' synset Synset(n07944050, [('young', '0'), ('youth', '0')])!
+The hypernymal paraphrase 'official' is specified by 1 adjectives of ['public'] that are attributes of the phrases 'justice' synset Synset(n10225219, [('judge', '0'), ('justice', '0'), ('jurist', '1')])!
+The hypernymal paraphrase 'people' is specified by 1 adjectives of ['young'] that are attributes of the phrases 'youth' synset Synset(n07944050, [('young', '0'), ('youth', '0')])!
+The hypernymal paraphrase 'friend' is specified by 1 adjectives of ['close'] that are attributes of the phrases 'brother' synset Synset(n09877951, [('buddy', '0'), ('brother', '3'), ('chum', '0'), ('crony', '0'), ('pal', '0'), ('sidekick', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'establishment' synset Synset(n08075847, [('establishment', '1')])!
+The hypernymal paraphrase 'enterprise' is specified by 1 adjectives of ['industrial'] that are attributes of the phrases 'business' synset Synset(n08061042, [('business', '0'), ('concern', '0'), ('business_concern', '0'), ('business_organization', '0'), ('business_organisation', '0')])!
+The hypernymal paraphrase 'enterprise' is specified by 1 adjectives of ['industrial'] that are attributes of the phrases 'business' synset Synset(n08061042, [('business', '0'), ('concern', '0'), ('business_concern', '0'), ('business_organization', '0'), ('business_organisation', '0')])!
+The hypernymal paraphrase 'component' is specified by 1 adjectives of ['important'] that are attributes of the phrases 'base' synset Synset(n13809769, [('basis', '1'), ('base', '0')])!
+The hypernymal paraphrase 'kind' is specified by 1 adjectives of ['special'] that are attributes of the phrases 'style' synset Synset(n05844105, [('style', '1')])!
+The hypernymal paraphrase 'show' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'premiere' synset Synset(n06893285, [('premiere', '0')])!
+The hypernymal paraphrase 'unit' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'company' synset Synset(n08214272, [('company', '3')])!
+The hypernymal paraphrase 'unit' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'company' synset Synset(n08214272, [('company', '3')])!
+The hypernymal paraphrase 'unit' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'company' synset Synset(n08214272, [('company', '3')])!
+The hypernymal paraphrase 'unit' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'company' synset Synset(n08214272, [('company', '3')])!
+The hypernymal paraphrase 'unit' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'company' synset Synset(n08214272, [('company', '3')])!
+The hypernymal paraphrase 'month' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'january' synset Synset(n15210045, [('January', '0'), ('Jan', '0')])!
+The hypernymal paraphrase 'amount' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'batch' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special', 'administrative'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special', 'administrative'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special', 'administrative'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special', 'administrative'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special', 'administrative'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special', 'administrative'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'month' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'january' synset Synset(n15210045, [('January', '0'), ('Jan', '0')])!
+The hypernymal paraphrase 'month' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'january' synset Synset(n15210045, [('January', '0'), ('Jan', '0')])!
+The hypernymal paraphrase 'staff' is specified by 1 adjectives of ['professional'] that are attributes of the phrases 'office' synset Synset(n08352303, [('office', '0'), ('office_staff', '0')])!
+The hypernymal paraphrase 'quality' is specified by 1 adjectives of ['high'] that are attributes of the phrases 'price' synset Synset(n05141683, [('price', '1')])!
+The hypernymal paraphrase 'quality' is specified by 1 adjectives of ['high'] that are attributes of the phrases 'price' synset Synset(n05141683, [('price', '1')])!
+The hypernymal paraphrase 'quality' is specified by 1 adjectives of ['high'] that are attributes of the phrases 'price' synset Synset(n05141683, [('price', '1')])!
+The hypernymal paraphrase 'amount' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'couple' synset Synset(n13771290, [('couple', '1')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'hour' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'part' is specified by 1 adjectives of ['important'] that are attributes of the phrases 'basis' synset Synset(n13809769, [('basis', '1'), ('base', '0')])!
+The hypernymal paraphrase 'part' is specified by 1 adjectives of ['important'] that are attributes of the phrases 'basis' synset Synset(n13809769, [('basis', '1'), ('base', '0')])!
+The hypernymal paraphrase 'effort' is specified by 1 adjectives of ['energetic'] that are attributes of the phrases 'battle' synset Synset(n00788973, [('struggle', '1'), ('battle', '1')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'level' is specified by 1 adjectives of ['low'] that are attributes of the phrases 'low' synset Synset(n05097706, [('low', '0')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special'] that are attributes of the phrases 'country' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'region' is specified by 1 adjectives of ['special'] that are attributes of the phrases 'area' synset Synset(n08497294, [('area', '1'), ('country', '2')])!
+The hypernymal paraphrase 'institution' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'university' synset Synset(n08286569, [('university', '1')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['many', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['many', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'currency' is specified by 1 adjectives of ['british'] that are attributes of the phrases 'sterling' synset Synset(n13385080, [('sterling', '0')])!
+The hypernymal paraphrase 'month' is specified by 1 adjectives of ['last'] that are attributes of the phrases 'december' synset Synset(n15213774, [('December', '0'), ('Dec', '0')])!
+The hypernymal paraphrase 'woman' is specified by 1 adjectives of ['married'] that are attributes of the phrases 'wife' synset Synset(n10780632, [('wife', '0'), ('married_woman', '0')])!
+The hypernymal paraphrase 'woman' is specified by 1 adjectives of ['married'] that are attributes of the phrases 'wife' synset Synset(n10780632, [('wife', '0'), ('married_woman', '0')])!
+The hypernymal paraphrase 'woman' is specified by 1 adjectives of ['married'] that are attributes of the phrases 'wife' synset Synset(n10780632, [('wife', '0'), ('married_woman', '0')])!
+The hypernymal paraphrase 'complaint' is specified by 1 adjectives of ['formal'] that are attributes of the phrases 'allegation' synset Synset(n07236077, [('allegation', '0')])!
+The hypernymal paraphrase 'color' is specified by 1 adjectives of ['red'] that are attributes of the phrases 'red' synset Synset(n04962784, [('red', '0'), ('redness', '0')])!
+The hypernymal paraphrase 'color' is specified by 1 adjectives of ['red'] that are attributes of the phrases 'red' synset Synset(n04962784, [('red', '0'), ('redness', '0')])!
+The hypernymal paraphrase 'person' is specified by 1 adjectives of ['important'] that are attributes of the phrases 'mind' synset Synset(n10708292, [('thinker', '0'), ('creative_thinker', '0'), ('mind', '0')])!
+The hypernymal paraphrase 'person' is specified by 1 adjectives of ['important'] that are attributes of the phrases 'mind' synset Synset(n10708292, [('thinker', '0'), ('creative_thinker', '0'), ('mind', '0')])!
+The hypernymal paraphrase 'event' is specified by 1 adjectives of ['recent'] that are attributes of the phrases 'development' synset Synset(n07423560, [('development', '1')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['specific', 'little'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['specific', 'little'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['specific', 'little'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['specific', 'little'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['specific', 'little'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'wealth' is specified by 1 adjectives of ['great'] that are attributes of the phrases 'gold' synset Synset(n13353446, [('gold', '1')])!
+The hypernymal paraphrase 'wealth' is specified by 1 adjectives of ['great'] that are attributes of the phrases 'gold' synset Synset(n13353446, [('gold', '1')])!
+The hypernymal paraphrase 'month' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'january' synset Synset(n15210045, [('January', '0'), ('Jan', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'dawn' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'part' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'part' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'part' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'property' is specified by 1 adjectives of ['such', 'primary'] that are attributes of the phrases 'body' synset Synset(n05024616, [('body', '1')])!
+The hypernymal paraphrase 'district' is specified by 1 adjectives of ['big', 'troubled'] that are attributes of the phrases 'city' synset Synset(n08524735, [('city', '0'), ('metropolis', '0'), ('urban_center', '0')])!
+The hypernymal paraphrase 'district' is specified by 1 adjectives of ['big', 'troubled'] that are attributes of the phrases 'city' synset Synset(n08524735, [('city', '0'), ('metropolis', '0'), ('urban_center', '0')])!
+The hypernymal paraphrase 'district' is specified by 1 adjectives of ['big', 'troubled'] that are attributes of the phrases 'city' synset Synset(n08524735, [('city', '0'), ('metropolis', '0'), ('urban_center', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'ditch' synset Synset(n09267758, [('ditch', '2')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['little'] that are attributes of the phrases 'ditch' synset Synset(n09267758, [('ditch', '2')])!
+The hypernymal paraphrase 'part' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'scrap' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['little'] that are attributes of the phrases 'scrap' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'scrap' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'part' is specified by 1 adjectives of ['important'] that are attributes of the phrases 'basis' synset Synset(n13809769, [('basis', '1'), ('base', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'devil' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'devil' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'devil' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'devil' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'devil' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'devil' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['other', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['other', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['other', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['other', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['other', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['other', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['other', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['other', 'evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'weapon' is specified by 1 adjectives of ['heavy'] that are attributes of the phrases 'cannon' synset Synset(n02950826, [('cannon', '3')])!
+The hypernymal paraphrase 'weapon' is specified by 1 adjectives of ['heavy'] that are attributes of the phrases 'cannon' synset Synset(n02950826, [('cannon', '3')])!
+The hypernymal paraphrase 'weapon' is specified by 1 adjectives of ['heavy'] that are attributes of the phrases 'cannon' synset Synset(n02950826, [('cannon', '3')])!
+The hypernymal paraphrase 'weapon' is specified by 1 adjectives of ['heavy'] that are attributes of the phrases 'cannon' synset Synset(n02950826, [('cannon', '3')])!
+The hypernymal paraphrase 'account' is specified by 1 adjectives of ['detailed'] that are attributes of the phrases 'recital' synset Synset(n07221756, [('recital', '4')])!
+The hypernymal paraphrase 'woman' is specified by 1 adjectives of ['young'] that are attributes of the phrases 'girl' synset Synset(n10129825, [('girl', '0'), ('miss', '0'), ('missy', '0'), ('young_lady', '0'), ('young_woman', '0'), ('fille', '0')])!
+The hypernymal paraphrase 'woman' is specified by 1 adjectives of ['young', 'saudi'] that are attributes of the phrases 'girl' synset Synset(n10129825, [('girl', '0'), ('miss', '0'), ('missy', '0'), ('young_lady', '0'), ('young_woman', '0'), ('fille', '0')])!
+The hypernymal paraphrase 'woman' is specified by 1 adjectives of ['young'] that are attributes of the phrases 'girl' synset Synset(n10129825, [('girl', '0'), ('miss', '0'), ('missy', '0'), ('young_lady', '0'), ('young_woman', '0'), ('fille', '0')])!
+The hypernymal paraphrase 'woman' is specified by 1 adjectives of ['young', 'saudi'] that are attributes of the phrases 'girl' synset Synset(n10129825, [('girl', '0'), ('miss', '0'), ('missy', '0'), ('young_lady', '0'), ('young_woman', '0'), ('fille', '0')])!
+The hypernymal paraphrase 'form' is specified by 1 adjectives of ['human'] that are attributes of the phrases 'person' synset Synset(n05217688, [('person', '0')])!
+The hypernymal paraphrase 'form' is specified by 1 adjectives of ['human'] that are attributes of the phrases 'person' synset Synset(n05217688, [('person', '0')])!
+The hypernymal paraphrase 'quantity' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'mess' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'amount' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'bit' synset Synset(n13761407, [('spot', '0'), ('bit', '1')])!
+The hypernymal paraphrase 'cause' is specified by 1 adjectives of ['important'] that are attributes of the phrases 'mind' synset Synset(n10708292, [('thinker', '0'), ('creative_thinker', '0'), ('mind', '0')])!
+The hypernymal paraphrase 'cause' is specified by 1 adjectives of ['important'] that are attributes of the phrases 'mind' synset Synset(n10708292, [('thinker', '0'), ('creative_thinker', '0'), ('mind', '0')])!
+The hypernymal paraphrase 'condition' is specified by 1 adjectives of ['proper', 'climatic'] that are attributes of the phrases 'place' synset Synset(n13947867, [('place', '2')])!
+The hypernymal paraphrase 'condition' is specified by 1 adjectives of ['proper', 'climatic'] that are attributes of the phrases 'place' synset Synset(n13947867, [('place', '2')])!
+The hypernymal paraphrase 'condition' is specified by 1 adjectives of ['proper', 'climatic'] that are attributes of the phrases 'place' synset Synset(n13947867, [('place', '2')])!
+The hypernymal paraphrase 'event' is specified by 1 adjectives of ['recent'] that are attributes of the phrases 'development' synset Synset(n07423560, [('development', '1')])!
+The hypernymal paraphrase 'event' is specified by 1 adjectives of ['recent'] that are attributes of the phrases 'development' synset Synset(n07423560, [('development', '1')])!
+The hypernymal paraphrase 'person' is specified by 1 adjectives of ['married'] that are attributes of the phrases 'husband' synset Synset(n10193967, [('husband', '0'), ('hubby', '0'), ('married_man', '0')])!
+The hypernymal paraphrase 'person' is specified by 1 adjectives of ['married'] that are attributes of the phrases 'wife' synset Synset(n10780632, [('wife', '0'), ('married_woman', '0')])!
+The hypernymal paraphrase 'person' is specified by 1 adjectives of ['married'] that are attributes of the phrases 'husband' synset Synset(n10193967, [('husband', '0'), ('hubby', '0'), ('married_man', '0')])!
+The hypernymal paraphrase 'person' is specified by 1 adjectives of ['married'] that are attributes of the phrases 'wife' synset Synset(n10780632, [('wife', '0'), ('married_woman', '0')])!
+The hypernymal paraphrase 'person' is specified by 1 adjectives of ['married'] that are attributes of the phrases 'wife' synset Synset(n10780632, [('wife', '0'), ('married_woman', '0')])!
+The hypernymal paraphrase 'statement' is specified by 1 adjectives of ['public'] that are attributes of the phrases 'announcement' synset Synset(n06726158, [('announcement', '1'), ('proclamation', '0'), ('annunciation', '1'), ('declaration', '3')])!
+The hypernymal paraphrase 'statement' is specified by 1 adjectives of ['public'] that are attributes of the phrases 'announcement' synset Synset(n06726158, [('announcement', '1'), ('proclamation', '0'), ('annunciation', '1'), ('declaration', '3')])!
+The hypernymal paraphrase 'relationship' is specified by 1 adjectives of ['social'] that are attributes of the phrases 'association' synset Synset(n13930385, [('affiliation', '0'), ('association', '0'), ('tie', '1'), ('tie-up', '0')])!
+The hypernymal paraphrase 'phone' is specified by 1 adjectives of ['mobile'] that are attributes of the phrases 'cell' synset Synset(n02992529, [('cellular_telephone', '0'), ('cellular_phone', '0'), ('cellphone', '0'), ('cell', '4'), ('mobile_phone', '0')])!
+The hypernymal paraphrase 'phone' is specified by 1 adjectives of ['mobile'] that are attributes of the phrases 'cell' synset Synset(n02992529, [('cellular_telephone', '0'), ('cellular_phone', '0'), ('cellphone', '0'), ('cell', '4'), ('mobile_phone', '0')])!
+The hypernymal paraphrase 'phone' is specified by 1 adjectives of ['mobile'] that are attributes of the phrases 'cell' synset Synset(n02992529, [('cellular_telephone', '0'), ('cellular_phone', '0'), ('cellphone', '0'), ('cell', '4'), ('mobile_phone', '0')])!
+The hypernymal paraphrase 'phone' is specified by 1 adjectives of ['mobile'] that are attributes of the phrases 'cell' synset Synset(n02992529, [('cellular_telephone', '0'), ('cellular_phone', '0'), ('cellphone', '0'), ('cell', '4'), ('mobile_phone', '0')])!
+The hypernymal paraphrase 'amount' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'deal' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'road' is specified by 1 adjectives of ['major'] that are attributes of the phrases 'highway' synset Synset(n03519981, [('highway', '0'), ('main_road', '0')])!
+The hypernymal paraphrase 'business' is specified by 1 adjectives of ['commercial'] that are attributes of the phrases 'line' synset Synset(n03671473, [('line', '5')])!
+The hypernymal paraphrase 'place' is specified by 1 adjectives of ['near'] that are attributes of the phrases 'right' synset Synset(n08625073, [('right', '0')])!
+The hypernymal paraphrase 'circumstance' is specified by 1 adjectives of ['special'] that are attributes of the phrases 'case' synset Synset(n13943400, [('event', '0'), ('case', '0')])!
+The hypernymal paraphrase 'activity' is specified by 1 adjectives of ['sexual'] that are attributes of the phrases 'pleasure' synset Synset(n00846326, [('pleasure', '1')])!
+The hypernymal paraphrase 'activity' is specified by 1 adjectives of ['sexual'] that are attributes of the phrases 'pleasure' synset Synset(n00846326, [('pleasure', '1')])!
+The hypernymal paraphrase 'activity' is specified by 1 adjectives of ['human', 'sexual'] that are attributes of the phrases 'pleasure' synset Synset(n00846326, [('pleasure', '1')])!
+The hypernymal paraphrase 'activity' is specified by 1 adjectives of ['human', 'sexual'] that are attributes of the phrases 'pleasure' synset Synset(n00846326, [('pleasure', '1')])!
+The hypernymal paraphrase 'activity' is specified by 1 adjectives of ['human', 'sexual'] that are attributes of the phrases 'pleasure' synset Synset(n00846326, [('pleasure', '1')])!
+The hypernymal paraphrase 'activity' is specified by 1 adjectives of ['sexual'] that are attributes of the phrases 'pleasure' synset Synset(n00846326, [('pleasure', '1')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'child' is specified by 1 adjectives of ['young'] that are attributes of the phrases 'infant' synset Synset(n09827683, [('baby', '0'), ('babe', '0'), ('infant', '0')])!
+The hypernymal paraphrase 'snake' is specified by 1 adjectives of ['big'] that are attributes of the phrases 'python' synset Synset(n01743605, [('python', '0')])!
+The hypernymal paraphrase 'standard' is specified by 1 adjectives of ['common'] that are attributes of the phrases 'money' synset Synset(n13384557, [('money', '0')])!
+The hypernymal paraphrase 'standard' is specified by 1 adjectives of ['common'] that are attributes of the phrases 'money' synset Synset(n13384557, [('money', '0')])!
+The hypernymal paraphrase 'standard' is specified by 1 adjectives of ['common'] that are attributes of the phrases 'money' synset Synset(n13384557, [('money', '0')])!
+The hypernymal paraphrase 'standard' is specified by 1 adjectives of ['common'] that are attributes of the phrases 'money' synset Synset(n13384557, [('money', '0')])!
+The hypernymal paraphrase 'standard' is specified by 1 adjectives of ['common'] that are attributes of the phrases 'money' synset Synset(n13384557, [('money', '0')])!
+The hypernymal paraphrase 'standard' is specified by 1 adjectives of ['common'] that are attributes of the phrases 'money' synset Synset(n13384557, [('money', '0')])!
+The hypernymal paraphrase 'amount' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'multitude' synset Synset(n13775093, [('battalion', '0'), ('large_number', '0'), ('multitude', '0'), ('plurality', '1'), ('pack', '0')])!
+The hypernymal paraphrase 'amount' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'lot' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'amount' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'lot' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'profit' is specified by 1 adjectives of ['big'] that are attributes of the phrases 'killing' synset Synset(n13259797, [('killing', '0'), ('cleanup', '0')])!
+The hypernymal paraphrase 'cost' is specified by 1 adjectives of ['extra'] that are attributes of the phrases 'bonus' synset Synset(n13273154, [('bonus', '0'), ('incentive', '0')])!
+The hypernymal paraphrase 'cost' is specified by 1 adjectives of ['extra'] that are attributes of the phrases 'bonus' synset Synset(n13273154, [('bonus', '0'), ('incentive', '0')])!
+The hypernymal paraphrase 'cost' is specified by 1 adjectives of ['extra'] that are attributes of the phrases 'bonus' synset Synset(n13273154, [('bonus', '0'), ('incentive', '0')])!
+The hypernymal paraphrase 'cost' is specified by 1 adjectives of ['extra'] that are attributes of the phrases 'bonus' synset Synset(n13273154, [('bonus', '0'), ('incentive', '0')])!
+The hypernymal paraphrase 'person' is specified by 1 adjectives of ['close'] that are attributes of the phrases 'brother' synset Synset(n09877951, [('buddy', '0'), ('brother', '3'), ('chum', '0'), ('crony', '0'), ('pal', '0'), ('sidekick', '0')])!
+The hypernymal paraphrase 'month' is specified by 1 adjectives of ['last'] that are attributes of the phrases 'december' synset Synset(n15213774, [('December', '0'), ('Dec', '0')])!
+The hypernymal paraphrase 'month' is specified by 1 adjectives of ['last'] that are attributes of the phrases 'december' synset Synset(n15213774, [('December', '0'), ('Dec', '0')])!
+The hypernymal paraphrase 'staff' is specified by 1 adjectives of ['professional'] that are attributes of the phrases 'office' synset Synset(n08352303, [('office', '0'), ('office_staff', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'information' is specified by 1 adjectives of ['additional'] that are attributes of the phrases 'check' synset Synset(n05825245, [('confirmation', '0'), ('verification', '0'), ('check', '1'), ('substantiation', '0')])!
+The hypernymal paraphrase 'part' is specified by 1 adjectives of ['various'] that are attributes of the phrases 'section' synset Synset(n04164989, [('section', '0'), ('segment', '0')])!
+The hypernymal paraphrase 'passage' is specified by 1 adjectives of ['immediate'] that are attributes of the phrases 'cut' synset Synset(n06618234, [('cut', '0')])!
+The hypernymal paraphrase 'passage' is specified by 1 adjectives of ['immediate'] that are attributes of the phrases 'cut' synset Synset(n06618234, [('cut', '0')])!
+The hypernymal paraphrase 'passage' is specified by 1 adjectives of ['immediate'] that are attributes of the phrases 'cut' synset Synset(n06618234, [('cut', '0')])!
+The hypernymal paraphrase 'passage' is specified by 1 adjectives of ['immediate'] that are attributes of the phrases 'cut' synset Synset(n06618234, [('cut', '0')])!
+The hypernymal paraphrase 'passage' is specified by 1 adjectives of ['immediate'] that are attributes of the phrases 'cut' synset Synset(n06618234, [('cut', '0')])!
+The hypernymal paraphrase 'passage' is specified by 1 adjectives of ['immediate'] that are attributes of the phrases 'cut' synset Synset(n06618234, [('cut', '0')])!
+The hypernymal paraphrase 'state' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'thing' synset Synset(n13943968, [('thing', '0')])!
+The hypernymal paraphrase 'state' is specified by 1 adjectives of ['particular'] that are attributes of the phrases 'case' synset Synset(n13943400, [('event', '0'), ('case', '0')])!
+The hypernymal paraphrase 'leader' is specified by 1 adjectives of ['political'] that are attributes of the phrases 'socialist' synset Synset(n10618848, [('socialist', '0')])!
+2016-10-11 15:16:33,173 INFO 	Fitting model parameters.
+2016-10-11 15:16:34,788 INFO Started epoch 1
+2016-10-11 15:19:48,951 INFO Finished epoch 1
+2016-10-11 15:19:48,951 INFO 	Incorrect predictions: 57409/340459
+2016-10-11 15:19:48,951 INFO Started epoch 2
+2016-10-11 15:23:02,684 INFO Finished epoch 2
+2016-10-11 15:23:02,685 INFO 	Incorrect predictions: 45104/340459
+2016-10-11 15:23:02,685 INFO Started epoch 3
+2016-10-11 15:26:16,445 INFO Finished epoch 3
+2016-10-11 15:26:16,445 INFO 	Incorrect predictions: 37604/340459
+2016-10-11 15:26:16,445 INFO Started epoch 4
+2016-10-11 15:29:29,806 INFO Finished epoch 4
+2016-10-11 15:29:29,806 INFO 	Incorrect predictions: 31239/340459
+2016-10-11 15:29:29,806 INFO Started epoch 5
+2016-10-11 15:32:43,238 INFO Finished epoch 5
+2016-10-11 15:32:43,239 INFO 	Incorrect predictions: 26263/340459
+2016-10-11 15:38:09,700 INFO Writing model to file.
+2016-10-11 15:38:11,907 INFO Done.
+dict_keys(['+'])
+
+
+testing with model [0;31mmodels/train_ehwon_no_functions_model.obj[0m 
+based on features in [0;31mfeatures_ehwon_no_functions.txt[0m 
+calculated for test set [0;31mdata/conll-2012/test.gold[0m 
+creating [0;31mehwon_no_functions_out.conll[0m
+
+2016-10-11 15:38:50,836 INFO Loading model.
+2016-10-11 15:38:52,414 INFO Reading in data.
+2016-10-11 15:40:28,982 INFO Extracting system mentions.
+2016-10-11 15:41:04,829 INFO Predicting.
+2016-10-11 15:41:04,829 INFO 	Removing coreference annotations from corpus.
+2016-10-11 15:41:04,870 INFO 	Extracting instances and features.
+=== Loading WordNet... ===
+parsing noun files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+...creating synsets
+parsing adj files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+...creating synsets
+parsing verb files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+...creating synsets
+parsing adv files...
+	...index
+	...data
+	...sense keys
+		0 missing synsets
+...creating synsets
+...finished
+...integrating new relations
+The hypernymal paraphrase 'strength' is specified by 1 adjectives of ['physical'] that are attributes of the phrases 'power' synset Synset(n05030680, [('might', '0'), ('mightiness', '0'), ('power', '2')])!
+The hypernymal paraphrase 'end' is specified by 1 adjectives of ['sharp'] that are attributes of the phrases 'point' synset Synset(n03974215, [('point', '0')])!
+The hypernymal paraphrase 'end' is specified by 1 adjectives of ['sharp'] that are attributes of the phrases 'point' synset Synset(n03974215, [('point', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'group' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'school' synset Synset(n07995453, [('school', '1'), ('shoal', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'time' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'morning' synset Synset(n15168790, [('dawn', '0'), ('dawning', '0'), ('morning', '1'), ('aurora', '0'), ('first_light', '0'), ('daybreak', '0'), ('break_of_day', '0'), ('break_of_the_day', '0'), ('dayspring', '0'), ('sunrise', '0'), ('sunup', '0'), ('cockcrow', '0')])!
+The hypernymal paraphrase 'craft' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'boat' synset Synset(n02858304, [('boat', '0')])!
+The hypernymal paraphrase 'craft' is specified by 1 adjectives of ['small'] that are attributes of the phrases 'boat' synset Synset(n02858304, [('boat', '0')])!
+The hypernymal paraphrase 'month' is specified by 1 adjectives of ['first'] that are attributes of the phrases 'january' synset Synset(n15210045, [('January', '0'), ('Jan', '0')])!
+The hypernymal paraphrase 'quantity' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'mountain' synset Synset(n13774404, [('batch', '0'), ('deal', '0'), ('flock', '0'), ('good_deal', '0'), ('great_deal', '0'), ('hatful', '2'), ('heap', '0'), ('lot', '0'), ('mass', '0'), ('mess', '0'), ('mickle', '0'), ('mint', '0'), ('mountain', '0'), ('muckle', '0'), ('passel', '0'), ('peck', '0'), ('pile', '0'), ('plenty', '0'), ('pot', '1'), ('quite_a_little', '0'), ('raft', '0'), ('sight', '0'), ('slew', '0'), ('spate', '0'), ('stack', '0'), ('tidy_sum', '0'), ('wad', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['little'] that are attributes of the phrases 'chip' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'month' is specified by 1 adjectives of ['last'] that are attributes of the phrases 'december' synset Synset(n15213774, [('December', '0'), ('Dec', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['cuddly', 'sweet', 'little'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'thing' is specified by 1 adjectives of ['little'] that are attributes of the phrases 'bit' synset Synset(n09222051, [('bit', '0'), ('chip', '0'), ('flake', '0'), ('fleck', '0'), ('scrap', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'spirit' is specified by 1 adjectives of ['evil'] that are attributes of the phrases 'demon' synset Synset(n09542339, [('devil', '0'), ('fiend', '2'), ('demon', '0'), ('daemon', '0'), ('daimon', '0')])!
+The hypernymal paraphrase 'crowd' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'army' synset Synset(n08183290, [('army', '1')])!
+The hypernymal paraphrase 'crowd' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'army' synset Synset(n08183290, [('army', '1')])!
+The hypernymal paraphrase 'crowd' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'army' synset Synset(n08183290, [('army', '1')])!
+The hypernymal paraphrase 'crowd' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'army' synset Synset(n08183290, [('army', '1')])!
+The hypernymal paraphrase 'crowd' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'army' synset Synset(n08183290, [('army', '1')])!
+The hypernymal paraphrase 'crowd' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'army' synset Synset(n08183290, [('army', '1')])!
+The hypernymal paraphrase 'crowd' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'army' synset Synset(n08183290, [('army', '1')])!
+The hypernymal paraphrase 'crowd' is specified by 1 adjectives of ['large'] that are attributes of the phrases 'army' synset Synset(n08183290, [('army', '1')])!
+The hypernymal paraphrase 'room' is specified by 1 adjectives of ['separate'] that are attributes of the phrases 'box' synset Synset(n02884011, [('box', '1')])!
+The hypernymal paraphrase 'room' is specified by 1 adjectives of ['separate'] that are attributes of the phrases 'box' synset Synset(n02884011, [('box', '1')])!
+The hypernymal paraphrase 'room' is specified by 1 adjectives of ['separate'] that are attributes of the phrases 'box' synset Synset(n02884011, [('box', '1')])!
+The hypernymal paraphrase 'room' is specified by 1 adjectives of ['separate'] that are attributes of the phrases 'box' synset Synset(n02884011, [('box', '1')])!
+The hypernymal paraphrase 'room' is specified by 1 adjectives of ['separate'] that are attributes of the phrases 'box' synset Synset(n02884011, [('box', '1')])!
+2016-10-11 15:43:32,232 INFO 	Doing predictions.
+2016-10-11 15:43:51,613 INFO 	Clustering results.
+2016-10-11 15:44:00,810 INFO Write corpus to file.
+2016-10-11 15:44:01,394 INFO Done.
+
+
+evaluating the output file [0;31mehwon_no_functions_out.conll[0m 
+against test file [0;31mdata/conll-2012/test.gold[0m
+
+version: 8.01 /home/students/weidler/Desktop/EhWoN/enhancedwordnet_cort/src/tools/reference-coreference-scorers-master/lib/CorScorer.pm
+
+METRIC muc:
+
+====== TOTALS =======
+Identification of Mentions: Recall: (14219 / 19764) 71.94%	Precision: (14219 / 15895) 89.45%	F1: 79.74%
+--------------------------------------------------------------------------
+Coreference: Recall: (10121 / 15232) 66.44%	Precision: (10121 / 12155) 83.26%	F1: 73.91%
+--------------------------------------------------------------------------
+
+METRIC bcub:
+
+====== TOTALS =======
+Identification of Mentions: Recall: (14219 / 19764) 71.94%	Precision: (14219 / 15895) 89.45%	F1: 79.74%
+--------------------------------------------------------------------------
+Coreference: Recall: (10160.534556061 / 19764) 51.4%	Precision: (11941.6570009138 / 15895) 75.12%	F1: 61.04%
+--------------------------------------------------------------------------
+
+METRIC ceafm:
+
+====== TOTALS =======
+Identification of Mentions: Recall: (14219 / 19764) 71.94%	Precision: (14219 / 15895) 89.45%	F1: 79.74%
+--------------------------------------------------------------------------
+Coreference: Recall: (11447 / 19764) 57.91%	Precision: (11447 / 15895) 72.01%	F1: 64.2%
+--------------------------------------------------------------------------
+
+METRIC ceafe:
+
+====== TOTALS =======
+Identification of Mentions: Recall: (14219 / 19764) 71.94%	Precision: (14219 / 15895) 89.45%	F1: 79.74%
+--------------------------------------------------------------------------
+Coreference: Recall: (2349.16392521467 / 4532) 51.83%	Precision: (2349.16392521467 / 3740) 62.81%	F1: 56.79%
+--------------------------------------------------------------------------
+
+METRIC blanc:
+
+====== TOTALS =======
+Identification of Mentions: Recall: (14219 / 19764) 71.94%	Precision: (14219 / 15895) 89.45%	F1: 79.74%
+--------------------------------------------------------------------------
+
+Coreference:
+Coreference links: Recall: (60080 / 111931) 53.67%	Precision: (60080 / 83538) 71.91%	F1: 61.47%
+--------------------------------------------------------------------------
+Non-coreference links: Recall: (447873 / 883032) 50.71%	Precision: (447873 / 584905) 76.57%	F1: 61.02%
+--------------------------------------------------------------------------
+BLANC: Recall: (0.521979156536192 / 1) 52.19%	Precision: (0.74245643986527 / 1) 74.24%	F1: 61.24%
+--------------------------------------------------------------------------
