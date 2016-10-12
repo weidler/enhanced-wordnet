@@ -192,7 +192,6 @@ class RelationExtractor(object):
 								arg_2 = variable_dict["arguments"]["ARG2"][i][0]
 								arg_1 = arg_1[0]
 
-								# TODO implement OR handling better
 								if isinstance(arg_1, tuple):
 									if arg_1[0] == "sk":
 										arg_1 = get_sk_main_variable(arg_1)
@@ -212,7 +211,7 @@ class RelationExtractor(object):
 
 								if arg_2 not in gloss_entity_dict: continue
 								arg_2_dict = gloss_entity_dict[arg_2]
-								if arg_1 == main_entity_symbol and arg_2_dict["type"] == "event":  #TODO maybe not check by event but by contained predicates
+								if arg_1 == main_entity_symbol and arg_2_dict["type"] == "event":
 									for predicate in arg_2_dict["predicates"]:
 										if get_ss_type_from_sense_key(predicate[1]) == "v" and self._check_if_valid_sensekey(predicate[1]):
 											function.append(predicate)

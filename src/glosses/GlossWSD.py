@@ -161,7 +161,7 @@ class GlossDisambiguator(object):
 							disambiguation = token.find("id")
 
 							token_original_form = disambiguation.tail
-							token_wn_synset_offset = ""  # TODO identify offset
+							token_wn_synset_offset = ""
 							token_wn_sense_key = disambiguation.attrib["sk"]
 
 						token_object = Token(token_id_in_gloss, token_original_form, lemma, token_wn_synset_offset, token_wn_sense_key, anno_tag, pos)
@@ -356,7 +356,6 @@ class GlossDisambiguator(object):
 			lemma_raw, lemma_ss_type = lemma.split("%")
 			if int(lemma_ss_type) in GLOSSTAG_POS_POSSIBLE_SS_TYPES[token.pos]:
 				lemma_pos = {1: "n", 2: "v", 3: "a", 4: "r", 5: "s"}[int(lemma_ss_type)]
-				# TODO avoid nltk?
 				synsets = wn.synsets(lemma_raw, lemma_pos)
 
 				for synset in synsets:

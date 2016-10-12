@@ -177,7 +177,6 @@ class GlossTransformer(object):
 				state = 0
 
 			elif match.group(2) == "|":
-				# TODO handle this better
 				if state == 0 and state == 3:
 					raise SyntaxError("Found | after opening bracket at {0}\n{1}!".format(match.start(), transformation))
 				args.append(current_element)
@@ -268,7 +267,6 @@ class GlossTransformer(object):
 
 	def _map_senses_to_predicates(self, variable_predicates, gloss):
 		"""Map the sense keys from the Gloss Tokens to the according predicates in the transformation. ~90% successrate..."""
-		# TODO better mapping for multiple gloss descriptions
 		disambiguated_variable_predicates = []
 		gloss_token_stack = gloss.tokens.copy()
 
@@ -328,7 +326,7 @@ class GlossTransformer(object):
 				gloss_text = re.sub(r"[.,;:?!]", " \g<0> ", definition)
 				gloss_text = re.sub(r"'(s)", "\g<1>", gloss_text)
 				if ignore_parenthesis_content:
-					gloss_text = re.sub(r"\(.*?\)", "", gloss_text)  # TODO das isn kack regex, brauche recursive
+					gloss_text = re.sub(r"\(.*?\)", "", gloss_text)
 					gloss_text = re.sub(r"[()]", "", gloss_text)
 				else:
 					gloss_text = re.sub(r"\(", " -LRB- ", gloss_text)
