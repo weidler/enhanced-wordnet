@@ -38,10 +38,10 @@ Download here: https://github.com/mikelewis0/EasySRL
 Download here: https://github.com/conll/reference-coreference-scorers  
 
 **data/wordnet_database/**  
-	* goto https://wordnet.princeton.edu/wordnet/download/current-version/  
- 	* choose the download under *WordNet 3.0 for UNIX-like systems (including: Linux, Mac OS X, Solaris)* 
+* goto https://wordnet.princeton.edu/wordnet/download/current-version/  
+* choose the download under *WordNet 3.0 for UNIX-like systems (including: Linux, Mac OS X, Solaris)* 
 	**Download just database files**  
- 	* extract the content into the directory named as above, a *sense.[WORDCLASS]* and *data.[WORDCLASS]* for each of the four word classes and an *index.sense* file is REQUIRED!  
+* extract the content into the directory named as above, a *sense.[WORDCLASS]* and *data.[WORDCLASS]* for each of the four word classes and an *index.sense* file is REQUIRED!  
 
 **data/wordnet_glosstags/**  
 Download from http://wordnet.princeton.edu/glosstag.shtml and extract all 4 .xml files to the folder mentioned above  
