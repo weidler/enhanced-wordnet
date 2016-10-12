@@ -27,7 +27,7 @@ For the evaluation of the relations, the coreference resolution framework **cort
 `pip` will install any missing dependencies for those packages.  
 Don't forget that you may have to use `pip3` in case you are using python3+ and have multiple python versions installed!
 
-### Missing in the GitHub version
+#### Missing in the GitHub version
 
 The following tools and data is missing due to Licesne/filesize. Path structure is requiered!
 
@@ -54,6 +54,11 @@ You need the following combined corpus files:
 	test.auto, test.gold
 
 Combine them from OntoNotes/Conll or any other conll format files. You may modify and use the script *src/coref/conll_corpus_combiner.py*  to do so.
+
+***
+## System Architecture
+![Picture of the System Architecture](https://github.com/weidler/enhanced-wordnet/blob/master/ehwon_architecture.png "System Architecture")
+
 ***
 ## Structure
 
