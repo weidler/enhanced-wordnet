@@ -78,7 +78,21 @@ The project is structured into the following tree of directories:
 I provide two main scripts to easily use the project
 
 ***main.py***  
-This wrapper/main file combines the whole disambiguation/transformation/extraction process based on some options.
+This wrapper/main file combines the whole disambiguation/transformation/extraction process based on some options. Usage as follows:
+
+	python3 main.py [OPTIONS]
+
+		--extension			file extension that will be added to the filenames (default: "\_dev")
+		--disambiguate		boolean that decides if a new disambiguation will be created or an old one will be used
+							(only if one exists, will exit on error else), default: True
+		--transform			boolean that decides if a new transformation will be created or an old one will be used
+							(only if one exists, will exit on error else), default: True
+		--use-portion		boolean to decide whether only a portion of the Glosses will be used (highly recommended
+							for testing, takes about an hour else), default: True
+		--portion-size		the size of the portion of the Glosses that will be used if the last option was True;
+							default: 1000
+		--detailed			boolean that decides if a detailed output is wanted, informing about all relations that were found
+							as well as the transformations; produces LARGE output for big portions of the glosses, default: False
 
 ***evaluate.sh***  
 A command line script to manage the cort based evaluation process. Usage as follows:

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # AUTHOR: Tonio Weidler
 
@@ -74,6 +74,8 @@ class WordNet(object):
 		if relations_filename:
 			self._integrate_relations_from_file(relations_filename)
 
+		print("finished loading...")
+
 	### PUBLIC ###
 
 	def collect_glosses(self):
@@ -107,12 +109,18 @@ class WordNet(object):
 
 	def synset_from_id(self, synset_id):
 		"""From a synset id get the according synset."""
-		return self.synsets[synset_id]
+		if synset_id in self.synsets:
+			return self.synsets[synset_id]
+		elif synset_id[0] == "a" and "s"+synset_id[1:] in self.synsets:
+			return self.synsets["s"+synset_id[1:]]
+		elif synset_id[0] == "s" and "a"+synset_id[1:] in self.synsets:
+			return self.synsets["a"+synset_id[1:]]
+		else:
+			raise ValueError("The synset id {0} doesnt exist in this database.".format(synset_id))
 
 	def synset_from_key(self, sense_key):
 		"""From a sense key get the according synset."""
-		ss_type = get_ss_type_from_sense_key(sense_key)
-		return self.synsets[ss_type + self.sense_keys[sense_key]["synset_offset"]]
+		return self.synset_from_id(self.synset_id_from_key(sense_key))
 
 	def synset_id_from_key(self, sense_key):
 		"""From a sense key get the according synset."""
@@ -146,6 +154,16 @@ class WordNet(object):
 			hypernym_ids = synset.relations["hypernym"]
 			return [self.synset_from_id(syn_id) for syn_id in hypernym_ids] + list(itertools.chain(*[self.get_hypernym_synsets(self.synset_from_id(syn_id_2), traversal_depth=traversal_depth-1) for syn_id_2 in hypernym_ids]))
 
+		return []
+
+	def get_similar_adjectives(self, synset):
+		"""Get similar adjectives of the snyset."""
+		if synset.ss_type not in "as":
+			raise TypeError("Can't search for similar adjectives of a {0}.".format(synset.ss_type))
+
+		if "similar_to" in synset.relations.keys():
+			first_level = [self.synset_from_id(syn_id) for syn_id in synset.relations["similar_to"]]
+			return set([self.synset_from_id(syn) for syn in itertools.chain(*[syn.relations["similar_to"] for syn in first_level if "similar_to" in syn.relations])] + first_level)
 		return []
 
 	### PROTECTED ###
@@ -410,4 +428,6 @@ if __name__ == "__main__":
 	from pprint import pprint
 	wn = WordNet("data/wordnet_database/", "src/pointers/noun_pointers.txt", "src/pointers/adj_pointers.txt", "src/pointers/verb_pointers.txt", "src/pointers/adv_pointers.txt", relations_filename="extracted_data/relations_dev_full.rel")
 
-	pprint(wn.synset_from_id("n07593972").relations)
+	hot = wn.synset_from_key("baking_hot%3:00:00:hot:01")
+	hot_similar = wn.get_similar_adjectives(hot)
+	pprint(hot_similar)

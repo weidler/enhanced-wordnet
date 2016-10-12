@@ -120,9 +120,6 @@ perceptron = import_helper.import_from_path(args.perceptron)(
     seed=int(args.seed)
 )
 
-pprint(mention_features)
-pprint(pairwise_features)
-
 extractor = instance_extractors.InstanceExtractor(
     import_helper.import_from_path(args.extractor),
     mention_features,
@@ -145,8 +142,6 @@ model = experiments.learn(
     extractor,
     perceptron
 )
-
-print(model[0].keys())
 
 logging.info("Writing model to file.")
 pickle.dump(model, open(args.output_filename, "wb"), protocol=2)

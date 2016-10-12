@@ -8,26 +8,23 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../"))
 
-from cort.core.mentions import Mention
-from cort.core.documents import Document
-
 from pprint import pprint
-import random as ran
 from nltk.stem import WordNetLemmatizer
 import itertools
 
 from src.WordnetInterface import WordNet
 import src.constants as CONSTANTS
-from src.util import is_noun, is_verb, is_subj, is_obj
+from src.util import is_verb, is_subj, is_obj
 
 # there is the need to create an global wordnet interface here, that can be used in the functions
 # else, with every function call it would have to be reinitialized
 
-GLOBAL_WORDNET_INTERFACE = WordNet("data/wordnet_database/", "src/pointers/noun_pointers.txt", "src/pointers/adj_pointers.txt", "src/pointers/verb_pointers.txt", "src/pointers/adv_pointers.txt", relations_filename="extracted_data/relations_dev_full.rel")
+GLOBAL_WORDNET_INTERFACE = WordNet("data/wordnet_database/", "src/pointers/noun_pointers.txt", "src/pointers/adj_pointers.txt", "src/pointers/verb_pointers.txt", "src/pointers/adv_pointers.txt", relations_filename="extracted_data/relations_final_full.rel")
 wnl = WordNetLemmatizer()
 
 def antecedent_attribute_specification(anaphor, antecedent):
     """Compute whether the anaphor is a hypernym of the antecedent, specified by adjectives that are attributes of the antecedent.
+
     Returns:
         (tuple):    feature name, boolean
     """
@@ -36,6 +33,7 @@ def antecedent_attribute_specification(anaphor, antecedent):
 
 def anaphor_attribute_specification(anaphor, antecedent):
     """Compute whether the antecedent is a hypernym of the anaphor, specified by adjectives that are attributes of the anaphor.
+
     Returns:
         (tuple):    feature name, boolean
     """
@@ -44,6 +42,7 @@ def anaphor_attribute_specification(anaphor, antecedent):
 
 def anaphor_performs_antecedent_function(anaphor, antecedent):
     """Compute whether the anaphor is object of a verb that is the antecedents function.
+
     Returns:
         (tuple):    feature name, boolean
     """
@@ -52,6 +51,7 @@ def anaphor_performs_antecedent_function(anaphor, antecedent):
 
 def antecedent_performs_anaphor_function(anaphor, antecedent):
     """Compute whether the antecedent is object of a verb that is the anaphors function.
+
     Returns:
         (tuple):    feature name, boolean
     """
@@ -62,6 +62,7 @@ def antecedent_performs_anaphor_function(anaphor, antecedent):
 
 def _calc_typical_action_congruency(phrase, paraphrase):
     """Calculate if the phrase performs an action which is typical for the paraphrase.
+
     Returns:
         (bool): true if the head of the paraphrase performs an action that is the function of the phrase head
     """
@@ -91,12 +92,13 @@ def _calc_typical_action_congruency(phrase, paraphrase):
         paraphrase_head_function_synset_ids = set(itertools.chain(*[syn.relations["function"] for syn in paraphrase_head_synsets if "function" in syn.relations]))
         if not potential_typical_actions_synset_ids.isdisjoint(paraphrase_head_function_synset_ids):
             phrase_performs_paraphrase_action = True
-            print("'{0}' performing '{1}' which is typical for a '{2}'".format(phrase_head_dependency_token.form, phrase_head_governor_token.form, paraphrase_head_lemma))
+            # print("'{0}' performing '{1}' which is typical for a '{2}'".format(phrase_head_dependency_token.form, phrase_head_governor_token.form, paraphrase_head_lemma))
 
     return phrase_performs_paraphrase_action
 
 def _calc_attribute_specification(phrase, paraphrase):
     """Calculate if a mention (paraphrase) is a hypernym of another mention (phrase) and is modified by adjectives that are the phrases attributes.
+
     Returns:
         (bool):     True if there is a match in hypernymy and attribute/adjectives
     """
@@ -114,7 +116,8 @@ def _calc_attribute_specification(phrase, paraphrase):
     if not paraphrase_head_adjectives: return specifies_with_attributes
 
     paraphrase_head_adjective_lemmas = [wnl.lemmatize(t.form, "a").lower() for t in paraphrase_head_adjectives]
-    paraphrase_head_adjectives_synset_ids = list(itertools.chain(*[[syn.synset_id for syn in GLOBAL_WORDNET_INTERFACE.synsets_for_lemma(adjective, "adj")] for adjective in paraphrase_head_adjective_lemmas]))
+    paraphrase_head_adjectives_synsets = list(itertools.chain(*[[syn for syn in GLOBAL_WORDNET_INTERFACE.synsets_for_lemma(adjective, "adj")] for adjective in paraphrase_head_adjective_lemmas]))
+    paraphrase_head_adjectives_synset_ids = set([syn.synset_id for syn in paraphrase_head_adjectives_synsets])
 
     # get necessary informations about the phrase
     phrase_dependency_structure = list(itertools.chain(*phrase.document.dep))[phrase.span.begin:phrase.span.end+1]
@@ -138,15 +141,14 @@ def _calc_attribute_specification(phrase, paraphrase):
     poss_matches = [0 for i in phrase_head_synsets_with_paraphrase_head_as_hypernym]
     for i, phrase_head_synset_with_hypernym in enumerate(phrase_head_synsets_with_paraphrase_head_as_hypernym):
         if "attributes" not in phrase_head_synset_with_hypernym.relations.keys(): continue
-        for attr in phrase_head_synset_with_hypernym.relations["attributes"]:
+        attributes_synsets = [GLOBAL_WORDNET_INTERFACE.synset_from_id(syn_id) for syn_id in phrase_head_synset_with_hypernym.relations["attributes"] if GLOBAL_WORDNET_INTERFACE.synset_from_id(syn_id).ss_type in "as"]
+        attributes_ids_extended = set([syn.synset_id for syn in list(itertools.chain(*[GLOBAL_WORDNET_INTERFACE.get_similar_adjectives(syn) for syn in attributes_synsets])) + attributes_synsets])
+        for attr in attributes_ids_extended:
             if attr in paraphrase_head_adjectives_synset_ids:
                 poss_matches[i] += 1
 
     attribute_matches = max(poss_matches)
-    matching_phrase_synset = phrase_head_synsets_with_paraphrase_head_as_hypernym[poss_matches.index(attribute_matches)]
-
     if attribute_matches > 0:
         specifies_with_attributes = True
-        print("The hypernymal paraphrase '{0}' is specified by {1} adjectives of {3} that are attributes of the phrases '{4}' synset {2}!".format(paraphrase_head_lemma, attribute_matches, matching_phrase_synset, paraphrase_head_adjective_lemmas, phrase_head_lemma))
 
     return specifies_with_attributes

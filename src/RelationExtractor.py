@@ -28,10 +28,7 @@ class RelationExtractor(object):
 			...
 
 			verb_key: {
-				locational_spec: [noun_key, ...],
-				manner_spec: [adj_key, ...],
-				temporal_spec: [???],
-				be: [adjective]
+				verb_specification: [adj_key, ...]
 			}
 
 			...
@@ -114,18 +111,10 @@ class RelationExtractor(object):
 						continue
 
 					# verb specifications
-					specifications = self._extract_verb_specifications(main_event_symbol, gloss_entity_dict, parsed_gloss_transformation)
-
-					for spec_type in specifications:
-						if spec_type[0]:
-							spec_name = "{0}_spec".format(spec_type[1])
-							add_key(spec_name, gloss_relations, value=[])
-							gloss_relations[spec_name].extend(set([sense[1] for sense in spec_type[0]]))
-
-				elif ss_type == "a" or ss_type == "s":
-					pass  # not implemented yet
-				elif ss_type == "r":
-					pass  # not implemented yet
+					verb_specifications = self._extract_verb_specifications(main_event_symbol, gloss_entity_dict, parsed_gloss_transformation)
+					if verb_specifications:
+						add_key("verb_specifications", gloss_relations, value=[])
+						gloss_relations["verb_specifications"].extend([f[1] for f in verb_specifications])
 
 			if gloss_relations:
 				extracted_relations[gloss_key] = gloss_relations
@@ -143,7 +132,7 @@ class RelationExtractor(object):
 		total_verbs = gloss_ss_types.count("v")
 
 		noun_relations = ["attributes", "specifications", "function"]
-		verb_relations = ["locational_spec", "manner_spec", "temporal_spec", "be"]
+		verb_relations = ["verb_specifications"]
 
 		print("From a total of {0} glosses of which are\n\t{1} nouns and\n\t{2} verbs\nrelations from {3} glosses where extracted,\nwhich where found as follows for their ss type:\n".format(
 					total_glosses_count,
@@ -161,7 +150,7 @@ class RelationExtractor(object):
 					if r in list(g.keys()):
 						r_count += 1
 						entries_count += len(g[r])
-				print("{0}:\n  in synsets:\t{1} \t({2}%)\n  total:\t\t{3}\n  pro synset:\t{4}".format(r, r_count, round(r_count/float(count)*100, 2), entries_count, round(entries_count/float(count), 2)))
+				print("{0}:\n  in synsets:\t{1} \t({2}%)\n  total:\t{3}\n  pro synset:\t{4}".format(r, r_count, round(r_count/float(count)*100, 2), entries_count, round(entries_count/float(count), 2)))
 
 	def _extract_noun_function(self, main_entity_symbol, gloss_entity_dict, parsed_gloss_transformation):
 		"""Extract the 'function' relation by applying several heuristics to the transformed glosses.
@@ -299,31 +288,27 @@ class RelationExtractor(object):
 			parsed_gloss_transformation		(list)		the parsed structure of lists/tuples that is the logical transformation
 
 		Returns:
-			(list)		all extracted predicates that were found to be a function of the given synset
+			(list)		all extracted predicates that were found to be an attribute of the given synset
 						predicates are tuples -> (lemma, synse_key)
 		"""
 		main_entity = gloss_entity_dict[main_entity_symbol]
 		main_entity_predicates = main_entity["predicates"]
 		hyperonym = None
 		attributes = []
-		for predicate in main_entity_predicates:  # TODO maybe i can even use UNKNOWNs
+		for predicate in main_entity_predicates:
 			if self._check_if_valid_sensekey(predicate[1]):
 				predicate_ss_type = get_ss_type_from_sense_key(predicate[1])
 				if not predicate_ss_type:
 					continue
 				if predicate_ss_type == "n":
 					hyperonym = predicate
-				elif predicate_ss_type in ["a", "r", "s"]:
+				elif predicate_ss_type in ["a", "s"]:
 					attributes.append(predicate)
 
 		return (attributes, hyperonym)
 
-	def _extract_verb_location(self, main_event_symbol, gloss_entity_dict, parsed_gloss_transformation):
-		# TODO
-		pass
-
 	def _extract_verb_specifications(self, main_event_symbol, gloss_entity_dict, parsed_gloss_transformation):
-		"""Extract the 'function' relation by applying several heuristics to the transformed glosses.
+		"""Extract the 'verb specification' relation.
 
 		Arguments:
 			main_event_symbol 				(string)	the symbol of the main entity in that gloss, that represents the
@@ -333,18 +318,16 @@ class RelationExtractor(object):
 			parsed_gloss_transformation		(list)		the parsed structure of lists/tuples that is the logical transformation
 
 		Returns:
-			(list)		all extracted predicates that were found to be a function of the given synset
-						predicates are tuples -> (lemma, synse_key)
+			(list)		all extracted predicates; predicates are tuples -> (lemma, synse_key)
 		"""
-		locational = []
-		manner = []
-		temporal = []
+		main_event = gloss_entity_dict[main_event_symbol]
+		main_event_predicates = main_event["predicates"]
 
-		types = [locational, manner, temporal]
-		pred_regs = ["LOC", "MNR", "TMP"]
-		names = ["locational", "manner", "temporal"]
+		specifications = []
+		arg_regs = ["MNR", "TMP", "DIR"]
 
-		for spec_type_list, reg in zip(types, pred_regs):
+		# get manners etc
+		for reg in arg_regs:
 			for loc in find_predicates(parsed_gloss_transformation, reg):
 				if loc[1][-1] == main_event_symbol:
 					possibilities = []
@@ -356,9 +339,18 @@ class RelationExtractor(object):
 						possibilities.append(loc[1][0])
 
 					for sk in possibilities:
-						spec_type_list.extend([sense for sense in gloss_entity_dict[get_sk_main_variable(sk)]["predicates"] if get_ss_type_from_sense_key(sense[1]) in ["a", "s", "r"] and self._check_if_valid_sensekey(sense[1])])
+						specifications.extend([sense for sense in gloss_entity_dict[get_sk_main_variable(sk)]["predicates"] if get_ss_type_from_sense_key(sense[1]) in ["a", "s", "r"] and self._check_if_valid_sensekey(sense[1])])
 
-		return list(zip(types, names))
+		# get simple modifying adjectives/adverbs
+		for predicate in main_event_predicates:
+			if self._check_if_valid_sensekey(predicate[1]):
+				predicate_ss_type = get_ss_type_from_sense_key(predicate[1])
+				if not predicate_ss_type:
+					continue
+				elif predicate_ss_type in ["a", "s", "r"]:
+					specifications.append(predicate)
+
+		return specifications
 
 
 	def _find_main_entity(self, gloss_entity_dict):

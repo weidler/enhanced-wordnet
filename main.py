@@ -12,18 +12,63 @@ from src.glosses.GlossWSD import GlossDisambiguator
 from src.glosses.GlossTransformation import GlossTransformer
 from src.RelationExtractor import RelationExtractor
 import pickle
+import argparse
 
 # Settings
-file_extension = "_dev"
 
-new_disambiguation = True
-new_logic_transformation = True
+arg_parser = argparse.ArgumentParser()
 
-use_test_gloss_portion = True
-test_gloss_portion = 100
+arg_parser.add_argument("--extension",
+	required=False,
+	dest="file_extension",
+	default="_dev")
 
-show_detailed_output = False
+arg_parser.add_argument("--disambiguate",
+	required=False,
+	dest="new_disambiguation",
+	default=True,
+	type=bool)
 
+arg_parser.add_argument("--transform",
+	required=False,
+	dest="new_logic_transformation",
+	default=True,
+	type=bool)
+
+arg_parser.add_argument("--use-portion",
+	required=False,
+	dest="use_test_gloss_portion",
+	default=True,
+	type=bool)
+
+arg_parser.add_argument("--portion-size",
+	required=False,
+	dest="test_gloss_portion",
+	default=1000,
+	type=int)
+
+arg_parser.add_argument("--detailed",
+	required=False,
+	dest="show_detailed_output",
+	default=False,
+	type=bool)
+
+arguments = arg_parser.parse_args()
+
+print(arguments)
+
+file_extension = arguments.file_extension
+
+new_disambiguation = arguments.new_disambiguation
+new_logic_transformation = arguments.new_logic_transformation
+
+use_test_gloss_portion = arguments.use_test_gloss_portion
+test_gloss_portion = arguments.test_gloss_portion
+
+show_detailed_output = arguments.show_detailed_output
+
+
+# adjust file extension
 if use_test_gloss_portion:
 	file_extension += "_" + str(test_gloss_portion)
 else:
