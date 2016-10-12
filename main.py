@@ -55,8 +55,6 @@ arg_parser.add_argument("--detailed",
 
 arguments = arg_parser.parse_args()
 
-print(arguments)
-
 file_extension = arguments.file_extension
 
 new_disambiguation = arguments.new_disambiguation
